@@ -67,56 +67,49 @@ function notificationHtml({ fullName, businessName, email, phone, businessType, 
 </html>`;
 }
 
-function confirmationHtml({ fullName, pkg, projectDetails }) {
+function confirmationHtml({ fullName }) {
   const firstName = fullName.split(' ')[0];
-  const packageLabel = {
-    basic: 'Basic — Starter Presence ($199 setup + $19.99/mo)',
-    pro: 'Pro — Growth Engine ($499 setup + $49.99/mo)',
-    premium: 'Premium — Total Domination ($999 setup + $99.99/mo)',
-    remodel: 'Website Remodel (custom quote)',
-    unsure: 'Not sure yet',
-  }[pkg] || pkg;
 
   return `<!DOCTYPE html>
-<html>
+<html lang="en">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
-<body style="margin:0;padding:0;background:#f4f4f4;font-family:'Helvetica Neue',Arial,sans-serif;">
-  <div style="max-width:600px;margin:32px auto;background:#fff;border:1px solid #e0e0e0;">
-    <div style="background:#050D1F;padding:28px;">
-      <h1 style="margin:0;color:#0EA5FF;font-size:1.2rem;letter-spacing:0.08em;text-transform:uppercase;">Raffinato Designs</h1>
-      <p style="margin:6px 0 0;color:#8ab4cc;font-size:0.85rem;">Premium Web Design for Ambitious Businesses</p>
+<body style="margin:0;padding:0;background:#f5f5f5;font-family:Georgia,'Cormorant Garamond',serif;">
+  <div style="max-width:600px;margin:40px auto;background:#ffffff;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,0.08);overflow:hidden;">
+
+    <!-- Header -->
+    <div style="background:#050D1F;padding:40px 20px;text-align:center;">
+      <img src="https://www.raffinatodesigns.com/logo2.png" alt="Raffinato Designs" style="max-width:200px;height:auto;display:block;margin:0 auto;">
     </div>
-    <div style="padding:32px 28px;">
-      <h2 style="margin:0 0 16px;color:#050D1F;font-size:1.3rem;">Hey ${firstName}, we got your project details.</h2>
-      <p style="margin:0 0 20px;color:#444;font-size:0.95rem;line-height:1.7;">
-        Thanks for reaching out — you're in the right place. Our team will review your submission and be in touch within <strong>24 hours</strong> to talk next steps.
+
+    <!-- Body -->
+    <div style="background:#ffffff;padding:40px 40px 30px;">
+      <p style="margin:0 0 20px;font-family:Georgia,'Cormorant Garamond',serif;font-size:16px;line-height:1.7;color:#1a1a1a;">Dear ${firstName},</p>
+      <p style="margin:0 0 20px;font-family:Georgia,'Cormorant Garamond',serif;font-size:16px;line-height:1.7;color:#1a1a1a;">
+        Thank you for reaching out to Raffinato Designs. We have received your consultation request and our team will review it carefully.
       </p>
-      <div style="background:#f7fbff;border:1px solid #d0eaff;padding:20px 24px;margin-bottom:24px;">
-        <p style="margin:0 0 12px;font-size:0.78rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#0EA5FF;">What You Submitted</p>
-        <table style="width:100%;border-collapse:collapse;font-size:0.88rem;">
-          <tr>
-            <td style="padding:5px 0;color:#666;width:130px;">Package</td>
-            <td style="padding:5px 0;color:#050D1F;font-weight:600;">${packageLabel}</td>
-          </tr>
-          <tr>
-            <td style="padding:5px 0;color:#666;vertical-align:top;">Your summary</td>
-            <td style="padding:5px 0;color:#050D1F;line-height:1.6;">${projectDetails}</td>
-          </tr>
-        </table>
-      </div>
-      <p style="margin:0 0 8px;color:#444;font-size:0.95rem;line-height:1.7;">
-        In the meantime, if anything changes or you want to add more detail, just reply to this email or reach us at:
+      <p style="margin:0 0 20px;font-family:Georgia,'Cormorant Garamond',serif;font-size:16px;line-height:1.7;color:#1a1a1a;">
+        You can expect to hear back from us within <strong style="font-weight:700;">24 hours</strong>. In the meantime, if you have any additional details to share, feel free to reply to this email.
       </p>
-      <p style="margin:0 0 28px;">
-        <a href="mailto:designs@raffinatodesigns.com" style="color:#0EA5FF;font-weight:600;font-size:0.95rem;">designs@raffinatodesigns.com</a>
+      <p style="margin:0 0 20px;font-family:Georgia,'Cormorant Garamond',serif;font-size:16px;line-height:1.7;color:#1a1a1a;">
+        We look forward to bringing your vision to reality.
       </p>
-      <p style="margin:0;color:#444;font-size:0.95rem;line-height:1.7;">Talk soon,<br>
-        <strong style="color:#050D1F;">The Raffinato Designs Team</strong>
+      <p style="margin:0;font-family:Georgia,'Cormorant Garamond',serif;font-size:16px;line-height:1.7;color:#1a1a1a;">
+        Warm regards,<br>
+        <strong style="font-weight:700;color:#0EA5FF;">The Raffinato Designs Team</strong>
       </p>
     </div>
-    <div style="background:#050D1F;padding:16px 28px;text-align:center;">
-      <p style="margin:0;color:#4a6a80;font-size:0.75rem;letter-spacing:0.06em;">© 2025 Raffinato Designs LLC — raffinatodesigns.com</p>
+
+    <!-- Footer -->
+    <div style="border-top:1px solid #e5e5e5;padding:24px 40px;background:#fafafa;text-align:center;">
+      <p style="margin:0 0 8px;font-family:Georgia,'Cormorant Garamond',serif;font-size:13px;color:#666;">
+        <a href="https://www.instagram.com/raffinato_designs" style="color:#0EA5FF;text-decoration:none;font-size:13px;">@raffinato_designs on Instagram</a>
+      </p>
+      <p style="margin:0;font-family:Georgia,'Cormorant Garamond',serif;font-size:13px;color:#666;">
+        Raffinato Designs &middot; Tennessee, USA &middot;
+        <a href="mailto:designs@raffinatodesigns.com" style="color:#0EA5FF;text-decoration:none;">designs@raffinatodesigns.com</a>
+      </p>
     </div>
+
   </div>
 </body>
 </html>`;
@@ -195,8 +188,8 @@ export default async function handler(req, res) {
         from: 'Raffinato Designs <designs@raffinatodesigns.com>',
         to: [email],
         reply_to: 'designs@raffinatodesigns.com',
-        subject: 'We got your project details — Raffinato Designs',
-        html: confirmationHtml({ fullName, pkg, projectDetails }),
+        subject: 'Thank You for Your Consultation Request — Raffinato Designs',
+        html: confirmationHtml({ fullName }),
       }),
     }).then(async r => ({ ok: r.ok, status: r.status, body: await r.json().catch(() => ({})) })),
   ]);
