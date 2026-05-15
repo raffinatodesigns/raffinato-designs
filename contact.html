@@ -327,6 +327,43 @@ a { text-decoration:none; color:inherit; }
 @media (prefers-reduced-motion:reduce) {
   *,*::before,*::after { animation-duration:0.01ms !important; transition-duration:0.01ms !important; }
 }
+
+/* ── Form validation errors ── */
+.field-error {
+  display: none;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.72rem;
+  color: #ff4757;
+  margin-top: 0.3rem;
+  letter-spacing: 0.04em;
+}
+.field-error.show { display: block; }
+.form-group.has-error input,
+.form-group.has-error select,
+.form-group.has-error textarea { border-bottom-color: #ff4757; }
+.form-error-banner {
+  display: none;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.82rem;
+  color: #ff4757;
+  border: 1px solid rgba(255,71,87,0.3);
+  background: rgba(255,71,87,0.06);
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.04em;
+}
+.form-error-banner.show { display: block; }
+.form-submit-error {
+  display: none;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.82rem;
+  color: #ff4757;
+  margin-top: 1rem;
+  letter-spacing: 0.04em;
+  line-height: 1.6;
+}
+.form-submit-error.show { display: block; }
+.form-submit-error a { color: #ff4757; text-decoration: underline; }
 </style>
 </head>
 <body>
@@ -467,22 +504,27 @@ a { text-decoration:none; color:inherit; }
   </div>
 
   <form id="contact-form" class="rv" novalidate aria-label="Project inquiry form">
+    <div id="form-error-banner" class="form-error-banner" role="alert">Please complete all required fields.</div>
     <div class="form-grid">
       <div class="form-group">
         <input type="text" id="fname" name="fname" placeholder=" " autocomplete="given-name" required>
         <label for="fname">Full Name *</label>
+        <span class="field-error" id="err-fname">Required</span>
       </div>
       <div class="form-group">
         <input type="text" id="bname" name="bname" placeholder=" " autocomplete="organization" required>
         <label for="bname">Business Name *</label>
+        <span class="field-error" id="err-bname">Required</span>
       </div>
       <div class="form-group">
         <input type="email" id="email" name="email" placeholder=" " autocomplete="email" required>
         <label for="email">Email Address *</label>
+        <span class="field-error" id="err-email">Please enter a valid email</span>
       </div>
       <div class="form-group">
-        <input type="tel" id="phone" name="phone" placeholder=" " autocomplete="tel">
-        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder=" " autocomplete="tel" required>
+        <label for="phone">Phone Number *</label>
+        <span class="field-error" id="err-phone">Required</span>
       </div>
       <div class="form-group">
         <select id="btype" name="btype" required aria-label="Business type">
@@ -494,6 +536,7 @@ a { text-decoration:none; color:inherit; }
           <option value="other">Other</option>
         </select>
         <label for="btype">Business Type *</label>
+        <span class="field-error" id="err-btype">Required</span>
       </div>
       <div class="form-group">
         <select id="heard" name="heard" aria-label="How did you hear about us">
@@ -535,19 +578,26 @@ a { text-decoration:none; color:inherit; }
       </div>
 
       <div class="form-group form-full">
-        <textarea id="details" name="details" placeholder=" " rows="5"></textarea>
-        <label for="details">Tell Us About Your Project</label>
+        <textarea id="details" name="details" placeholder=" " rows="5" required></textarea>
+        <label for="details">Tell Us About Your Project *</label>
+        <span class="field-error" id="err-details">Required</span>
       </div>
+
+      <!-- Honeypot — hidden from real users, catches bots -->
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" aria-hidden="true">
 
       <div class="form-full">
         <button type="submit" class="submit-btn" id="submit-btn">Send My Project Details →</button>
-        <div class="success-msg" id="success-msg" role="alert" aria-live="polite">
-          <h3>You're In Good Hands</h3>
-          <p>We'll be in touch within 24 hours to discuss your project.</p>
+        <div class="form-submit-error" id="submit-error">
+          Something went wrong. Please email <a href="mailto:designs@raffinatodesigns.com">designs@raffinatodesigns.com</a> directly.
         </div>
       </div>
     </div>
   </form>
+  <div class="success-msg" id="success-msg" role="alert" aria-live="polite">
+    <h3>You're In Good Hands</h3>
+    <p>We'll be in touch within 24 hours to discuss your project. Check your inbox for a confirmation email.</p>
+  </div>
 </section>
 
 <!-- ============================================================
@@ -681,19 +731,85 @@ document.querySelectorAll('select').forEach(sel=>{
   });
 });
 
-// Form submit
-document.getElementById('contact-form').addEventListener('submit',function(e){
+// Form submit — validates then POSTs to /api/contact
+document.getElementById('contact-form').addEventListener('submit', async function(e) {
   e.preventDefault();
-  const btn=document.getElementById('submit-btn');
-  const msg=document.getElementById('success-msg');
-  btn.textContent='Sending...';
-  btn.disabled=true;
-  setTimeout(()=>{
-    btn.classList.add('success');
-    btn.textContent='';
-    msg.classList.add('show');
-    msg.scrollIntoView({behavior:'smooth',block:'nearest'});
-  },1400);
+  const form = this;
+  const btn         = document.getElementById('submit-btn');
+  const successMsg  = document.getElementById('success-msg');
+  const banner      = document.getElementById('form-error-banner');
+  const submitError = document.getElementById('submit-error');
+
+  // Clear previous error state
+  banner.classList.remove('show');
+  submitError.classList.remove('show');
+  form.querySelectorAll('.field-error').forEach(el => el.classList.remove('show'));
+  form.querySelectorAll('.form-group').forEach(el => el.classList.remove('has-error'));
+
+  // Collect values
+  const fname   = document.getElementById('fname').value.trim();
+  const bname   = document.getElementById('bname').value.trim();
+  const email   = document.getElementById('email').value.trim();
+  const phone   = document.getElementById('phone').value.trim();
+  const btype   = document.getElementById('btype').value;
+  const details = document.getElementById('details').value.trim();
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  let valid = true;
+  function markError(inputId, errId) {
+    const input = document.getElementById(inputId);
+    if (input) input.closest('.form-group').classList.add('has-error');
+    const err = document.getElementById(errId);
+    if (err) err.classList.add('show');
+    valid = false;
+  }
+
+  if (!fname)                          markError('fname',   'err-fname');
+  if (!bname)                          markError('bname',   'err-bname');
+  if (!email || !EMAIL_RE.test(email)) markError('email',   'err-email');
+  if (!phone)                          markError('phone',   'err-phone');
+  if (!btype)                          markError('btype',   'err-btype');
+  if (!details)                        markError('details', 'err-details');
+
+  if (!valid) {
+    banner.classList.add('show');
+    banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    return;
+  }
+
+  const pkg      = (form.querySelector('input[name="package"]:checked') || {}).value || 'unsure';
+  const howHeard = document.getElementById('heard').value || '';
+  const honeypot = (form.querySelector('input[name="_gotcha"]') || {}).value || '';
+
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        fullName: fname, businessName: bname, email, phone,
+        businessType: btype, projectDetails: details,
+        package: pkg, howHeard, _gotcha: honeypot
+      })
+    });
+    const data = await res.json();
+
+    if (data.success) {
+      form.style.display = 'none';
+      successMsg.classList.add('show');
+      successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    } else {
+      submitError.classList.add('show');
+      btn.textContent = 'Send My Project Details →';
+      btn.disabled = false;
+    }
+  } catch {
+    submitError.classList.add('show');
+    btn.textContent = 'Send My Project Details →';
+    btn.disabled = false;
+  }
 });
 
 // Smooth scroll to form from pricing CTAs
