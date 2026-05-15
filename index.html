@@ -31,38 +31,44 @@ body {
   font-family: 'Jost', sans-serif;
   font-weight: 400;
   overflow-x: hidden;
-  cursor: none;
 }
 
 img { display: block; max-width: 100%; }
 a { text-decoration: none; color: inherit; }
 
 /* ============================================================
-   CUSTOM CURSOR
+   CUSTOM CURSOR — mouse-only devices
    ============================================================ */
-#cursor-dot {
-  position: fixed;
-  width: 12px; height: 12px;
-  background: var(--electric);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: width 0.2s var(--ease), height 0.2s var(--ease), background 0.2s;
+@media (hover: hover) and (pointer: fine) {
+  body { cursor: none; }
+  #cursor-dot {
+    position: fixed;
+    width: 12px; height: 12px;
+    background: var(--electric);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s var(--ease), height 0.2s var(--ease), background 0.2s;
+  }
+  #cursor-ring {
+    position: fixed;
+    width: 36px; height: 36px;
+    border: 1.5px solid var(--electric);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    opacity: 0.6;
+    transition: opacity 0.3s;
+  }
+  body:has(a:hover) #cursor-dot,
+  body:has(button:hover) #cursor-dot { width: 18px; height: 18px; background: var(--electric); }
 }
-#cursor-ring {
-  position: fixed;
-  width: 36px; height: 36px;
-  border: 1.5px solid var(--electric);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9998;
-  transform: translate(-50%, -50%);
-  opacity: 0.6;
-  transition: opacity 0.3s;
+@media (hover: none), (pointer: coarse) {
+  body { cursor: auto; }
+  #cursor-dot, #cursor-ring { display: none !important; }
 }
-body:has(a:hover) #cursor-dot,
-body:has(button:hover) #cursor-dot { width: 18px; height: 18px; background: var(--electric); }
 
 /* ============================================================
    LOADER — targeting system + shatter
@@ -967,6 +973,7 @@ body:has(button:hover) #cursor-dot { width: 18px; height: 18px; background: var(
   .nav-links { display: none; }
   .hamburger { display: flex; }
   .hero-content { max-width: 100%; }
+  .hero-orb { width: 280px; height: 280px; }
   .wwd-panel { grid-template-columns: 60px 1fr; }
   .wwd-keyword { display: none; }
   .services-grid { grid-template-columns: 1fr; }
@@ -974,6 +981,43 @@ body:has(button:hover) #cursor-dot { width: 18px; height: 18px; background: var(
   .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
   .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
   .testi-card { flex: 0 0 85vw; min-width: 0; }
+  /* How It Works — disable sticky scroll, show all steps */
+  #how-it-works { height: auto; }
+  .how-sticky { position: static; height: auto; display: block; padding: 4rem 5%; background: var(--navy); }
+  .how-left { display: none; }
+  .how-right { position: static; }
+  .how-step { position: static !important; transform: none !important; opacity: 1 !important;
+    pointer-events: all !important; padding: 2rem 0; border-bottom: 1px solid var(--dark-border); }
+  .how-step:last-child { border-bottom: none; }
+  .how-step-title { white-space: normal; font-size: clamp(1.8rem, 5.5vw, 3.5rem); }
+  /* Sections — reduce side padding */
+  #what-we-do, #services { padding-left: 5%; padding-right: 5%; }
+  .wwd-inner { padding: 0; }
+  #why-us { padding: 5rem 5%; }
+  #cta-banner { padding: 5rem 5%; }
+}
+
+@media (max-width: 480px) {
+  /* Hero headline — remove nowrap and tighten size */
+  .hero-headline { font-size: clamp(1.8rem, 7.5vw, 3.2rem); }
+  .hero-line-1, .hero-line-2 { white-space: normal; }
+  #hero { padding: 7rem 5% 3.5rem; }
+  /* Hero CTAs — stack vertically */
+  .hero-ctas { flex-direction: column; align-items: stretch; max-width: 320px; margin: 0 auto; }
+  .btn-outline, .btn-filled { padding: 15px 24px; display: block; text-align: center; width: 100%; }
+  /* Stats — single column */
+  .stats-grid { grid-template-columns: 1fr; }
+  /* WWD panels — reduce */
+  .wwd-panel { grid-template-columns: 44px 1fr; gap: 1rem; padding: 1.5rem 5%; }
+  .wwd-num { font-size: 2.5rem; }
+  /* Section headings */
+  .wwd-header .section-heading { font-size: clamp(2rem, 7vw, 4rem); }
+  .why-header .section-heading { font-size: clamp(2rem, 7vw, 4rem); }
+  .services-header .section-heading { font-size: clamp(2rem, 7vw, 4rem); }
+  .testi-header .section-heading { font-size: clamp(2rem, 7vw, 4rem); }
+  .cta-title { font-size: clamp(2.5rem, 8vw, 6rem); }
+  /* Service cards — reduce padding */
+  .service-card { padding: 2rem 1.5rem; }
 }
 
 /* ============================================================
@@ -1363,17 +1407,19 @@ body { animation: pageIn 0.35s var(--ease) both; }
      SCRIPTS
      ============================================================ -->
 <script>
-// ── Cursor ──────────────────────────────────────────────────
-const dot = document.getElementById('cursor-dot');
-const ring = document.getElementById('cursor-ring');
-let mx = 0, my = 0, rx = 0, ry = 0;
-document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-(function lerp() {
-  rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
-  dot.style.left  = mx + 'px'; dot.style.top  = my + 'px';
-  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-  requestAnimationFrame(lerp);
-})();
+// ── Cursor — mouse-only ───────────────────────────────────────
+if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  const dot = document.getElementById('cursor-dot');
+  const ring = document.getElementById('cursor-ring');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  (function lerp() {
+    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+    dot.style.left  = mx + 'px'; dot.style.top  = my + 'px';
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(lerp);
+  })();
+}
 
 // ── Loader — grid sweep + canvas intro ───────────────────────
 (function introLoader() {
@@ -1387,7 +1433,7 @@ document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; })
   const SWEEP_GAP    = 18;  // ms stagger between lines
   const T_SHOCK_DUR  = 600;
 
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || window.innerWidth < 768) {
     loader.classList.add('done');
     heroGrid.style.opacity = '1';
     return;
@@ -1676,8 +1722,9 @@ function splitChars(el, baseDelay) {
 splitChars(document.getElementById('line1'), 0.4);
 splitChars(document.getElementById('line2'), 0.7);
 
-// ── Particles ────────────────────────────────────────────────
+// ── Particles — skip on mobile ────────────────────────────────
 (function initParticles() {
+  if (window.innerWidth < 768) return;
   const canvas = document.getElementById('particles-canvas');
   const ctx = canvas.getContext('2d');
   let W, H, particles = [];
@@ -2239,6 +2286,7 @@ document.querySelectorAll('a[href]').forEach(a => {
   @media (max-width: 480px) {
     #chat-window { width: calc(100vw - 24px); right: 12px; bottom: 88px; }
     #chat-btn { right: 16px; bottom: 20px; }
+    #chat-input { font-size: 16px; }
   }
 </style>
 
@@ -2266,20 +2314,43 @@ document.querySelectorAll('a[href]').forEach(a => {
 
 <script>
 (function raffinatoChat() {
-  const ANTHROPIC_API_KEY = 'ANTHROPIC_API_KEY'; // Replace with your key from console.anthropic.com
-  const MODEL = 'claude-sonnet-4-20250514';
-  const SYSTEM = `You are the AI assistant for Raffinato Designs, a premium web design agency. Be concise, warm, and professional. Only discuss topics relevant to web design, the agency's services, and helping potential clients.
+  const API_URL = '/api/chat';
+  const SYSTEM = `You are the AI assistant for Raffinato Designs, a premium web design agency serving US small businesses. Be concise, warm, and professional. Only discuss topics relevant to web design, our services, and helping potential clients. If a visitor asks about anything off-topic, gently steer back to how we can help their business.
 
-Key facts about Raffinato Designs:
-- We build high-converting websites for businesses that want to generate real customers.
-- Services: custom website design, brand identity, SEO optimization, ongoing maintenance.
-- Our process: (1) Client tells us their vision, (2) We design it, (3) Client reviews and gives feedback, (4) We launch it.
-- Packages start from £999 for a starter site. Custom quotes for larger projects.
-- Typical turnaround: 2–4 weeks depending on scope.
-- Contact: use the contact page to get a free consultation.
-- We specialize in luxury, modern, conversion-focused design.
+Core positioning:
+- Done-for-you websites. Clients do not need any technical knowledge — we handle design, build, hosting, and launch. They just share their vision; we deliver a finished site.
+- We build conversion-focused sites for ambitious US small business owners.
 
-If asked for a quote, encourage them to book a free consultation via the contact page. Do not invent specific prices beyond what is listed above. Keep responses under 120 words unless a detailed answer is clearly needed.`;
+Our packages (all prices in USD, setup fee + monthly that covers hosting and upkeep):
+
+1) BASIC — "Starter Presence"
+   - $199 setup + $19.99/month
+   - Custom design, mobile responsive, fast hosting, contact form, SSL security
+
+2) PRO — "Growth Engine" (most popular)
+   - $499 setup + $49.99/month
+   - Everything in Basic, plus SEO optimization, analytics dashboard, booking/CRM integration, priority support
+
+3) PREMIUM — "Total Domination"
+   - $999 setup + $99.99/month
+   - Everything in Pro, plus e-commerce ready, custom functionality, advanced SEO + content, 24/7 dedicated support
+
+4) WEBSITE REMODEL — for businesses that already have a site
+   - Custom quote (no fixed price — depends on the existing site)
+   - Full redesign, content migration, speed optimization, SEO audit + fixes
+   - Encourage these visitors to use the contact form for a quote
+
+Process: (1) Client shares their vision via the contact form, (2) we design it, (3) client reviews and gives feedback, (4) we launch it.
+
+Turnaround: Most sites delivered in under a week. We move fast without cutting corners.
+
+Contact: Visitors can fill out the contact form on the Get Started page, or email designs@raffinatodesigns.com. We respond within 24 hours.
+
+Rules:
+- Always quote prices in US dollars exactly as listed above. Never invent prices or discounts.
+- For Remodel quotes or anything custom, direct visitors to the contact form.
+- Keep replies under 120 words unless the question genuinely needs more detail.
+- Never mention competitors by name or compare pricing to other agencies.`;
 
   const btn     = document.getElementById('chat-btn');
   const win     = document.getElementById('chat-window');
@@ -2333,20 +2404,10 @@ If asked for a quote, encourage them to book a free consultation via the contact
     showTyping();
 
     try {
-      const res = await fetch('https://api.anthropic.com/v1/messages', {
+      const res = await fetch(API_URL, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': ANTHROPIC_API_KEY,
-          'anthropic-version': '2023-06-01',
-          'anthropic-dangerous-direct-browser-access': 'true'
-        },
-        body: JSON.stringify({
-          model: MODEL,
-          max_tokens: 512,
-          system: SYSTEM,
-          messages: history
-        })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: history, system: SYSTEM })
       });
 
       if (!res.ok) {
