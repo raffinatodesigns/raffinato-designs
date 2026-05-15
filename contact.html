@@ -435,7 +435,7 @@ a { text-decoration:none; color:inherit; }
         <li>Contact form</li>
         <li>SSL security</li>
       </ul>
-      <a href="#contact-form" class="price-cta">Get Started →</a>
+      <a href="#contact-form?pkg=basic" class="price-cta">Get Started →</a>
     </div>
 
     <!-- Pro (featured) -->
@@ -455,7 +455,7 @@ a { text-decoration:none; color:inherit; }
         <li>Booking/CRM integration</li>
         <li>Priority support</li>
       </ul>
-      <a href="#contact-form" class="price-cta">Get Started →</a>
+      <a href="#contact-form?pkg=pro" class="price-cta">Get Started →</a>
     </div>
 
     <!-- Premium -->
@@ -474,7 +474,7 @@ a { text-decoration:none; color:inherit; }
         <li>Advanced SEO + content</li>
         <li>24/7 dedicated support</li>
       </ul>
-      <a href="#contact-form" class="price-cta">Get Started →</a>
+      <a href="#contact-form?pkg=premium" class="price-cta">Get Started →</a>
     </div>
 
     <!-- Remodel -->
@@ -488,7 +488,7 @@ a { text-decoration:none; color:inherit; }
         <li>Speed optimization</li>
         <li>SEO audit + fixes</li>
       </ul>
-      <a href="#contact-form" class="price-cta">Get a Quote →</a>
+      <a href="#contact-form?pkg=remodel" class="price-cta">Get a Quote →</a>
     </div>
 
   </div>
@@ -812,13 +812,46 @@ document.getElementById('contact-form').addEventListener('submit', async functio
   }
 });
 
-// Smooth scroll to form from pricing CTAs
-document.querySelectorAll('a[href="#contact-form"]').forEach(a=>{
-  a.addEventListener('click',e=>{
+// Pricing CTAs — smooth scroll + auto-select package radio
+function parsePkg(str) {
+  const valid = ['basic','pro','premium','remodel'];
+  const m = String(str||'').match(/pkg=([a-z]+)/);
+  const v = m ? m[1] : new URLSearchParams(window.location.search).get('pkg') || '';
+  return valid.includes(v) ? v : null;
+}
+
+function applyPkg(pkg) {
+  if (!pkg) return;
+  const radio = document.getElementById('pkg-' + pkg);
+  if (!radio) return;
+  radio.checked = true;
+  const card = radio.closest('.radio-card');
+  if (!card) return;
+  card.style.transition = 'box-shadow 0.2s, outline 0.2s';
+  card.style.outline = '2px solid var(--electric)';
+  card.style.boxShadow = '0 0 12px rgba(14,165,255,0.35)';
+  setTimeout(() => {
+    card.style.outline = '';
+    card.style.boxShadow = '';
+  }, 1500);
+}
+
+document.querySelectorAll('a.price-cta').forEach(a => {
+  a.addEventListener('click', e => {
     e.preventDefault();
-    document.getElementById('contact-form-section').scrollIntoView({behavior:'smooth'});
+    const pkg = parsePkg(a.getAttribute('href'));
+    document.getElementById('contact-form-section').scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => applyPkg(pkg), 400);
   });
 });
+
+// Handle direct landing with ?pkg= or #contact-form?pkg=
+(function() {
+  const pkg = parsePkg(window.location.hash) || parsePkg('pkg=' + (new URLSearchParams(window.location.search).get('pkg') || ''));
+  if (pkg) applyPkg(pkg);
+})();
+
+window.addEventListener('hashchange', () => applyPkg(parsePkg(window.location.hash)));
 
 // Page transitions
 document.querySelectorAll('a[href]').forEach(a=>{
