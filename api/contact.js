@@ -33,7 +33,7 @@ function notificationHtml({ fullName, businessName, email, phone, businessType, 
   const row = (label, value) => `
     <tr>
       <td style="padding:8px 12px;font-weight:600;color:#444;background:#f9f9f9;width:160px;border-bottom:1px solid #e5e5e5;">${label}</td>
-      <td style="padding:8px 12px;color:#111;border-bottom:1px solid #e5e5e5;">${value || '—'}</td>
+      <td style="padding:8px 12px;color:#111;border-bottom:1px solid #e5e5e5;">${value || 'N/A'}</td>
     </tr>`;
 
   return `<!DOCTYPE html>
@@ -176,7 +176,7 @@ export default async function handler(req, res) {
         from: 'Raffinato Designs <noreply@raffinatodesigns.com>',
         to: ['designs@raffinatodesigns.com'],
         reply_to: email,
-        subject: `New project inquiry — ${fullName} (${businessName})`,
+        subject: `New project inquiry from ${fullName} (${businessName})`,
         html: notificationHtml({ fullName, businessName, email, phone, businessType, projectDetails, pkg, howHeard, ip, timestamp }),
       }),
     }).then(async r => ({ ok: r.ok, status: r.status, body: await r.json().catch(() => ({})) })),
@@ -188,7 +188,7 @@ export default async function handler(req, res) {
         from: 'Raffinato Designs <designs@raffinatodesigns.com>',
         to: [email],
         reply_to: 'designs@raffinatodesigns.com',
-        subject: 'Thank You for Your Consultation Request — Raffinato Designs',
+        subject: 'Thank You for Reaching Out to Raffinato Designs',
         html: confirmationHtml({ fullName }),
       }),
     }).then(async r => ({ ok: r.ok, status: r.status, body: await r.json().catch(() => ({})) })),
