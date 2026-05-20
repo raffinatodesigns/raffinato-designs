@@ -737,6 +737,34 @@ a { text-decoration: none; color: inherit; }
   background: var(--electric);
   flex-shrink: 0;
 }
+.service-features li.feat-ok { color: var(--chalk); }
+.service-features li.feat-ok::before {
+  content: '✓';
+  color: var(--electric);
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background: none;
+  font-weight: 700;
+  font-size: 0.85rem;
+  line-height: 1;
+}
+.service-features li.feat-no {
+  text-decoration: line-through;
+  opacity: 0.4;
+  color: var(--chrome);
+}
+.service-features li.feat-no::before {
+  background: rgba(200,212,224,0.25);
+}
+.service-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.92rem;
+  color: var(--chrome);
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
 .service-link {
   font-family: 'Jost', sans-serif;
   font-size: 0.8rem;
@@ -1025,6 +1053,8 @@ a { text-decoration: none; color: inherit; }
   .cta-title { font-size: clamp(2.5rem, 8vw, 6rem); }
   /* Service cards — reduce padding */
   .service-card { padding: 2rem 1.5rem; }
+  /* Feature list — tighter on mobile */
+  .service-features li { padding: 0.25rem 0; font-size: 0.82rem; }
 }
 
 /* ============================================================
@@ -1268,12 +1298,18 @@ body { animation: pageIn 0.35s var(--ease) both; }
       </svg>
       <p class="service-tier">Basic</p>
       <h3 class="service-name">Starter Presence</h3>
-      <p class="service-desc">A perfect, professional web presence for businesses just getting started online.</p>
+      <p class="service-subtitle">A clean, professional site to get you online.</p>
       <ul class="service-features">
-        <li>1 to 2 custom pages</li>
-        <li>Mobile responsive</li>
-        <li>Fast hosting included</li>
-        <li>Contact form</li>
+        <li class="feat-ok">Custom design, flawless on every device</li>
+        <li class="feat-ok">Contact form that sends leads to your inbox</li>
+        <li class="feat-ok">Fast, secure hosting fully managed by us</li>
+        <li class="feat-no">Accept payments directly on your site</li>
+        <li class="feat-no">SEO setup so customers find you on Google</li>
+        <li class="feat-no">Automated email follow-up that works leads around the clock</li>
+        <li class="feat-no">AI assistant answering questions instantly, day or night</li>
+        <li class="feat-no">Priority support when you need a hand</li>
+        <li class="feat-no">Advanced analytics on customer behavior</li>
+        <li class="feat-no">Website heatmaps</li>
       </ul>
       <a href="contact.html" class="service-link">Learn More <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
     </div>
@@ -1283,15 +1319,20 @@ body { animation: pageIn 0.35s var(--ease) both; }
         <circle cx="24" cy="34" r="8" stroke-width="1.8"/>
         <path d="M24 30V34L26.5 36.5"/>
       </svg>
-      <p class="service-tier" style="display:flex;align-items:center;gap:0.5rem;">Pro <span style="font-size:0.6rem;background:var(--electric);color:var(--navy);padding:0.15rem 0.4rem;letter-spacing:0.1em;font-family:'Jost',sans-serif;font-weight:700;">POPULAR</span></p>
+      <p class="service-tier" style="display:flex;align-items:center;gap:0.5rem;">Pro <span style="font-size:0.6rem;background:var(--electric);color:var(--navy);padding:0.15rem 0.4rem;letter-spacing:0.1em;font-family:'Jost',sans-serif;font-weight:700;">⭐ Most Popular</span></p>
       <h3 class="service-name">Growth Engine</h3>
-      <p class="service-desc">Everything you need to grow online. SEO, analytics, and booking are all built right in.</p>
+      <p class="service-subtitle">Everything you need to actually get customers.</p>
       <ul class="service-features">
-        <li>3 to 5 custom pages</li>
-        <li>SEO optimization</li>
-        <li>Analytics dashboard</li>
-        <li>Booking/CRM integration</li>
-        <li>Priority support</li>
+        <li class="feat-ok">Custom design, flawless on every device</li>
+        <li class="feat-ok">Contact form that sends leads to your inbox</li>
+        <li class="feat-ok">Fast, secure hosting fully managed by us</li>
+        <li class="feat-ok">Accept payments directly on your site</li>
+        <li class="feat-ok">SEO setup so customers find you on Google</li>
+        <li class="feat-ok">Automated email follow-up that works leads around the clock</li>
+        <li class="feat-ok">AI assistant answering questions instantly, day or night</li>
+        <li class="feat-no">Priority support when you need a hand</li>
+        <li class="feat-no">Advanced analytics on customer behavior</li>
+        <li class="feat-no">Website heatmaps</li>
       </ul>
       <a href="contact.html" class="service-link">Learn More <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
     </div>
@@ -1303,13 +1344,18 @@ body { animation: pageIn 0.35s var(--ease) both; }
       </svg>
       <p class="service-tier">Premium</p>
       <h3 class="service-name">Total Domination</h3>
-      <p class="service-desc">Complete online domination. E-commerce, custom features, and white-glove service from day one.</p>
+      <p class="service-subtitle">For established businesses ready to scale.</p>
       <ul class="service-features">
-        <li>6 to 10 custom pages</li>
-        <li>E-commerce ready</li>
-        <li>Custom functionality</li>
-        <li>Advanced SEO + content</li>
-        <li>24/7 dedicated support</li>
+        <li class="feat-ok">Custom design, flawless on every device</li>
+        <li class="feat-ok">Contact form that sends leads to your inbox</li>
+        <li class="feat-ok">Fast, secure hosting fully managed by us</li>
+        <li class="feat-ok">Accept payments directly on your site</li>
+        <li class="feat-ok">SEO setup so customers find you on Google</li>
+        <li class="feat-ok">Automated email follow-up that works leads around the clock</li>
+        <li class="feat-ok">AI assistant answering questions instantly, day or night</li>
+        <li class="feat-ok">Priority support when you need a hand</li>
+        <li class="feat-ok">Advanced analytics on customer behavior</li>
+        <li class="feat-ok">Website heatmaps</li>
       </ul>
       <a href="contact.html" class="service-link">Learn More <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
     </div>
@@ -2332,15 +2378,15 @@ Our packages (all prices in USD, setup fee + monthly that covers hosting and upk
 
 1) BASIC: "Starter Presence"
    - $199 setup + $19.99/month
-   - Custom design, mobile responsive, fast hosting, contact form, SSL security
+   - Custom design flawless on every device, contact form that sends leads to your inbox, fast secure hosting fully managed by us
 
 2) PRO: "Growth Engine" (most popular)
    - $499 setup + $49.99/month
-   - Everything in Basic, plus SEO optimization, analytics dashboard, booking/CRM integration, priority support
+   - Everything in Basic, plus: accept payments directly on your site, SEO setup so customers find you on Google, automated email follow-up that works leads around the clock, AI assistant answering questions instantly day or night
 
 3) PREMIUM: "Total Domination"
    - $999 setup + $99.99/month
-   - Everything in Pro, plus e-commerce ready, custom functionality, advanced SEO + content, 24/7 dedicated support
+   - Everything in Pro, plus: priority support when you need a hand, advanced analytics on customer behavior, website heatmaps
 
 4) WEBSITE REMODEL: for businesses that already have a site
    - Custom quote (the price depends on the existing site)

@@ -155,6 +155,40 @@ a { text-decoration:none; color:inherit; }
 .price-features { list-style:none; margin-bottom:2rem; }
 .price-features li { font-size:0.85rem; color:var(--chrome); padding:0.35rem 0; border-bottom:1px solid var(--dark-border); display:flex; align-items:center; gap:0.5rem; }
 .price-features li::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--electric); flex-shrink:0; }
+.price-features li.feat-ok { color: var(--chalk); }
+.price-features li.feat-ok::before {
+  content: '✓';
+  color: var(--electric);
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background: none;
+  font-weight: 700;
+  font-size: 0.85rem;
+  line-height: 1;
+}
+.price-features li.feat-no {
+  text-decoration: line-through;
+  opacity: 0.4;
+  color: var(--chrome);
+}
+.price-features li.feat-no::before {
+  background: rgba(200,212,224,0.25);
+}
+.price-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--chrome);
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+.price-card.featured {
+  border-color: var(--electric);
+  box-shadow: 0 0 30px rgba(14,165,255,0.15);
+  position: relative;
+  z-index: 1;
+}
 .price-cta { display:block; font-family:'Jost',sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:var(--electric); border:1px solid var(--electric); padding:0.75rem; text-align:center; border-radius:2px; transition:background 0.25s,color 0.25s; }
 .price-cta:hover { background:var(--electric); color:var(--navy); }
 .price-card.featured .price-cta { background:var(--electric); color:var(--navy); }
@@ -348,6 +382,8 @@ a { text-decoration:none; color:inherit; }
   .radio-card label { padding: 0.5rem 0.75rem; font-size: 0.72rem; }
   .submit-btn { font-size: 1.1rem; }
   .trust-title { font-size: 1.3rem; }
+  /* Feature list — tighter on mobile */
+  .price-features li { padding: 0.22rem 0; font-size: 0.8rem; }
 }
 @media (prefers-reduced-motion:reduce) {
   *,*::before,*::after { animation-duration:0.01ms !important; transition-duration:0.01ms !important; }
@@ -448,37 +484,49 @@ a { text-decoration:none; color:inherit; }
     <div class="price-card" style="transition-delay:0s">
       <p class="price-tier">Basic</p>
       <h3 class="price-name">Starter Presence</h3>
+      <p class="price-subtitle">A clean, professional site to get you online.</p>
       <table class="price-table" aria-label="Basic package pricing">
         <tr><td>Setup</td><td>$199</td></tr>
         <tr><td>Monthly</td><td>$19.99</td></tr>
         <tr><td>Pages</td><td>1 to 2</td></tr>
       </table>
       <ul class="price-features">
-        <li>Custom design</li>
-        <li>Mobile responsive</li>
-        <li>Fast hosting</li>
-        <li>Contact form</li>
-        <li>SSL security</li>
+        <li class="feat-ok">Custom design, flawless on every device</li>
+        <li class="feat-ok">Contact form that sends leads to your inbox</li>
+        <li class="feat-ok">Fast, secure hosting fully managed by us</li>
+        <li class="feat-no">Accept payments directly on your site</li>
+        <li class="feat-no">SEO setup so customers find you on Google</li>
+        <li class="feat-no">Automated email follow-up that works leads around the clock</li>
+        <li class="feat-no">AI assistant answering questions instantly, day or night</li>
+        <li class="feat-no">Priority support when you need a hand</li>
+        <li class="feat-no">Advanced analytics on customer behavior</li>
+        <li class="feat-no">Website heatmaps</li>
       </ul>
       <a href="#contact-form?pkg=basic" class="price-cta">Get Started →</a>
     </div>
 
     <!-- Pro (featured) -->
     <div class="price-card featured" style="transition-delay:0.1s">
-      <span class="price-badge">Most Popular</span>
+      <span class="price-badge">⭐ Most Popular</span>
       <p class="price-tier">Pro</p>
       <h3 class="price-name">Growth Engine</h3>
+      <p class="price-subtitle">Everything you need to actually get customers.</p>
       <table class="price-table" aria-label="Pro package pricing">
         <tr><td>Setup</td><td>$499</td></tr>
         <tr><td>Monthly</td><td>$49.99</td></tr>
         <tr><td>Pages</td><td>3 to 5</td></tr>
       </table>
       <ul class="price-features">
-        <li>Everything in Basic</li>
-        <li>SEO optimization</li>
-        <li>Analytics dashboard</li>
-        <li>Booking/CRM integration</li>
-        <li>Priority support</li>
+        <li class="feat-ok">Custom design, flawless on every device</li>
+        <li class="feat-ok">Contact form that sends leads to your inbox</li>
+        <li class="feat-ok">Fast, secure hosting fully managed by us</li>
+        <li class="feat-ok">Accept payments directly on your site</li>
+        <li class="feat-ok">SEO setup so customers find you on Google</li>
+        <li class="feat-ok">Automated email follow-up that works leads around the clock</li>
+        <li class="feat-ok">AI assistant answering questions instantly, day or night</li>
+        <li class="feat-no">Priority support when you need a hand</li>
+        <li class="feat-no">Advanced analytics on customer behavior</li>
+        <li class="feat-no">Website heatmaps</li>
       </ul>
       <a href="#contact-form?pkg=pro" class="price-cta">Get Started →</a>
     </div>
@@ -487,17 +535,23 @@ a { text-decoration:none; color:inherit; }
     <div class="price-card" style="transition-delay:0.2s">
       <p class="price-tier">Premium</p>
       <h3 class="price-name">Total Domination</h3>
+      <p class="price-subtitle">For established businesses ready to scale.</p>
       <table class="price-table" aria-label="Premium package pricing">
         <tr><td>Setup</td><td>$999</td></tr>
         <tr><td>Monthly</td><td>$99.99</td></tr>
         <tr><td>Pages</td><td>6 to 10</td></tr>
       </table>
       <ul class="price-features">
-        <li>Everything in Pro</li>
-        <li>E-commerce ready</li>
-        <li>Custom functionality</li>
-        <li>Advanced SEO + content</li>
-        <li>24/7 dedicated support</li>
+        <li class="feat-ok">Custom design, flawless on every device</li>
+        <li class="feat-ok">Contact form that sends leads to your inbox</li>
+        <li class="feat-ok">Fast, secure hosting fully managed by us</li>
+        <li class="feat-ok">Accept payments directly on your site</li>
+        <li class="feat-ok">SEO setup so customers find you on Google</li>
+        <li class="feat-ok">Automated email follow-up that works leads around the clock</li>
+        <li class="feat-ok">AI assistant answering questions instantly, day or night</li>
+        <li class="feat-ok">Priority support when you need a hand</li>
+        <li class="feat-ok">Advanced analytics on customer behavior</li>
+        <li class="feat-ok">Website heatmaps</li>
       </ul>
       <a href="#contact-form?pkg=premium" class="price-cta">Get Started →</a>
     </div>
@@ -1129,15 +1183,15 @@ Our packages (all prices in USD, setup fee + monthly that covers hosting and upk
 
 1) BASIC: "Starter Presence"
    - $199 setup + $19.99/month
-   - Custom design, mobile responsive, fast hosting, contact form, SSL security
+   - Custom design flawless on every device, contact form that sends leads to your inbox, fast secure hosting fully managed by us
 
 2) PRO: "Growth Engine" (most popular)
    - $499 setup + $49.99/month
-   - Everything in Basic, plus SEO optimization, analytics dashboard, booking/CRM integration, priority support
+   - Everything in Basic, plus: accept payments directly on your site, SEO setup so customers find you on Google, automated email follow-up that works leads around the clock, AI assistant answering questions instantly day or night
 
 3) PREMIUM: "Total Domination"
    - $999 setup + $99.99/month
-   - Everything in Pro, plus e-commerce ready, custom functionality, advanced SEO + content, 24/7 dedicated support
+   - Everything in Pro, plus: priority support when you need a hand, advanced analytics on customer behavior, website heatmaps
 
 4) WEBSITE REMODEL: for businesses that already have a site
    - Custom quote (the price depends on the existing site)
