@@ -793,6 +793,7 @@ a { text-decoration: none; color: inherit; }
   border: 1px solid var(--dark-border);
   padding: 2.5rem 2rem;
   flex-direction: column;
+  overflow-y: auto;
 }
 .flip-trigger { background: none; border: none; padding: 0; cursor: pointer; }
 .flip-back-close {
@@ -2265,6 +2266,7 @@ document.querySelectorAll('a[href]').forEach(a => {
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function swapIn(inner, front, back) {
+    inner.style.height = front.offsetHeight + 'px';
     front.style.display = 'none';
     back.style.display  = 'flex';
   }
@@ -2272,6 +2274,7 @@ document.querySelectorAll('a[href]').forEach(a => {
   function swapOut(inner, front, back) {
     back.style.display  = 'none';
     front.style.display = '';
+    inner.style.height  = '';
   }
 
   function foldTo(inner, front, back, toBack) {
@@ -2297,6 +2300,7 @@ document.querySelectorAll('a[href]').forEach(a => {
       var b = w.querySelector('.flip-back');
       b.style.display = 'none';
       f.style.display = '';
+      i.style.height  = '';
       i.style.transform = '';
       w.classList.remove('flipped');
     });
