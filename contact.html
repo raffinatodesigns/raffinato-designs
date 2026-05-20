@@ -924,7 +924,13 @@ document.querySelectorAll('a.price-cta').forEach(a => {
 // Handle direct landing with ?pkg= or #contact-form?pkg=
 (function() {
   const pkg = parsePkg(window.location.hash) || parsePkg('pkg=' + (new URLSearchParams(window.location.search).get('pkg') || ''));
-  if (pkg) applyPkg(pkg);
+  if (pkg) {
+    applyPkg(pkg);
+    setTimeout(function() {
+      const section = document.getElementById('contact-form-section');
+      if (section) section.scrollIntoView({ behavior: 'smooth' });
+    }, 150);
+  }
 })();
 
 window.addEventListener('hashchange', () => applyPkg(parsePkg(window.location.hash)));
