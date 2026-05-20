@@ -1615,15 +1615,11 @@ if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
   // ── Dynamic timing from viewport ─────────────────────────────
   const numH   = Math.ceil(window.innerHeight / CELL);
   const numV   = Math.ceil(window.innerWidth  / CELL);
-  const H_DONE = numH * SWEEP_GAP + SWEEP_DUR;          // all H lines done
-  const V_DONE = H_DONE + numV * SWEEP_GAP + SWEEP_DUR; // all V lines done
-  const LOGO_T     = V_DONE + 200;
-  // Entrance: 600ms zoom + 3×180ms pulses + 250ms snap = 1390ms
-  // Shockwave fires at snap-back moment (inside showLogo)
-  const GLITCH_T   = LOGO_T + 1550;  // entrance done + 160ms buffer
-  const COLLAPSE_T = GLITCH_T + 300;
-  const FADE_T     = COLLAPSE_T + 300;
-  const DONE_T     = FADE_T + 200;
+  // Entrance: 600ms zoom + 3×180ms pulses + 250ms snap = 1390ms + 160ms buffer
+  const AFTER_LOGO_GLITCH   = 1550;
+  const AFTER_GLITCH_COLLAPSE = 300;
+  const AFTER_COLLAPSE_FADE   = 300;
+  const AFTER_FADE_DONE       = 200;
 
   let cols, rows, centerX, centerY, maxRadius;
   let intensity, collapseScale, shockHit, collapseTrig;
@@ -1753,26 +1749,13 @@ if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
   }
 
   // ── Sweep lines ───────────────────────────────────────────────
-  function runSweep() {
+  function runSweep(onDone) {
     const wrap = document.createElement('div');
     wrap.style.cssText = 'position:absolute;inset:0;z-index:3;pointer-events:none;overflow:hidden;';
     loader.appendChild(wrap);
 
-    // Horizontal lines — top to bottom, 18ms stagger
-    for (let i = 0; i < numH; i++) {
-      const line = document.createElement('div');
-      line.style.cssText = `position:absolute;left:0;width:100%;height:1.5px;top:${i * CELL}px;background:rgba(14,165,255,1);transform:translateX(-100%);`;
-      wrap.appendChild(line);
-      setTimeout(() => {
-        line.animate(
-          [{ transform: 'translateX(-100%)' }, { transform: 'translateX(100%)' }],
-          { duration: SWEEP_DUR, easing: 'linear', fill: 'forwards' }
-        ).onfinish = () => line.remove();
-      }, i * SWEEP_GAP);
-    }
-
-    // Vertical lines — left to right, start after H sweep done
-    setTimeout(() => {
+    function startPhase2() {
+      let vDone = 0;
       for (let i = 0; i < numV; i++) {
         const line = document.createElement('div');
         line.style.cssText = `position:absolute;top:0;height:100%;width:1.5px;left:${i * CELL}px;background:rgba(14,165,255,1);transform:translateY(-100%);`;
@@ -1781,11 +1764,32 @@ if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
           line.animate(
             [{ transform: 'translateY(-100%)' }, { transform: 'translateY(100%)' }],
             { duration: SWEEP_DUR, easing: 'linear', fill: 'forwards' }
-          ).onfinish = () => line.remove();
+          ).onfinish = () => {
+            line.remove();
+            vDone++;
+            if (vDone === numV) { wrap.remove(); if (onDone) onDone(); }
+          };
         }, i * SWEEP_GAP);
       }
-      setTimeout(() => wrap.remove(), numV * SWEEP_GAP + SWEEP_DUR + 50);
-    }, H_DONE);
+    }
+
+    // Horizontal lines — count completions, kick Phase 2 when all finish
+    let hDone = 0;
+    for (let i = 0; i < numH; i++) {
+      const line = document.createElement('div');
+      line.style.cssText = `position:absolute;left:0;width:100%;height:1.5px;top:${i * CELL}px;background:rgba(14,165,255,1);transform:translateX(-100%);`;
+      wrap.appendChild(line);
+      setTimeout(() => {
+        line.animate(
+          [{ transform: 'translateX(-100%)' }, { transform: 'translateX(100%)' }],
+          { duration: SWEEP_DUR, easing: 'linear', fill: 'forwards' }
+        ).onfinish = () => {
+          line.remove();
+          hDone++;
+          if (hDone === numH) startPhase2();
+        };
+      }, i * SWEEP_GAP);
+    }
   }
 
   // ── Logo ──────────────────────────────────────────────────────
@@ -1835,26 +1839,27 @@ if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
   // ── Timeline ──────────────────────────────────────────────────
   setup();
   rafId = requestAnimationFrame(draw);
-  runSweep();
-
-  setTimeout(showLogo,    LOGO_T);
-  setTimeout(glitchLogo, GLITCH_T);
-  setTimeout(() => {
-    isCollapsing            = true;
-    logoEl.style.transition = 'opacity 0.2s ease';
-    logoEl.style.opacity    = '0';
-  }, COLLAPSE_T);
-  setTimeout(() => {
-    loader.style.transition = 'opacity 0.2s ease';
-    loader.style.opacity    = '0';
-  }, FADE_T);
-  setTimeout(() => {
-    isDone = true;
-    cancelAnimationFrame(rafId);
-    loader.classList.add('done');
-    heroGrid.style.transition = 'opacity 0.3s ease';
-    heroGrid.style.opacity    = '1';
-  }, DONE_T);
+  runSweep(function() {
+    // Both sweep phases done — chain rest of sequence
+    setTimeout(showLogo, 200);
+    setTimeout(glitchLogo, 200 + AFTER_LOGO_GLITCH);
+    setTimeout(() => {
+      isCollapsing            = true;
+      logoEl.style.transition = 'opacity 0.2s ease';
+      logoEl.style.opacity    = '0';
+    }, 200 + AFTER_LOGO_GLITCH + AFTER_GLITCH_COLLAPSE);
+    setTimeout(() => {
+      loader.style.transition = 'opacity 0.2s ease';
+      loader.style.opacity    = '0';
+    }, 200 + AFTER_LOGO_GLITCH + AFTER_GLITCH_COLLAPSE + AFTER_COLLAPSE_FADE);
+    setTimeout(() => {
+      isDone = true;
+      cancelAnimationFrame(rafId);
+      loader.classList.add('done');
+      heroGrid.style.transition = 'opacity 0.3s ease';
+      heroGrid.style.opacity    = '1';
+    }, 200 + AFTER_LOGO_GLITCH + AFTER_GLITCH_COLLAPSE + AFTER_COLLAPSE_FADE + AFTER_FADE_DONE);
+  });
 
   window.addEventListener('resize', setup, { passive: true });
 })();
