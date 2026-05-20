@@ -779,6 +779,93 @@ a { text-decoration: none; color: inherit; }
 }
 .service-card:hover .service-link { gap: 0.9rem; }
 
+/* ── Card Flip ── */
+.flip-wrap { perspective: 1200px; }
+.flip-inner {
+  position: relative;
+  width: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s var(--ease);
+}
+.flip-wrap.flipped .flip-inner { transform: rotateY(180deg); }
+.flip-front {
+  width: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.flip-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: rotateY(180deg);
+  background: var(--navy);
+  border: 1px solid var(--dark-border);
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+.flip-wrap.flipped .flip-front { pointer-events: none; }
+.flip-trigger { background: none; border: none; padding: 0; cursor: pointer; }
+.flip-back-close {
+  background: none;
+  border: none;
+  color: var(--electric);
+  cursor: pointer;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: opacity 0.2s;
+  align-self: flex-start;
+}
+.flip-back-close:hover { opacity: 0.7; }
+.flip-back-heading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.2rem;
+  color: var(--chalk);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  margin-bottom: 0.7rem;
+}
+.flip-back-tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--electric);
+  margin-bottom: 1.2rem;
+  line-height: 1.5;
+}
+.flip-back-body {
+  font-size: 0.92rem;
+  color: var(--chrome);
+  line-height: 1.78;
+  flex: 1;
+  margin-bottom: 1.8rem;
+}
+.flip-back-cta {
+  display: block;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--navy);
+  background: var(--electric);
+  padding: 0.75rem;
+  text-align: center;
+  border-radius: 2px;
+  transition: background 0.25s;
+}
+.flip-back-cta:hover { background: #3bbcff; }
+
 /* ============================================================
    TESTIMONIALS — Section 6
    ============================================================ */
@@ -1055,6 +1142,8 @@ a { text-decoration: none; color: inherit; }
   .service-card { padding: 2rem 1.5rem; }
   /* Feature list — tighter on mobile */
   .service-features li { padding: 0.25rem 0; font-size: 0.82rem; }
+  /* Flip back — tighter padding on small screens */
+  .flip-back { padding: 1.8rem 1.5rem; }
 }
 
 /* ============================================================
@@ -1067,6 +1156,10 @@ a { text-decoration: none; color: inherit; }
     transition-duration: 0.01ms !important;
   }
   #loader { display: none !important; }
+  .flip-inner { transform: none !important; transition: none !important; }
+  .flip-back { transform: none; opacity: 0; pointer-events: none; position: absolute; inset: 0; }
+  .flip-wrap.flipped .flip-front { opacity: 0; pointer-events: none; }
+  .flip-wrap.flipped .flip-back { opacity: 1; pointer-events: all; }
 }
 
 /* Page transition */
@@ -1292,73 +1385,113 @@ body { animation: pageIn 0.35s var(--ease) both; }
     <h2 class="section-heading" id="services-heading">Built For Every Stage</h2>
   </div>
   <div class="services-grid">
-    <div class="service-card rv" style="transition-delay:0s">
-      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M24 4L28 16H40L30.5 23.5L34 36L24 29L14 36L17.5 23.5L8 16H20L24 4Z"/>
-      </svg>
-      <p class="service-tier">Basic</p>
-      <h3 class="service-name">Starter Presence</h3>
-      <p class="service-subtitle">A clean, professional site to get you online.</p>
-      <ul class="service-features">
-        <li class="feat-ok">Custom design, flawless on every device</li>
-        <li class="feat-ok">Contact form that sends leads to your inbox</li>
-        <li class="feat-ok">Fast, secure hosting fully managed by us</li>
-        <li class="feat-no">Accept payments directly on your site</li>
-        <li class="feat-no">SEO setup so customers find you on Google</li>
-        <li class="feat-no">Automated email follow-up that works leads around the clock</li>
-        <li class="feat-no">AI assistant answering questions instantly, day or night</li>
-        <li class="feat-no">Priority support when you need a hand</li>
-        <li class="feat-no">Advanced analytics on customer behavior</li>
-        <li class="feat-no">Website heatmaps</li>
-      </ul>
-      <a href="contact.html" class="service-link">Learn More <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+
+    <!-- ── Basic ── -->
+    <div class="flip-wrap rv" style="transition-delay:0s">
+      <div class="flip-inner">
+        <div class="flip-front service-card">
+          <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M24 4L28 16H40L30.5 23.5L34 36L24 29L14 36L17.5 23.5L8 16H20L24 4Z"/>
+          </svg>
+          <p class="service-tier">Basic</p>
+          <h3 class="service-name">Starter Presence</h3>
+          <p class="service-subtitle">A clean, professional site to get you online.</p>
+          <ul class="service-features">
+            <li class="feat-ok">Custom design, flawless on every device</li>
+            <li class="feat-ok">Contact form that sends leads to your inbox</li>
+            <li class="feat-ok">Fast, secure hosting fully managed by us</li>
+            <li class="feat-no">Accept payments directly on your site</li>
+            <li class="feat-no">SEO setup so customers find you on Google</li>
+            <li class="feat-no">Automated email follow-up that works leads around the clock</li>
+            <li class="feat-no">AI assistant answering questions instantly, day or night</li>
+            <li class="feat-no">Priority support when you need a hand</li>
+            <li class="feat-no">Advanced analytics on customer behavior</li>
+            <li class="feat-no">Website heatmaps</li>
+          </ul>
+          <button class="service-link flip-trigger" aria-label="Learn more about Starter Presence">Learn More <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+        </div>
+        <div class="flip-back" aria-hidden="true">
+          <button class="flip-back-close" aria-label="Flip back to front">&#8592; Back</button>
+          <p class="flip-back-heading">Starter Presence</p>
+          <p class="flip-back-tagline">Your business, online and looking the part.</p>
+          <p class="flip-back-body">You have a great business. The only problem? No one can find you online, and the site you have doesn't do it justice. Starter Presence fixes that. A custom-designed, mobile-perfect site that loads fast, looks sharp, and turns visitors into real leads. We handle everything from design to launch to hosting. You just focus on running your business.</p>
+          <a href="contact.html?pkg=basic" class="flip-back-cta">Get Started &rarr;</a>
+        </div>
+      </div>
     </div>
-    <div class="service-card rv" style="transition-delay:0.1s">
-      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M24 6L26.9 14.1H35.5L28.8 19.2L31.7 27.3L24 22.2L16.3 27.3L19.2 19.2L12.5 14.1H21.1L24 6Z"/>
-        <circle cx="24" cy="34" r="8" stroke-width="1.8"/>
-        <path d="M24 30V34L26.5 36.5"/>
-      </svg>
-      <p class="service-tier" style="display:flex;align-items:center;gap:0.5rem;">Pro <span style="font-size:0.6rem;background:var(--electric);color:var(--navy);padding:0.15rem 0.4rem;letter-spacing:0.1em;font-family:'Jost',sans-serif;font-weight:700;">★ Most Popular</span></p>
-      <h3 class="service-name">Growth Engine</h3>
-      <p class="service-subtitle">Everything you need to actually get customers.</p>
-      <ul class="service-features">
-        <li class="feat-ok">Custom design, flawless on every device</li>
-        <li class="feat-ok">Contact form that sends leads to your inbox</li>
-        <li class="feat-ok">Fast, secure hosting fully managed by us</li>
-        <li class="feat-ok">Accept payments directly on your site</li>
-        <li class="feat-ok">SEO setup so customers find you on Google</li>
-        <li class="feat-ok">Automated email follow-up that works leads around the clock</li>
-        <li class="feat-ok">AI assistant answering questions instantly, day or night</li>
-        <li class="feat-no">Priority support when you need a hand</li>
-        <li class="feat-no">Advanced analytics on customer behavior</li>
-        <li class="feat-no">Website heatmaps</li>
-      </ul>
-      <a href="contact.html" class="service-link">Learn More <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+
+    <!-- ── Pro ── -->
+    <div class="flip-wrap rv" style="transition-delay:0.1s">
+      <div class="flip-inner">
+        <div class="flip-front service-card">
+          <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M24 6L26.9 14.1H35.5L28.8 19.2L31.7 27.3L24 22.2L16.3 27.3L19.2 19.2L12.5 14.1H21.1L24 6Z"/>
+            <circle cx="24" cy="34" r="8" stroke-width="1.8"/>
+            <path d="M24 30V34L26.5 36.5"/>
+          </svg>
+          <p class="service-tier" style="display:flex;align-items:center;gap:0.5rem;">Pro <span style="font-size:0.6rem;background:var(--electric);color:var(--navy);padding:0.15rem 0.4rem;letter-spacing:0.1em;font-family:'Jost',sans-serif;font-weight:700;">★ Most Popular</span></p>
+          <h3 class="service-name">Growth Engine</h3>
+          <p class="service-subtitle">Everything you need to actually get customers.</p>
+          <ul class="service-features">
+            <li class="feat-ok">Custom design, flawless on every device</li>
+            <li class="feat-ok">Contact form that sends leads to your inbox</li>
+            <li class="feat-ok">Fast, secure hosting fully managed by us</li>
+            <li class="feat-ok">Accept payments directly on your site</li>
+            <li class="feat-ok">SEO setup so customers find you on Google</li>
+            <li class="feat-ok">Automated email follow-up that works leads around the clock</li>
+            <li class="feat-ok">AI assistant answering questions instantly, day or night</li>
+            <li class="feat-no">Priority support when you need a hand</li>
+            <li class="feat-no">Advanced analytics on customer behavior</li>
+            <li class="feat-no">Website heatmaps</li>
+          </ul>
+          <button class="service-link flip-trigger" aria-label="Learn more about Growth Engine">Learn More <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+        </div>
+        <div class="flip-back" aria-hidden="true">
+          <button class="flip-back-close" aria-label="Flip back to front">&#8592; Back</button>
+          <p class="flip-back-heading">Growth Engine</p>
+          <p class="flip-back-tagline">Built to bring in customers, not just look pretty.</p>
+          <p class="flip-back-body">Looking good online is table stakes. Growth Engine is built to actually grow your business. Customers find you on Google, your booking system handles itself, and the AI on your site answers questions 24/7 so you never lose a lead. Most of our clients see a real difference within the first 90 days. This is the plan most businesses wish they had started with.</p>
+          <a href="contact.html?pkg=pro" class="flip-back-cta">Get Started &rarr;</a>
+        </div>
+      </div>
     </div>
-    <div class="service-card rv" style="transition-delay:0.2s">
-      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M24 4L27 13H37L29 19L32 28L24 22L16 28L19 19L11 13H21L24 4Z"/>
-        <path d="M12 36H36"/>
-        <path d="M8 42H40"/>
-      </svg>
-      <p class="service-tier">Premium</p>
-      <h3 class="service-name">Total Domination</h3>
-      <p class="service-subtitle">For established businesses ready to scale.</p>
-      <ul class="service-features">
-        <li class="feat-ok">Custom design, flawless on every device</li>
-        <li class="feat-ok">Contact form that sends leads to your inbox</li>
-        <li class="feat-ok">Fast, secure hosting fully managed by us</li>
-        <li class="feat-ok">Accept payments directly on your site</li>
-        <li class="feat-ok">SEO setup so customers find you on Google</li>
-        <li class="feat-ok">Automated email follow-up that works leads around the clock</li>
-        <li class="feat-ok">AI assistant answering questions instantly, day or night</li>
-        <li class="feat-ok">Priority support when you need a hand</li>
-        <li class="feat-ok">Advanced analytics on customer behavior</li>
-        <li class="feat-ok">Website heatmaps</li>
-      </ul>
-      <a href="contact.html" class="service-link">Learn More <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+
+    <!-- ── Premium ── -->
+    <div class="flip-wrap rv" style="transition-delay:0.2s">
+      <div class="flip-inner">
+        <div class="flip-front service-card">
+          <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M24 4L27 13H37L29 19L32 28L24 22L16 28L19 19L11 13H21L24 4Z"/>
+            <path d="M12 36H36"/>
+            <path d="M8 42H40"/>
+          </svg>
+          <p class="service-tier">Premium</p>
+          <h3 class="service-name">Total Domination</h3>
+          <p class="service-subtitle">For established businesses ready to scale.</p>
+          <ul class="service-features">
+            <li class="feat-ok">Custom design, flawless on every device</li>
+            <li class="feat-ok">Contact form that sends leads to your inbox</li>
+            <li class="feat-ok">Fast, secure hosting fully managed by us</li>
+            <li class="feat-ok">Accept payments directly on your site</li>
+            <li class="feat-ok">SEO setup so customers find you on Google</li>
+            <li class="feat-ok">Automated email follow-up that works leads around the clock</li>
+            <li class="feat-ok">AI assistant answering questions instantly, day or night</li>
+            <li class="feat-ok">Priority support when you need a hand</li>
+            <li class="feat-ok">Advanced analytics on customer behavior</li>
+            <li class="feat-ok">Website heatmaps</li>
+          </ul>
+          <button class="service-link flip-trigger" aria-label="Learn more about Total Domination">Learn More <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+        </div>
+        <div class="flip-back" aria-hidden="true">
+          <button class="flip-back-close" aria-label="Flip back to front">&#8592; Back</button>
+          <p class="flip-back-heading">Total Domination</p>
+          <p class="flip-back-tagline">For the business that refuses to be second.</p>
+          <p class="flip-back-body">You have outgrown a basic site. Total Domination is a full digital machine: e-commerce, advanced SEO, custom features built around how you actually operate, and a team watching your back around the clock. We move fast, we move precisely, and we build things that scale. This is the option for businesses that want to lead their market, not just compete in it.</p>
+          <a href="contact.html?pkg=premium" class="flip-back-cta">Get Started &rarr;</a>
+        </div>
+      </div>
     </div>
+
   </div>
 </section>
 
@@ -2138,6 +2271,62 @@ document.querySelectorAll('a[href]').forEach(a => {
 
   resize();
   window.addEventListener('resize', resize);
+})();
+</script>
+
+<!-- ── Card Flip Controller ── -->
+<script>
+(function () {
+  var wraps = document.querySelectorAll('.flip-wrap');
+
+  function flipOpen(wrap) {
+    wraps.forEach(function (w) {
+      if (w !== wrap) flipClose(w);
+    });
+    wrap.classList.add('flipped');
+    var back = wrap.querySelector('.flip-back');
+    if (back) {
+      back.removeAttribute('aria-hidden');
+      back.scrollTop = 0;
+    }
+    var front = wrap.querySelector('.flip-front');
+    if (front) front.setAttribute('aria-hidden', 'true');
+  }
+
+  function flipClose(wrap) {
+    wrap.classList.remove('flipped');
+    var back = wrap.querySelector('.flip-back');
+    if (back) back.setAttribute('aria-hidden', 'true');
+    var front = wrap.querySelector('.flip-front');
+    if (front) front.removeAttribute('aria-hidden');
+  }
+
+  wraps.forEach(function (wrap) {
+    var trigger = wrap.querySelector('.flip-trigger');
+    var closeBtn = wrap.querySelector('.flip-back-close');
+
+    if (trigger) {
+      trigger.addEventListener('click', function () {
+        if (wrap.classList.contains('flipped')) {
+          flipClose(wrap);
+        } else {
+          flipOpen(wrap);
+        }
+      });
+    }
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function () {
+        flipClose(wrap);
+      });
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      wraps.forEach(function (w) { flipClose(w); });
+    }
+  });
 })();
 </script>
 
