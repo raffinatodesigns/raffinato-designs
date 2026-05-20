@@ -783,6 +783,8 @@ a { text-decoration: none; color: inherit; }
 .flip-wrap { position: relative; }
 .flip-inner { position: relative; width: 100%; }
 .flip-front { width: 100%; }
+/* front card is fully clickable */
+.flip-wrap .flip-front { cursor: pointer; }
 /* disable hover-lift on flippable cards */
 .flip-wrap .service-card:hover { transform: none; box-shadow: none; }
 .flip-back {
@@ -2310,23 +2312,27 @@ document.querySelectorAll('a[href]').forEach(a => {
     var inner    = wrap.querySelector('.flip-inner');
     var front    = wrap.querySelector('.flip-front');
     var back     = wrap.querySelector('.flip-back');
-    var trigger  = wrap.querySelector('.flip-trigger');
     var closeBtn = wrap.querySelector('.flip-back-close');
 
-    if (trigger) {
-      trigger.addEventListener('click', function () {
-        closeAll(wrap);
-        wrap.classList.add('flipped');
-        foldTo(inner, front, back, true);
-      });
-    }
+    // clicking anywhere on the front card flips it
+    front.addEventListener('click', function () {
+      closeAll(wrap);
+      wrap.classList.add('flipped');
+      foldTo(inner, front, back, true);
+    });
 
+    // back: close button and clicking the card itself (but not the CTA link)
     if (closeBtn) {
-      closeBtn.addEventListener('click', function () {
+      closeBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
         wrap.classList.remove('flipped');
         foldTo(inner, front, back, false);
       });
     }
+
+    // prevent CTA link clicks from bubbling to any card handler
+    var cta = back.querySelector('.flip-back-cta');
+    if (cta) cta.addEventListener('click', function (e) { e.stopPropagation(); });
   });
 
   document.addEventListener('keydown', function (e) {
