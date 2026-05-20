@@ -425,6 +425,102 @@ a { text-decoration:none; color:inherit; }
 }
 .form-submit-error.show { display: block; }
 .form-submit-error a { color: #ff4757; text-decoration: underline; }
+
+/* ── Card Flip ── */
+.flip-wrap { position: relative; }
+.flip-inner { position: relative; width: 100%; }
+.flip-front { width: 100%; }
+.flip-back {
+  position: absolute;
+  inset: 0;
+  display: none;
+  background: var(--navy);
+  border: 1px solid var(--dark-border);
+  padding: 2.5rem 2rem;
+  flex-direction: column;
+  overflow-y: auto;
+  z-index: 2;
+}
+.flip-front.featured ~ .flip-back { border-color: var(--electric); }
+.price-learn-more {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  color: var(--electric);
+  font-family: 'Jost', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: opacity 0.2s;
+  z-index: 2;
+}
+.price-learn-more:hover { opacity: 0.7; }
+.flip-back-close {
+  background: none;
+  border: none;
+  color: var(--electric);
+  cursor: pointer;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: opacity 0.2s;
+  align-self: flex-start;
+}
+.flip-back-close:hover { opacity: 0.7; }
+.flip-back-heading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.2rem;
+  color: var(--chalk);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  margin-bottom: 0.7rem;
+}
+.flip-back-tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--electric);
+  margin-bottom: 1.2rem;
+  line-height: 1.5;
+}
+.flip-back-body {
+  font-size: 0.92rem;
+  color: var(--chrome);
+  line-height: 1.78;
+  flex: 1;
+  margin-bottom: 1.8rem;
+}
+.flip-back-cta {
+  display: block;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--navy);
+  background: var(--electric);
+  padding: 0.75rem;
+  text-align: center;
+  border-radius: 2px;
+  transition: background 0.25s;
+  text-decoration: none;
+}
+.flip-back-cta:hover { background: #3bbcff; }
 </style>
 </head>
 <body>
@@ -481,76 +577,112 @@ a { text-decoration:none; color:inherit; }
   <div class="pricing-grid">
 
     <!-- Basic -->
-    <div class="price-card" style="transition-delay:0s">
-      <p class="price-tier">Basic</p>
-      <h3 class="price-name">Starter Presence</h3>
-      <p class="price-subtitle">A clean, professional site to get you online.</p>
-      <table class="price-table" aria-label="Basic package pricing">
-        <tr><td>Setup</td><td>$199</td></tr>
-        <tr><td>Monthly</td><td>$19.99</td></tr>
-      </table>
-      <ul class="price-features">
-        <li class="feat-ok">Custom design, flawless on every device</li>
-        <li class="feat-ok">Contact form that sends leads to your inbox</li>
-        <li class="feat-ok">Fast, secure hosting fully managed by us</li>
-        <li class="feat-no">Accept payments directly on your site</li>
-        <li class="feat-no">SEO setup so customers find you on Google</li>
-        <li class="feat-no">Automated email follow-up that works leads around the clock</li>
-        <li class="feat-no">AI assistant answering questions instantly, day or night</li>
-        <li class="feat-no">Priority support when you need a hand</li>
-        <li class="feat-no">Advanced analytics on customer behavior</li>
-        <li class="feat-no">Website heatmaps</li>
-      </ul>
-      <a href="#contact-form?pkg=basic" class="price-cta">Get Started →</a>
+    <div class="flip-wrap">
+      <div class="flip-inner">
+        <div class="flip-front price-card" style="transition-delay:0s">
+          <button class="price-learn-more" aria-label="Learn more about Starter Presence">Learn More ›</button>
+          <p class="price-tier">Basic</p>
+          <h3 class="price-name">Starter Presence</h3>
+          <p class="price-subtitle">A clean, professional site to get you online.</p>
+          <table class="price-table" aria-label="Basic package pricing">
+            <tr><td>Setup</td><td>$199</td></tr>
+            <tr><td>Monthly</td><td>$19.99</td></tr>
+          </table>
+          <ul class="price-features">
+            <li class="feat-ok">Custom design, flawless on every device</li>
+            <li class="feat-ok">Contact form that sends leads to your inbox</li>
+            <li class="feat-ok">Fast, secure hosting fully managed by us</li>
+            <li class="feat-no">Accept payments directly on your site</li>
+            <li class="feat-no">SEO setup so customers find you on Google</li>
+            <li class="feat-no">Automated email follow-up that works leads around the clock</li>
+            <li class="feat-no">AI assistant answering questions instantly, day or night</li>
+            <li class="feat-no">Priority support when you need a hand</li>
+            <li class="feat-no">Advanced analytics on customer behavior</li>
+            <li class="feat-no">Website heatmaps</li>
+          </ul>
+          <a href="#contact-form?pkg=basic" class="price-cta">Get Started →</a>
+        </div>
+        <div class="flip-back">
+          <button class="flip-back-close">&#8592; Back</button>
+          <p class="flip-back-heading">Starter Presence</p>
+          <p class="flip-back-tagline">Perfect for new businesses getting online for the first time.</p>
+          <p class="flip-back-body">You don't need to understand web design, hosting, or code. You tell us about your business, and we deliver a polished, professional site that works flawlessly on every device. It's live in days, fully managed by us, and ready to take payments from day one. No tech headaches, no monthly surprises, just a site you're proud to share.</p>
+          <a href="#contact-form?pkg=basic" class="flip-back-cta price-cta">Get Started →</a>
+        </div>
+      </div>
     </div>
 
     <!-- Pro (featured) -->
-    <div class="price-card featured" style="transition-delay:0.1s">
-      <span class="price-badge">★ Most Popular</span>
-      <p class="price-tier">Pro</p>
-      <h3 class="price-name">Growth Engine</h3>
-      <p class="price-subtitle">Everything you need to actually get customers.</p>
-      <table class="price-table" aria-label="Pro package pricing">
-        <tr><td>Setup</td><td>$499</td></tr>
-        <tr><td>Monthly</td><td>$49.99</td></tr>
-      </table>
-      <ul class="price-features">
-        <li class="feat-ok">Custom design, flawless on every device</li>
-        <li class="feat-ok">Contact form that sends leads to your inbox</li>
-        <li class="feat-ok">Fast, secure hosting fully managed by us</li>
-        <li class="feat-ok">Accept payments directly on your site</li>
-        <li class="feat-ok">SEO setup so customers find you on Google</li>
-        <li class="feat-ok">Automated email follow-up that works leads around the clock</li>
-        <li class="feat-ok">AI assistant answering questions instantly, day or night</li>
-        <li class="feat-no">Priority support when you need a hand</li>
-        <li class="feat-no">Advanced analytics on customer behavior</li>
-        <li class="feat-no">Website heatmaps</li>
-      </ul>
-      <a href="#contact-form?pkg=pro" class="price-cta">Get Started →</a>
+    <div class="flip-wrap">
+      <div class="flip-inner">
+        <div class="flip-front price-card featured" style="transition-delay:0.1s">
+          <button class="price-learn-more" aria-label="Learn more about Growth Engine">Learn More ›</button>
+          <span class="price-badge">★ Most Popular</span>
+          <p class="price-tier">Pro</p>
+          <h3 class="price-name">Growth Engine</h3>
+          <p class="price-subtitle">Everything you need to actually get customers.</p>
+          <table class="price-table" aria-label="Pro package pricing">
+            <tr><td>Setup</td><td>$499</td></tr>
+            <tr><td>Monthly</td><td>$49.99</td></tr>
+          </table>
+          <ul class="price-features">
+            <li class="feat-ok">Custom design, flawless on every device</li>
+            <li class="feat-ok">Contact form that sends leads to your inbox</li>
+            <li class="feat-ok">Fast, secure hosting fully managed by us</li>
+            <li class="feat-ok">Accept payments directly on your site</li>
+            <li class="feat-ok">SEO setup so customers find you on Google</li>
+            <li class="feat-ok">Automated email follow-up that works leads around the clock</li>
+            <li class="feat-ok">AI assistant answering questions instantly, day or night</li>
+            <li class="feat-no">Priority support when you need a hand</li>
+            <li class="feat-no">Advanced analytics on customer behavior</li>
+            <li class="feat-no">Website heatmaps</li>
+          </ul>
+          <a href="#contact-form?pkg=pro" class="price-cta">Get Started →</a>
+        </div>
+        <div class="flip-back">
+          <button class="flip-back-close">&#8592; Back</button>
+          <p class="flip-back-heading">Growth Engine</p>
+          <p class="flip-back-tagline">Our most popular package, and it's not close.</p>
+          <p class="flip-back-body">Basic gets you online. Pro gets you customers. You get everything in Basic plus the tools that actually grow a business: SEO so people find you on Google, automated email follow-up that works your leads while you sleep, and an AI assistant answering customer questions 24/7. Most small businesses don't need a website, they need customers. This is how you get them.</p>
+          <a href="#contact-form?pkg=pro" class="flip-back-cta price-cta">Get Started →</a>
+        </div>
+      </div>
     </div>
 
     <!-- Premium -->
-    <div class="price-card" style="transition-delay:0.2s">
-      <p class="price-tier">Premium</p>
-      <h3 class="price-name">Total Domination</h3>
-      <p class="price-subtitle">For established businesses ready to scale.</p>
-      <table class="price-table" aria-label="Premium package pricing">
-        <tr><td>Setup</td><td>$999</td></tr>
-        <tr><td>Monthly</td><td>$99.99</td></tr>
-      </table>
-      <ul class="price-features">
-        <li class="feat-ok">Custom design, flawless on every device</li>
-        <li class="feat-ok">Contact form that sends leads to your inbox</li>
-        <li class="feat-ok">Fast, secure hosting fully managed by us</li>
-        <li class="feat-ok">Accept payments directly on your site</li>
-        <li class="feat-ok">SEO setup so customers find you on Google</li>
-        <li class="feat-ok">Automated email follow-up that works leads around the clock</li>
-        <li class="feat-ok">AI assistant answering questions instantly, day or night</li>
-        <li class="feat-ok">Priority support when you need a hand</li>
-        <li class="feat-ok">Advanced analytics on customer behavior</li>
-        <li class="feat-ok">Website heatmaps</li>
-      </ul>
-      <a href="#contact-form?pkg=premium" class="price-cta">Get Started →</a>
+    <div class="flip-wrap">
+      <div class="flip-inner">
+        <div class="flip-front price-card" style="transition-delay:0.2s">
+          <button class="price-learn-more" aria-label="Learn more about Total Domination">Learn More ›</button>
+          <p class="price-tier">Premium</p>
+          <h3 class="price-name">Total Domination</h3>
+          <p class="price-subtitle">For established businesses ready to scale.</p>
+          <table class="price-table" aria-label="Premium package pricing">
+            <tr><td>Setup</td><td>$999</td></tr>
+            <tr><td>Monthly</td><td>$99.99</td></tr>
+          </table>
+          <ul class="price-features">
+            <li class="feat-ok">Custom design, flawless on every device</li>
+            <li class="feat-ok">Contact form that sends leads to your inbox</li>
+            <li class="feat-ok">Fast, secure hosting fully managed by us</li>
+            <li class="feat-ok">Accept payments directly on your site</li>
+            <li class="feat-ok">SEO setup so customers find you on Google</li>
+            <li class="feat-ok">Automated email follow-up that works leads around the clock</li>
+            <li class="feat-ok">AI assistant answering questions instantly, day or night</li>
+            <li class="feat-ok">Priority support when you need a hand</li>
+            <li class="feat-ok">Advanced analytics on customer behavior</li>
+            <li class="feat-ok">Website heatmaps</li>
+          </ul>
+          <a href="#contact-form?pkg=premium" class="price-cta">Get Started →</a>
+        </div>
+        <div class="flip-back">
+          <button class="flip-back-close">&#8592; Back</button>
+          <p class="flip-back-heading">Total Domination</p>
+          <p class="flip-back-tagline">For established businesses ready to dominate their market.</p>
+          <p class="flip-back-body">Everything in Pro, supercharged. Advanced analytics show you exactly where your customers come from and what they do on your site. Website heatmaps reveal what's working and what's costing you sales. With priority support and a dedicated point of contact, you're not just getting a website, you're getting a growth partner invested in your results.</p>
+          <a href="#contact-form?pkg=premium" class="flip-back-cta price-cta">Get Started →</a>
+        </div>
+      </div>
     </div>
 
     <!-- Remodel -->
@@ -1172,6 +1304,84 @@ document.querySelectorAll('a[href]').forEach(a=>{
     </button>
   </div>
 </div>
+
+<!-- ── Card Flip Controller ── -->
+<script>
+(function () {
+  var HALF = 220;
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function swapIn(inner, front, back) {
+    inner.style.height = front.offsetHeight + 'px';
+    front.style.display = 'none';
+    back.style.display  = 'flex';
+  }
+
+  function swapOut(inner, front, back) {
+    back.style.display  = 'none';
+    front.style.display = '';
+    inner.style.height  = '';
+  }
+
+  function foldTo(inner, front, back, toBack) {
+    if (reducedMotion) {
+      toBack ? swapIn(inner, front, back) : swapOut(inner, front, back);
+      return;
+    }
+    inner.style.transition = 'transform ' + HALF + 'ms ease-in';
+    inner.style.transform  = 'scaleX(0)';
+    setTimeout(function () {
+      toBack ? swapIn(inner, front, back) : swapOut(inner, front, back);
+      inner.style.transition = 'transform ' + HALF + 'ms ease-out';
+      inner.style.transform  = 'scaleX(1)';
+      setTimeout(function () { inner.style.transition = ''; }, HALF);
+    }, HALF);
+  }
+
+  function closeAll(except) {
+    document.querySelectorAll('.flip-wrap.flipped').forEach(function (w) {
+      if (w === except) return;
+      var i = w.querySelector('.flip-inner');
+      var f = w.querySelector('.flip-front');
+      var b = w.querySelector('.flip-back');
+      b.style.display = 'none';
+      f.style.display = '';
+      i.style.height  = '';
+      i.style.transform = '';
+      w.classList.remove('flipped');
+    });
+  }
+
+  document.querySelectorAll('.flip-wrap').forEach(function (wrap) {
+    var inner    = wrap.querySelector('.flip-inner');
+    var front    = wrap.querySelector('.flip-front');
+    var back     = wrap.querySelector('.flip-back');
+    var learnBtn = wrap.querySelector('.price-learn-more');
+    var closeBtn = wrap.querySelector('.flip-back-close');
+
+    if (learnBtn) {
+      learnBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        closeAll(wrap);
+        wrap.classList.add('flipped');
+        foldTo(inner, front, back, true);
+      });
+    }
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        wrap.classList.remove('flipped');
+        foldTo(inner, front, back, false);
+      });
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeAll(null);
+  });
+})();
+</script>
 
 <script>
 (function raffinatoChat() {
