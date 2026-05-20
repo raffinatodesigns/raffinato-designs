@@ -17,9 +17,13 @@ function getIp(req) {
 }
 
 function setCors(req, res) {
-  const allowed = process.env.CORS_ORIGIN || '';
   const origin = req.headers['origin'] || '';
-  const use = origin === allowed ? origin : allowed;
+  const allowed = [
+    'https://www.raffinatodesigns.com',
+    'https://raffinatodesigns.com',
+    process.env.CORS_ORIGIN,
+  ].filter(Boolean);
+  const use = allowed.includes(origin) ? origin : allowed[0];
   res.setHeader('Access-Control-Allow-Origin', use);
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
