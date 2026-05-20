@@ -780,45 +780,20 @@ a { text-decoration: none; color: inherit; }
 .service-card:hover .service-link { gap: 0.9rem; }
 
 /* ── Card Flip ── */
-.flip-wrap {
-  -webkit-perspective: 1200px;
-  perspective: 1200px;
-}
-.flip-inner {
-  position: relative;
-  width: 100%;
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  -webkit-transition: -webkit-transform 0.6s var(--ease);
-  transition: transform 0.6s var(--ease);
-}
-.flip-wrap.flipped .flip-inner {
-  -webkit-transform: rotateY(180deg);
-  transform: rotateY(180deg);
-}
-.flip-front {
-  width: 100%;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-/* override card's overflow:hidden — breaks backface-visibility in 3D context */
-.flip-front.service-card { overflow: visible; }
-/* disable hover-lift when card is inside flip wrapper */
-.flip-wrap .service-card:hover { transform: none; }
+.flip-wrap { position: relative; }
+.flip-inner { position: relative; width: 100%; }
+.flip-front { width: 100%; }
+/* disable hover-lift on flippable cards */
+.flip-wrap .service-card:hover { transform: none; box-shadow: none; }
 .flip-back {
   position: absolute;
   inset: 0;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  -webkit-transform: rotateY(180deg);
-  transform: rotateY(180deg);
+  display: none;
   background: var(--navy);
   border: 1px solid var(--dark-border);
   padding: 2.5rem 2rem;
-  display: flex;
   flex-direction: column;
 }
-.flip-wrap.flipped .flip-front { pointer-events: none; }
 .flip-trigger { background: none; border: none; padding: 0; cursor: pointer; }
 .flip-back-close {
   background: none;
@@ -1168,10 +1143,7 @@ a { text-decoration: none; color: inherit; }
     transition-duration: 0.01ms !important;
   }
   #loader { display: none !important; }
-  .flip-inner { -webkit-transform: none !important; transform: none !important; transition: none !important; }
-  .flip-back { -webkit-transform: none; transform: none; opacity: 0; pointer-events: none; position: absolute; inset: 0; }
-  .flip-wrap.flipped .flip-front { opacity: 0; pointer-events: none; }
-  .flip-wrap.flipped .flip-back { opacity: 1; pointer-events: all; }
+  .flip-inner { transition: none !important; }
 }
 
 /* Page transition */
@@ -2289,55 +2261,72 @@ document.querySelectorAll('a[href]').forEach(a => {
 <!-- ── Card Flip Controller ── -->
 <script>
 (function () {
-  var wraps = document.querySelectorAll('.flip-wrap');
+  var HALF = 220; // ms per half-fold
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  function flipOpen(wrap) {
-    wraps.forEach(function (w) {
-      if (w !== wrap) flipClose(w);
-    });
-    wrap.classList.add('flipped');
-    var back = wrap.querySelector('.flip-back');
-    if (back) {
-      back.removeAttribute('aria-hidden');
-      back.scrollTop = 0;
+  function swapIn(inner, front, back) {
+    front.style.display = 'none';
+    back.style.display  = 'flex';
+  }
+
+  function swapOut(inner, front, back) {
+    back.style.display  = 'none';
+    front.style.display = '';
+  }
+
+  function foldTo(inner, front, back, toBack) {
+    if (reducedMotion) {
+      toBack ? swapIn(inner, front, back) : swapOut(inner, front, back);
+      return;
     }
-    var front = wrap.querySelector('.flip-front');
-    if (front) front.setAttribute('aria-hidden', 'true');
+    inner.style.transition = 'transform ' + HALF + 'ms ease-in';
+    inner.style.transform  = 'scaleX(0)';
+    setTimeout(function () {
+      toBack ? swapIn(inner, front, back) : swapOut(inner, front, back);
+      inner.style.transition = 'transform ' + HALF + 'ms ease-out';
+      inner.style.transform  = 'scaleX(1)';
+      setTimeout(function () { inner.style.transition = ''; }, HALF);
+    }, HALF);
   }
 
-  function flipClose(wrap) {
-    wrap.classList.remove('flipped');
-    var back = wrap.querySelector('.flip-back');
-    if (back) back.setAttribute('aria-hidden', 'true');
-    var front = wrap.querySelector('.flip-front');
-    if (front) front.removeAttribute('aria-hidden');
+  function closeAll(except) {
+    document.querySelectorAll('.flip-wrap.flipped').forEach(function (w) {
+      if (w === except) return;
+      var i = w.querySelector('.flip-inner');
+      var f = w.querySelector('.flip-front');
+      var b = w.querySelector('.flip-back');
+      b.style.display = 'none';
+      f.style.display = '';
+      i.style.transform = '';
+      w.classList.remove('flipped');
+    });
   }
 
-  wraps.forEach(function (wrap) {
-    var trigger = wrap.querySelector('.flip-trigger');
+  document.querySelectorAll('.flip-wrap').forEach(function (wrap) {
+    var inner    = wrap.querySelector('.flip-inner');
+    var front    = wrap.querySelector('.flip-front');
+    var back     = wrap.querySelector('.flip-back');
+    var trigger  = wrap.querySelector('.flip-trigger');
     var closeBtn = wrap.querySelector('.flip-back-close');
 
     if (trigger) {
       trigger.addEventListener('click', function () {
-        if (wrap.classList.contains('flipped')) {
-          flipClose(wrap);
-        } else {
-          flipOpen(wrap);
-        }
+        closeAll(wrap);
+        wrap.classList.add('flipped');
+        foldTo(inner, front, back, true);
       });
     }
 
     if (closeBtn) {
       closeBtn.addEventListener('click', function () {
-        flipClose(wrap);
+        wrap.classList.remove('flipped');
+        foldTo(inner, front, back, false);
       });
     }
   });
 
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') {
-      wraps.forEach(function (w) { flipClose(w); });
-    }
+    if (e.key === 'Escape') closeAll(null);
   });
 })();
 </script>
