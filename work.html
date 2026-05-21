@@ -214,6 +214,10 @@ a { text-decoration: none; color: inherit; }
 .card:nth-child(6) .card-preview::before { inset:15% 10% 40% 50%; border:1px solid rgba(14,165,255,0.22); background:rgba(14,165,255,0.04); border-radius:2px; }
 .card:nth-child(6) .card-preview::after  { inset:50% 10% 15% 10%; background:rgba(14,165,255,0.04); border:1px solid rgba(14,165,255,0.12); border-radius:2px; }
 
+.card:nth-child(7) .card-preview { background: linear-gradient(135deg, #1A1A1A 0%, #2D2A2B 55%, #3a2200 100%); }
+.card:nth-child(7) .card-preview::before { inset:18% 10% 38% 10%; background:rgba(255,130,0,0.07); border:1px solid rgba(255,130,0,0.28); border-radius:2px; }
+.card:nth-child(7) .card-preview::after  { bottom:18%; left:10%; right:38%; height:2px; background:linear-gradient(90deg,#FF8200,transparent); box-shadow:0 0 14px rgba(255,130,0,0.5); }
+
 /* Card overlay (slide up on hover) */
 .card-overlay {
   position: absolute;
@@ -514,6 +518,15 @@ a { text-decoration: none; color: inherit; }
         <span class="card-view">View Project →</span>
       </div>
     </div>
+    <div class="card" data-category="fitness" data-name="Summit Strength Co." data-desc="A bold, high-energy website concept for a Knoxville strength and fitness gym, built to drive memberships and showcase their programs and coaching staff." data-url="/work/summit-strength/" tabindex="0" role="article" aria-label="Summit Strength Co. - view live demo">
+      <div class="card-preview" aria-hidden="true"></div>
+      <div class="card-info"><p class="card-info-name">Summit Strength Co.</p><p class="card-info-tag">Gym &amp; Fitness</p></div>
+      <div class="card-overlay">
+        <span class="card-tag">Gym &amp; Fitness</span>
+        <p class="card-name">Summit Strength Co.</p>
+        <span class="card-view">View Live Demo →</span>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -674,6 +687,10 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
 const lb = document.getElementById('lightbox');
 document.querySelectorAll('.card').forEach(card => {
   function open(){
+    if (card.dataset.url) {
+      window.open(card.dataset.url, '_blank', 'noopener,noreferrer');
+      return;
+    }
     document.getElementById('lightbox-tag').textContent   = card.querySelector('.card-tag')?.textContent || '';
     document.getElementById('lightbox-title').textContent = card.dataset.name;
     document.getElementById('lightbox-desc').textContent  = card.dataset.desc;
