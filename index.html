@@ -1755,34 +1755,37 @@ if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
     wrap.style.cssText = 'position:absolute;inset:0;z-index:3;pointer-events:none;overflow:hidden;';
     loader.appendChild(wrap);
 
-    // Phase 2: vertical lines left→right, each sweeps top→bottom
+    // Phase 2: vertical lines, stagger via animation delay (compositor-driven)
     function startPhase2() {
       for (let i = 0; i < numV; i++) {
         const line = document.createElement('div');
         line.style.cssText = `position:absolute;top:0;height:100%;width:1.5px;left:${i * CELL}px;background:rgba(14,165,255,1);transform:translateY(-100%);`;
         wrap.appendChild(line);
-        setTimeout(() => {
-          line.animate(
-            [{ transform: 'translateY(-100%)' }, { transform: 'translateY(100%)' }],
-            { duration: SWEEP_DUR, easing: 'linear', fill: 'forwards' }
-          ).onfinish = () => line.remove();
-          if (i === numV - 1) setTimeout(() => { wrap.remove(); if (onDone) onDone(); }, SWEEP_DUR + 16);
-        }, i * SWEEP_GAP);
+        const anim = line.animate(
+          [{ transform: 'translateY(-100%)' }, { transform: 'translateY(100%)' }],
+          { duration: SWEEP_DUR, delay: i * SWEEP_GAP, easing: 'linear', fill: 'both' }
+        );
+        anim.onfinish = () => {
+          line.remove();
+          if (i === numV - 1) { wrap.remove(); if (onDone) onDone(); }
+        };
       }
     }
 
-    // Phase 1: horizontal lines top→bottom, each sweeps left→right
+    // Phase 1: horizontal lines, stagger via animation delay (compositor-driven)
+    // onfinish of the last line (longest delay) kicks Phase 2
     for (let i = 0; i < numH; i++) {
       const line = document.createElement('div');
       line.style.cssText = `position:absolute;left:0;width:100%;height:1.5px;top:${i * CELL}px;background:rgba(14,165,255,1);transform:translateX(-100%);`;
       wrap.appendChild(line);
-      setTimeout(() => {
-        line.animate(
-          [{ transform: 'translateX(-100%)' }, { transform: 'translateX(100%)' }],
-          { duration: SWEEP_DUR, easing: 'linear', fill: 'forwards' }
-        ).onfinish = () => line.remove();
-        if (i === numH - 1) setTimeout(startPhase2, SWEEP_DUR + 16);
-      }, i * SWEEP_GAP);
+      const anim = line.animate(
+        [{ transform: 'translateX(-100%)' }, { transform: 'translateX(100%)' }],
+        { duration: SWEEP_DUR, delay: i * SWEEP_GAP, easing: 'linear', fill: 'both' }
+      );
+      anim.onfinish = () => {
+        line.remove();
+        if (i === numH - 1) startPhase2();
+      };
     }
   }
 
