@@ -205,9 +205,15 @@ a { text-decoration: none; color: inherit; }
 .card:nth-child(2) .card-preview::before { top:20%; left:15%; right:15%; height:35%; background:rgba(14,165,255,0.06); border-top:2px solid var(--electric); }
 .card:nth-child(2) .card-preview::after  { top:62%; left:15%; width:40%; height:3px; background:var(--electric); box-shadow:0 0 10px rgba(14,165,255,0.6); border-radius:2px; }
 
-.card:nth-child(3) .card-preview { background: radial-gradient(circle at 30% 40%, #0a2a4a 0%, #050D1F 70%); }
-.card:nth-child(3) .card-preview::before { inset:25% 20% 20% 15%; border-radius:4px; border:1px solid rgba(14,165,255,0.2); background:rgba(14,165,255,0.03); }
-.card:nth-child(3) .card-preview::after  { top:35%; right:20%; width:28%; height:28%; border-radius:50%; border:1px solid rgba(14,165,255,0.25); box-shadow:inset 0 0 20px rgba(14,165,255,0.08); }
+.card:nth-child(3) .card-preview {
+  background-image: url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=800&q=80');
+  background-size: cover;
+  background-position: center 40%;
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+.card:nth-child(3):hover .card-preview { transform: scale(1.04); }
+.card:nth-child(3) .card-preview::before { inset:0; background:rgba(5,13,31,0.40); border:none; }
+.card:nth-child(3) .card-preview::after  { display:none; }
 
 .card:nth-child(4) .card-preview { background: linear-gradient(200deg, #060f22 0%, #091e3a 100%); }
 .card:nth-child(4) .card-preview::before { inset:10% 10% 45% 10%; background:linear-gradient(135deg,rgba(14,165,255,0.08),transparent); border:1px solid rgba(14,165,255,0.18); }
@@ -495,13 +501,13 @@ a { text-decoration: none; color: inherit; }
         <span class="card-view">View Project →</span>
       </div>
     </div>
-    <div class="card" data-category="professional" data-name="Meridian Law" data-desc="Trust-first legal firm website with practice area pages, attorney bios, consultation booking, and ADA compliance. Built in 5 days." tabindex="0" role="article">
+    <div class="card" data-category="professional" data-name="Meridian Law" data-desc="A polished, trust-driven website concept for a Chicago law firm, designed to convey authority and convert consultations." data-url="/work/meridian-law/" tabindex="0" role="article" aria-label="Meridian Law - view live demo">
       <div class="card-preview" aria-hidden="true"></div>
       <div class="card-info"><p class="card-info-name">Meridian Law</p><p class="card-info-tag">Professional Services</p></div>
       <div class="card-overlay">
         <span class="card-tag">Professional Services</span>
         <p class="card-name">Meridian Law</p>
-        <span class="card-view">View Project →</span>
+        <span class="card-view">View Live Demo →</span>
       </div>
     </div>
     <div class="card" data-category="fitness" data-name="Iron District Gym" data-desc="High-energy fitness brand site with class scheduling, membership tiers, trainer profiles, and progress tracking CTAs. Delivered in 4 days." tabindex="0" role="article">
