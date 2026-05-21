@@ -1754,34 +1754,33 @@ if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
     wrap.style.cssText = 'position:absolute;inset:0;z-index:3;pointer-events:none;overflow:hidden;';
     loader.appendChild(wrap);
 
+    // Phase 2: horizontal lines sweep left→right, staggered top→bottom
     function startPhase2() {
-      for (let i = 0; i < numV; i++) {
+      for (let i = 0; i < numH; i++) {
         const line = document.createElement('div');
-        line.style.cssText = `position:absolute;top:0;height:100%;width:1.5px;left:${i * CELL}px;background:rgba(14,165,255,1);transform:translateY(-100%);`;
+        line.style.cssText = `position:absolute;left:0;width:100%;height:1.5px;top:${i * CELL}px;background:rgba(14,165,255,1);transform:translateX(-100%);`;
         wrap.appendChild(line);
         setTimeout(() => {
           line.animate(
-            [{ transform: 'translateY(-100%)' }, { transform: 'translateY(100%)' }],
+            [{ transform: 'translateX(-100%)' }, { transform: 'translateX(100%)' }],
             { duration: SWEEP_DUR, easing: 'linear', fill: 'forwards' }
           ).onfinish = () => line.remove();
-          // When the last V-line animation starts, schedule onDone after it finishes
-          if (i === numV - 1) setTimeout(() => { wrap.remove(); if (onDone) onDone(); }, SWEEP_DUR + 16);
+          if (i === numH - 1) setTimeout(() => { wrap.remove(); if (onDone) onDone(); }, SWEEP_DUR + 16);
         }, i * SWEEP_GAP);
       }
     }
 
-    // Horizontal lines — when the last one's animation starts, schedule Phase 2 after it finishes
-    for (let i = 0; i < numH; i++) {
+    // Phase 1: vertical lines sweep top→bottom, staggered left→right
+    for (let i = 0; i < numV; i++) {
       const line = document.createElement('div');
-      line.style.cssText = `position:absolute;left:0;width:100%;height:1.5px;top:${i * CELL}px;background:rgba(14,165,255,1);transform:translateX(-100%);`;
+      line.style.cssText = `position:absolute;top:0;height:100%;width:1.5px;left:${i * CELL}px;background:rgba(14,165,255,1);transform:translateY(-100%);`;
       wrap.appendChild(line);
       setTimeout(() => {
         line.animate(
-          [{ transform: 'translateX(-100%)' }, { transform: 'translateX(100%)' }],
+          [{ transform: 'translateY(-100%)' }, { transform: 'translateY(100%)' }],
           { duration: SWEEP_DUR, easing: 'linear', fill: 'forwards' }
         ).onfinish = () => line.remove();
-        // When the last H-line animation starts, schedule Phase 2 after it finishes
-        if (i === numH - 1) setTimeout(startPhase2, SWEEP_DUR + 16);
+        if (i === numV - 1) setTimeout(startPhase2, SWEEP_DUR + 16);
       }, i * SWEEP_GAP);
     }
   }
