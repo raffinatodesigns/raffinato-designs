@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://raffinatodesigns.com/sitemap.xml
+Sitemap: https://www.raffinatodesigns.com/sitemap.xml
