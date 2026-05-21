@@ -190,9 +190,15 @@ a { text-decoration: none; color: inherit; }
 .card-preview::before, .card-preview::after { content: ''; position: absolute; }
 
 /* Per-card unique geometric previews */
-.card:nth-child(1) .card-preview { background: linear-gradient(135deg, #050D1F 0%, #0A2040 60%, #082d54 100%); }
-.card:nth-child(1) .card-preview::before { inset:20% 15% 30% 10%; border:1px solid rgba(14,165,255,0.3); background:rgba(14,165,255,0.04); }
-.card:nth-child(1) .card-preview::after  { bottom:15%; left:10%; right:40%; height:2px; background:linear-gradient(90deg,var(--electric),transparent); box-shadow:0 0 12px rgba(14,165,255,0.5); }
+.card:nth-child(1) .card-preview {
+  background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80');
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+.card:nth-child(1):hover .card-preview { transform: scale(1.04); }
+.card:nth-child(1) .card-preview::before { inset:0; background:rgba(5,13,31,0.32); border:none; }
+.card:nth-child(1) .card-preview::after  { display:none; }
 
 .card:nth-child(2) .card-preview { background: linear-gradient(160deg, #0A1628 0%, #05192e 100%); }
 .card:nth-child(2) .card-preview::before { top:20%; left:15%; right:15%; height:35%; background:rgba(14,165,255,0.06); border-top:2px solid var(--electric); }
@@ -470,13 +476,13 @@ a { text-decoration: none; color: inherit; }
     <button class="filter-btn" data-filter="fitness" role="tab" aria-selected="false">Fitness</button>
   </div>
   <div class="portfolio-grid" id="portfolio-grid">
-    <div class="card" data-category="restaurant" data-name="Ember & Oak" data-desc="A full-service restaurant website with online reservations, seasonal menu display, and immersive photography galleries. Delivered in 6 days." tabindex="0" role="article">
+    <div class="card" data-category="restaurant" data-name="Ember & Oak" data-desc="An editorial, cinematic website concept for a Chicago fine-dining restaurant. Open-fire cuisine, seasonal menus, gallery lightbox, and private events booking." data-url="/work/ember-and-oak/" tabindex="0" role="article" aria-label="Ember &amp; Oak - view live demo">
       <div class="card-preview" aria-hidden="true"></div>
       <div class="card-info"><p class="card-info-name">Ember &amp; Oak</p><p class="card-info-tag">Restaurant</p></div>
       <div class="card-overlay">
         <span class="card-tag">Restaurant</span>
         <p class="card-name">Ember &amp; Oak</p>
-        <span class="card-view">View Project →</span>
+        <span class="card-view">View Live Demo →</span>
       </div>
     </div>
     <div class="card" data-category="retail" data-name="Luxe Threads" data-desc="Boutique fashion e-commerce with a custom product configurator, lookbook gallery, and integrated Shopify checkout. Live in 7 days." tabindex="0" role="article">
