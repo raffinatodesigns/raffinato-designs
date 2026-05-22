@@ -235,9 +235,15 @@ a { text-decoration: none; color: inherit; }
 .card:nth-child(5) .card-preview::before { inset:0; background:rgba(5,13,31,0.32); border:none; }
 .card:nth-child(5) .card-preview::after  { display:none; }
 
-.card:nth-child(6) .card-preview { background: radial-gradient(ellipse at 60% 30%, #0b2040 0%, #050D1F 70%); }
-.card:nth-child(6) .card-preview::before { inset:15% 10% 40% 50%; border:1px solid rgba(14,165,255,0.22); background:rgba(14,165,255,0.04); border-radius:2px; }
-.card:nth-child(6) .card-preview::after  { inset:50% 10% 15% 10%; background:rgba(14,165,255,0.04); border:1px solid rgba(14,165,255,0.12); border-radius:2px; }
+.card:nth-child(6) .card-preview {
+  background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80');
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+.card:nth-child(6):hover .card-preview { transform: scale(1.04); }
+.card:nth-child(6) .card-preview::before { inset:0; background:rgba(5,13,31,0.35); border:none; }
+.card:nth-child(6) .card-preview::after  { display:none; }
 
 .card:nth-child(7) .card-preview {
   background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=80');
@@ -248,6 +254,16 @@ a { text-decoration: none; color: inherit; }
 .card:nth-child(7):hover .card-preview { transform: scale(1.04); }
 .card:nth-child(7) .card-preview::before { inset:0; background:rgba(5,13,31,0.38); border:none; }
 .card:nth-child(7) .card-preview::after  { display:none; }
+
+.card:nth-child(8) .card-preview {
+  background-image: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=800&q=80');
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+.card:nth-child(8):hover .card-preview { transform: scale(1.04); }
+.card:nth-child(8) .card-preview::before { inset:0; background:rgba(5,13,31,0.45); border:none; }
+.card:nth-child(8) .card-preview::after  { display:none; }
 
 /* Card overlay (slide up on hover) */
 .card-overlay {
@@ -540,13 +556,13 @@ a { text-decoration: none; color: inherit; }
         <span class="card-view">View Live Demo →</span>
       </div>
     </div>
-    <div class="card" data-category="professional" data-name="Crest Financial" data-desc="Financial advisory firm with wealth management service pages, team profiles, client portal link, and lead capture forms. Launched in 7 days." tabindex="0" role="article">
+    <div class="card" data-category="professional" data-name="Crest Financial" data-desc="A modern, trust-driven website concept for a Maryland financial advisory firm, designed to turn visitors into consultations." data-url="/work/crest-financial/" tabindex="0" role="article" aria-label="Crest Financial - view live demo">
       <div class="card-preview" aria-hidden="true"></div>
       <div class="card-info"><p class="card-info-name">Crest Financial</p><p class="card-info-tag">Professional Services</p></div>
       <div class="card-overlay">
         <span class="card-tag">Professional Services</span>
         <p class="card-name">Crest Financial</p>
-        <span class="card-view">View Project →</span>
+        <span class="card-view">View Live Demo →</span>
       </div>
     </div>
     <div class="card" data-category="fitness" data-name="Summit Strength Co." data-desc="A bold, high-energy website concept for a Knoxville strength and fitness gym, built to drive memberships and showcase their programs and coaching staff." data-url="/work/summit-strength/" tabindex="0" role="article" aria-label="Summit Strength Co. - view live demo">
@@ -555,6 +571,15 @@ a { text-decoration: none; color: inherit; }
       <div class="card-overlay">
         <span class="card-tag">Gym &amp; Fitness</span>
         <p class="card-name">Summit Strength Co.</p>
+        <span class="card-view">View Live Demo →</span>
+      </div>
+    </div>
+    <div class="card" data-category="fitness" data-name="Iron District" data-desc="A raw, industrial website concept for a hardcore NYC strength gym. A deliberate contrast to our Knoxville fitness build, showing range within a single industry." data-url="/work/iron-district/" tabindex="0" role="article" aria-label="Iron District - view live demo">
+      <div class="card-preview" aria-hidden="true"></div>
+      <div class="card-info"><p class="card-info-name">Iron District</p><p class="card-info-tag">Gym &amp; Fitness</p></div>
+      <div class="card-overlay">
+        <span class="card-tag">Gym &amp; Fitness</span>
+        <p class="card-name">Iron District</p>
         <span class="card-view">View Live Demo →</span>
       </div>
     </div>
