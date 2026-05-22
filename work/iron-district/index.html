@@ -3,1083 +3,924 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Iron District NYC | Bushwick Strength Gym</title>
-<meta name="description" content="Iron District NYC - Bushwick's hardcore strength gym. Powerlifting, strongman, Olympic lifting, boxing, and conditioning. No fluff. Just work.">
+<title>Iron District NYC | Brooklyn's Hardcore Strength Gym</title>
+<meta name="description" content="Iron District NYC is Brooklyn's premier underground strength gym. Powerlifting, strongman, Olympic lifting, boxing. Gowanus, Brooklyn. No frills. No excuses.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
 <style>
-
-/* ══ TOKENS ══════════════════════════════════════════════════════════ */
-:root {
-  --void:     #0A0A0A;
-  --dark:     #111111;
-  --surface:  #1C1C1C;
-  --concrete: #2E2E2E;
-  --steel:    #585858;
-  --ghost:    #8A8A8A;
-  --chalk:    #DCDCDC;
-  --white:    #F2F2F2;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+:root{
+  --black:    #0A0A0A;
+  --concrete: #1C1C1C;
+  --pit:      #141414;
+  --steel:    #6E6E6E;
+  --chalk:    #E8E8E8;
+  --dim:      rgba(232,232,232,0.55);
   --acid:     #C5FF00;
-  --acid-dim: rgba(197,255,0,0.1);
-  --snap:     cubic-bezier(0.2, 0, 0.4, 1);
+  --border:   rgba(110,110,110,0.22);
+  --snap:     cubic-bezier(0.7,0,0.3,1);
+  --ease:     cubic-bezier(0.16,1,0.3,1);
+}
+*{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+body{background:var(--black);color:var(--chalk);font-family:'Barlow Condensed',sans-serif;font-weight:400;line-height:1.5;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+img{max-width:100%;display:block;}
+
+/* Grain overlay */
+body::after{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity:0.04;pointer-events:none;z-index:9997;mix-blend-mode:overlay;
 }
 
-/* ══ RESET ═══════════════════════════════════════════════════════════ */
-*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  background: var(--void);
-  color: var(--chalk);
-  font-family: 'Space Mono', monospace;
-  font-size: 16px;
-  line-height: 1.6;
-  overflow-x: hidden;
-  animation: bodyIn 0.2s ease both;
-}
-@keyframes bodyIn { from { opacity: 0; } to { opacity: 1; } }
-a { text-decoration: none; color: inherit; }
-img { display: block; max-width: 100%; }
-address { font-style: normal; }
+/* Scroll reveal */
+.rv{opacity:0;transform:translateY(38px);transition:opacity 0.6s var(--ease),transform 0.6s var(--ease);}
+.rv.visible{opacity:1;transform:translateY(0);}
+.d1{transition-delay:0.08s;}.d2{transition-delay:0.16s;}.d3{transition-delay:0.24s;}
+.d4{transition-delay:0.32s;}.d5{transition-delay:0.4s;}.d6{transition-delay:0.48s;}
 
-/* ══ GRAIN OVERLAY ═══════════════════════════════════════════════════ */
-.grain-layer {
-  position: fixed; inset: 0;
-  width: 100%; height: 100%;
-  pointer-events: none;
-  z-index: 9990;
-  mix-blend-mode: soft-light;
+/* ── NAV ── */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.4rem 5%;
+  transition:background 0.3s,padding 0.3s,border-color 0.3s;
+  border-bottom:1px solid transparent;
 }
-
-/* ══ SCROLL REVEAL ═══════════════════════════════════════════════════ */
-.rv  { opacity: 0; transform: translateY(20px); transition: opacity 0.4s var(--snap), transform 0.4s var(--snap); }
-.rvx { opacity: 0; transform: translateX(-20px); transition: opacity 0.4s var(--snap), transform 0.4s var(--snap); }
-.rv.visible, .rvx.visible { opacity: 1; transform: translate(0); }
-.d1 { transition-delay: 0.07s; }
-.d2 { transition-delay: 0.14s; }
-.d3 { transition-delay: 0.21s; }
-.d4 { transition-delay: 0.28s; }
-
-/* ══ NAV ══════════════════════════════════════════════════════════════ */
-#nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 900;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 1.4rem 4%;
-  transition: background 0.2s ease, padding 0.2s ease, border-color 0.2s;
+#nav.scrolled{background:rgba(10,10,10,0.95);backdrop-filter:blur(12px);padding:0.9rem 5%;border-color:var(--border);}
+.nav-brand{font-family:'Anton',sans-serif;font-size:1.3rem;letter-spacing:0.08em;text-transform:uppercase;line-height:1;}
+.nav-brand .a{color:var(--acid);}
+.nav-links{display:flex;align-items:center;gap:2rem;list-style:none;}
+.nav-links a{font-size:0.78rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--dim);transition:color 0.15s;}
+.nav-links a:hover{color:var(--chalk);}
+.nav-cta{
+  font-family:'Barlow Condensed',sans-serif;font-size:0.76rem;font-weight:700;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--black);background:var(--acid);
+  padding:0.6rem 1.5rem;border:2px solid var(--acid);
+  transition:background 0.15s,color 0.15s;
 }
-#nav.scrolled {
-  background: rgba(10,10,10,0.96);
-  backdrop-filter: blur(10px);
-  padding: 0.9rem 4%;
-  border-bottom: 1px solid var(--concrete);
+.nav-cta:hover{background:transparent;color:var(--acid);}
+.back-link{font-size:0.66rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:rgba(232,232,232,0.3);transition:color 0.2s;}
+.back-link:hover{color:var(--acid);}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;}
+.hamburger span{display:block;width:24px;height:2px;background:var(--chalk);transition:transform 0.3s var(--ease),opacity 0.3s;}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+#mobile-menu{
+  position:fixed;inset:0;background:rgba(10,10,10,0.98);backdrop-filter:blur(20px);
+  z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.8rem;
+  opacity:0;pointer-events:none;transition:opacity 0.3s var(--ease);
 }
-.nav-brand {
-  font-family: 'Anton', sans-serif;
-  font-size: 1.2rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--white);
-  line-height: 1;
-}
-.nav-brand .a { color: var(--acid); }
-.nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
-.nav-links a {
-  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--steel); transition: color 0.15s;
-}
-.nav-links a:hover { color: var(--acid); }
-.nav-cta {
-  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--void); background: var(--acid); padding: 0.6rem 1.4rem;
-  transition: background 0.15s;
-}
-.nav-cta:hover { background: #d4ff1a; }
-.hamburger {
-  display: none; flex-direction: column; gap: 5px;
-  background: none; border: none; cursor: pointer; padding: 4px; z-index: 901;
-}
-.hamburger span { display: block; width: 24px; height: 2px; background: var(--chalk); transition: transform 0.2s var(--snap), opacity 0.2s; }
-.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.hamburger.open span:nth-child(2) { opacity: 0; }
-.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-#mobile-menu {
-  position: fixed; inset: 0; background: var(--void);
-  z-index: 899; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.8rem;
-  opacity: 0; pointer-events: none; transition: opacity 0.2s ease;
-}
-#mobile-menu.open { opacity: 1; pointer-events: all; }
-#mobile-menu a {
-  font-family: 'Anton', sans-serif; font-size: 2.6rem; letter-spacing: 0.08em;
-  text-transform: uppercase; color: var(--chalk); transition: color 0.15s;
-}
-#mobile-menu a:hover { color: var(--acid); }
-#mobile-menu .m-cta {
-  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--void); background: var(--acid); padding: 1rem 2.8rem; margin-top: 0.5rem;
+#mobile-menu.open{opacity:1;pointer-events:all;}
+#mobile-menu a{font-family:'Anton',sans-serif;font-size:2.6rem;letter-spacing:0.06em;text-transform:uppercase;}
+#mobile-menu a:hover{color:var(--acid);}
+#mobile-menu .mcta{
+  font-family:'Barlow Condensed',sans-serif;font-size:0.85rem;font-weight:700;letter-spacing:0.16em;
+  text-transform:uppercase;background:var(--acid);color:var(--black);padding:0.85rem 2.5rem;margin-top:0.8rem;
 }
 
-/* ══ HERO ═════════════════════════════════════════════════════════════ */
-#hero {
-  position: relative; height: 100vh; min-height: 620px;
-  display: flex; align-items: flex-end; overflow: hidden;
+/* ── HERO ── */
+#hero{
+  position:relative;height:100vh;min-height:640px;
+  display:flex;align-items:flex-end;overflow:hidden;
 }
-.hero-bg {
-  position: absolute; inset: 0;
-  background-image: url('https://images.unsplash.com/photo-1517130038641-a774d04afb3c?auto=format&fit=crop&w=1920&q=80');
-  background-size: cover; background-position: center 25%;
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(to bottom,rgba(10,10,10,0.25) 0%,rgba(10,10,10,0.7) 55%,rgba(10,10,10,0.97) 100%),
+    linear-gradient(105deg,rgba(10,10,10,0.7) 0%,transparent 55%),
+    url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
 }
-.hero-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(10,10,10,1) 0%,
-    rgba(10,10,10,0.65) 45%,
-    rgba(10,10,10,0.2) 100%
-  );
+.hero-content{position:relative;z-index:2;padding:0 5% 5rem;width:100%;}
+.hero-eyebrow{
+  font-size:0.7rem;font-weight:700;letter-spacing:0.36em;text-transform:uppercase;
+  color:var(--acid);margin-bottom:1rem;display:block;
+  opacity:0;animation:snapIn 0.4s steps(1) 0.25s forwards;
 }
-.hero-content { position: relative; z-index: 2; padding: 0 4% 4.5rem; width: 100%; }
-.hero-eyebrow {
-  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.26em; text-transform: uppercase;
-  color: var(--acid); display: block; margin-bottom: 0.5rem;
-  opacity: 0; animation: hIn 0.4s 0.15s var(--snap) both;
+.hero-headline{
+  font-family:'Anton',sans-serif;
+  font-size:clamp(5rem,19vw,22rem);
+  line-height:0.86;letter-spacing:0.01em;text-transform:uppercase;color:var(--chalk);
+  margin-bottom:0.12em;
+  opacity:0;animation:snapIn 0.4s steps(1) 0.45s forwards;
 }
-.hero-h1 {
-  font-family: 'Anton', sans-serif;
-  font-size: clamp(5rem, 17vw, 17rem);
-  line-height: 0.87; letter-spacing: -0.01em; text-transform: uppercase;
-  color: var(--white); margin-bottom: 1.4rem;
-  opacity: 0; animation: hIn 0.45s 0.3s var(--snap) both;
+.hero-headline .hl2{color:var(--acid);}
+.hero-sub{
+  font-size:clamp(1rem,2vw,1.18rem);font-weight:300;color:var(--dim);
+  max-width:500px;margin-bottom:2.4rem;
+  opacity:0;animation:snapIn 0.4s steps(1) 0.65s forwards;
 }
-.hero-h1 .acid-line { color: var(--acid); }
-.hero-bottom {
-  display: flex; align-items: flex-end; justify-content: space-between;
-  flex-wrap: wrap; gap: 2rem;
-  opacity: 0; animation: hIn 0.45s 0.5s var(--snap) both;
-}
-.hero-sub {
-  font-size: 0.8rem; color: var(--ghost); line-height: 1.85;
-  max-width: 360px; letter-spacing: 0.03em;
-}
-.hero-cta-group { display: flex; gap: 0.8rem; flex-wrap: wrap; align-items: center; }
-.btn-acid {
-  display: inline-block; font-size: 0.68rem; font-weight: 700;
-  letter-spacing: 0.18em; text-transform: uppercase;
-  background: var(--acid); color: var(--void); padding: 0.95rem 2.4rem;
-  transition: background 0.15s;
-}
-.btn-acid:hover { background: #d4ff1a; }
-.btn-wire {
-  display: inline-block; font-size: 0.68rem; font-weight: 700;
-  letter-spacing: 0.18em; text-transform: uppercase;
-  background: transparent; color: var(--ghost);
-  border: 1px solid var(--concrete); padding: 0.95rem 2.4rem;
-  transition: border-color 0.15s, color 0.15s;
-}
-.btn-wire:hover { border-color: var(--acid); color: var(--acid); }
-@keyframes hIn { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
-@media (prefers-reduced-motion: reduce) {
-  .hero-eyebrow,.hero-h1,.hero-bottom { animation: none; opacity: 1; }
-}
+.hero-ctas{display:flex;gap:1.2rem;flex-wrap:wrap;opacity:0;animation:snapIn 0.4s steps(1) 0.85s forwards;}
 
-/* ══ TICKER ══════════════════════════════════════════════════════════ */
-#ticker { background: var(--acid); overflow: hidden; padding: 0.85rem 0; }
-.ticker-track {
-  display: flex; white-space: nowrap; gap: 0;
-  will-change: transform;
-}
-@keyframes tickerRun { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-@media (prefers-reduced-motion: no-preference) {
-  .ticker-track { animation: tickerRun 24s linear infinite; }
-}
-.ticker-item {
-  display: inline-flex; align-items: center; gap: 1.4rem;
-  padding: 0 2rem; flex-shrink: 0;
-  font-family: 'Anton', sans-serif;
-  font-size: 1rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--void);
-}
-.ticker-sep { font-family: 'Space Mono', monospace; font-size: 0.7rem; opacity: 0.35; }
+@keyframes snapIn{from{opacity:0;}to{opacity:1;}}
 
-/* ══ MANIFESTO ═══════════════════════════════════════════════════════ */
-#manifesto { background: var(--dark); padding: 9rem 4%; position: relative; overflow: hidden; }
-.manifesto-ghost-num {
-  position: absolute; top: 2rem; right: 3%;
-  font-family: 'Anton', sans-serif;
-  font-size: clamp(10rem, 22vw, 22rem);
-  line-height: 1; color: rgba(255,255,255,0.022);
-  user-select: none; pointer-events: none;
+.btn-acid{
+  display:inline-block;font-family:'Barlow Condensed',sans-serif;
+  font-size:0.82rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;
+  background:var(--acid);color:var(--black);padding:1rem 2.4rem;
+  border:2px solid var(--acid);transition:background 0.15s var(--snap),color 0.15s var(--snap);
 }
-.manifesto-grid {
-  display: grid; grid-template-columns: 1.15fr 1fr;
-  gap: 7rem; align-items: center;
-  max-width: 1200px; margin: 0 auto; position: relative; z-index: 1;
+.btn-acid:hover{background:transparent;color:var(--acid);}
+.btn-ghost{
+  display:inline-block;font-family:'Barlow Condensed',sans-serif;
+  font-size:0.82rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;
+  background:transparent;color:var(--chalk);padding:1rem 2.4rem;
+  border:2px solid rgba(232,232,232,0.3);transition:border-color 0.15s,color 0.15s;
 }
-.manifesto-text { order: 1; }
-.manifesto-eyebrow {
-  font-size: 0.6rem; font-weight: 700; letter-spacing: 0.24em;
-  text-transform: uppercase; color: var(--acid); display: block; margin-bottom: 0.8rem;
-}
-.manifesto-h2 {
-  font-family: 'Anton', sans-serif;
-  font-size: clamp(2.8rem, 6vw, 6rem);
-  line-height: 0.9; text-transform: uppercase; color: var(--white); margin-bottom: 2.2rem;
-}
-.manifesto-body {
-  font-size: 0.8rem; line-height: 2; color: var(--ghost); margin-bottom: 1.2rem; letter-spacing: 0.02em;
-}
-.manifesto-pull {
-  font-family: 'Anton', sans-serif;
-  font-size: clamp(1.2rem, 2.5vw, 2rem);
-  line-height: 1.1; text-transform: uppercase; color: var(--acid);
-  border-left: 3px solid var(--acid); padding-left: 1.4rem;
-  margin: 2.2rem 0 2.5rem;
-}
-.manifesto-specs {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 0;
-  border: 1px solid var(--concrete);
-}
-.spec-item {
-  padding: 1rem 1.2rem; border-right: 1px solid var(--concrete);
-  border-bottom: 1px solid var(--concrete);
-}
-.spec-item:nth-child(even) { border-right: none; }
-.spec-item:nth-last-child(-n+2) { border-bottom: none; }
-.spec-label { font-size: 0.55rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--acid); display: block; margin-bottom: 0.2rem; }
-.spec-val { font-size: 0.8rem; color: var(--chalk); letter-spacing: 0.04em; }
-.manifesto-image-wrap { order: 2; position: relative; }
-.manifesto-img { width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block; filter: grayscale(30%); }
-.manifesto-img-tag {
-  position: absolute; bottom: 1.5rem; left: 1.5rem;
-  background: var(--acid); color: var(--void);
-  font-size: 0.55rem; font-weight: 700; letter-spacing: 0.18em;
-  text-transform: uppercase; padding: 0.3rem 0.8rem;
-}
+.btn-ghost:hover{border-color:var(--acid);color:var(--acid);}
 
-/* ══ PROGRAMS ════════════════════════════════════════════════════════ */
-#programs { background: var(--void); padding: 9rem 4%; }
-.programs-header {
-  display: flex; align-items: flex-end; justify-content: space-between;
-  gap: 2rem; max-width: 1200px; margin: 0 auto 3rem;
+/* ── MARQUEE ── */
+.marquee-band{
+  background:var(--acid);padding:0.9rem 0;overflow:hidden;position:relative;z-index:10;
 }
-.programs-eyebrow { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; color: var(--acid); display: block; margin-bottom: 0.6rem; }
-.programs-h2 { font-family: 'Anton', sans-serif; font-size: clamp(2.5rem, 5.5vw, 5.5rem); line-height: 0.9; text-transform: uppercase; color: var(--white); }
-.programs-note { font-size: 0.7rem; color: var(--steel); text-align: right; max-width: 240px; line-height: 1.75; flex-shrink: 0; }
-.programs-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 2px; background: var(--concrete);
-  max-width: 1200px; margin: 0 auto;
+.marquee-track{
+  display:flex;align-items:center;width:max-content;
+  animation:marquee 20s linear infinite;
 }
-.prog-card { position: relative; overflow: hidden; aspect-ratio: 4/3; }
-.prog-img {
-  position: absolute; inset: 0; width: 100%; height: 100%;
-  object-fit: cover;
-  filter: grayscale(100%) brightness(0.42) contrast(1.1);
-  transition: filter 0.22s ease, transform 0.4s var(--snap);
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.marquee-item{
+  font-family:'Anton',sans-serif;font-size:1rem;letter-spacing:0.16em;
+  text-transform:uppercase;color:var(--black);white-space:nowrap;padding:0 2.5rem;
 }
-.prog-card:hover .prog-img { filter: grayscale(0%) brightness(0.52); transform: scale(1.07); }
-.prog-shade {
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(10,10,10,0.97) 0%, rgba(10,10,10,0.35) 55%, transparent 100%);
-}
-.prog-card::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-  background: var(--acid); transform: scaleX(0); transform-origin: left;
-  transition: transform 0.18s ease; z-index: 2;
-}
-.prog-card:hover::before { transform: scaleX(1); }
-.prog-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 1.4rem; z-index: 1; }
-.prog-code {
-  font-size: 0.55rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
-  color: var(--acid); display: block; margin-bottom: 0.35rem;
-  opacity: 0; transform: translateY(6px); transition: opacity 0.18s ease, transform 0.18s ease;
-}
-.prog-card:hover .prog-code { opacity: 1; transform: translateY(0); }
-.prog-name {
-  font-family: 'Anton', sans-serif;
-  font-size: clamp(1.4rem, 2.5vw, 2.2rem);
-  line-height: 0.93; text-transform: uppercase; color: var(--white);
-  margin-bottom: 0.5rem; transition: color 0.18s;
-}
-.prog-card:hover .prog-name { color: var(--acid); }
-.prog-desc {
-  font-size: 0.68rem; color: var(--ghost); line-height: 1.7; letter-spacing: 0.02em;
-  max-height: 0; overflow: hidden; opacity: 0;
-  transition: max-height 0.3s ease, opacity 0.2s ease;
-}
-.prog-card:hover .prog-desc { max-height: 80px; opacity: 1; }
+.marquee-sep{color:rgba(10,10,10,0.3);font-size:1.2rem;flex-shrink:0;}
+@media(prefers-reduced-motion:reduce){.marquee-track{animation:none;overflow:auto;}}
 
-/* ══ THE SPACE ════════════════════════════════════════════════════════ */
-#the-space {
-  position: relative; overflow: hidden;
-  min-height: 56vh; display: flex; align-items: center;
+/* ── SECTION UTILS ── */
+.section-label{font-size:0.68rem;font-weight:700;letter-spacing:0.32em;text-transform:uppercase;color:var(--acid);margin-bottom:0.8rem;display:block;}
+.section-heading{
+  font-family:'Anton',sans-serif;font-size:clamp(2.8rem,5.5vw,6rem);
+  line-height:0.9;letter-spacing:0.01em;text-transform:uppercase;color:var(--chalk);
 }
-.space-bg {
-  position: absolute; inset: 0;
-  background-image: url('https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?auto=format&fit=crop&w=1920&q=80');
-  background-size: cover; background-position: center 35%;
-}
-.space-overlay { position: absolute; inset: 0; background: rgba(10,10,10,0.82); }
-.space-content { position: relative; z-index: 1; width: 100%; padding: 5rem 4%; }
-.space-label {
-  font-size: 0.6rem; font-weight: 700; letter-spacing: 0.26em; text-transform: uppercase;
-  color: var(--acid); display: block; margin-bottom: 2.5rem;
-  max-width: 1200px; margin-left: auto; margin-right: auto;
-}
-.space-stats {
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  max-width: 1200px; margin: 0 auto;
-  border-top: 1px solid var(--concrete); border-left: 1px solid var(--concrete);
-}
-.space-stat {
-  padding: 2.5rem 2rem;
-  border-right: 1px solid var(--concrete);
-  border-bottom: 1px solid var(--concrete);
-}
-.space-num {
-  font-family: 'Anton', sans-serif;
-  font-size: clamp(3rem, 7vw, 6.5rem);
-  line-height: 0.88; color: var(--acid); display: block; margin-bottom: 0.6rem;
-}
-.space-stat-label {
-  font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--steel);
-}
+.section-header{margin-bottom:4rem;}
+.max-w{max-width:1300px;margin:0 auto;}
 
-/* ══ COACHES ══════════════════════════════════════════════════════════ */
-#coaches { background: var(--dark); padding: 9rem 4%; }
-.coaches-header { max-width: 1200px; margin: 0 auto 3rem; }
-.coaches-eyebrow { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; color: var(--acid); display: block; margin-bottom: 0.6rem; }
-.coaches-h2 { font-family: 'Anton', sans-serif; font-size: clamp(2.5rem, 5.5vw, 5.5rem); line-height: 0.9; text-transform: uppercase; color: var(--white); }
-.coaches-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: 2px; background: var(--concrete);
-  max-width: 1200px; margin: 0 auto;
+/* ── ABOUT ── */
+#about{padding:8rem 5%;background:var(--concrete);position:relative;overflow:hidden;}
+#about::before{
+  content:'19';position:absolute;right:-2%;top:50%;transform:translateY(-50%);
+  font-family:'Anton',sans-serif;font-size:clamp(20rem,40vw,44rem);
+  color:rgba(232,232,232,0.022);line-height:1;pointer-events:none;user-select:none;letter-spacing:-0.04em;
 }
-.coach-card { position: relative; overflow: hidden; background: var(--dark); }
-.coach-photo {
-  width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: center top; display: block;
-  filter: grayscale(100%) brightness(0.65) contrast(1.1);
-  transition: filter 0.25s ease, transform 0.4s var(--snap);
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+.about-label{font-size:0.68rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--acid);margin-bottom:1rem;display:block;}
+.about-heading{
+  font-family:'Anton',sans-serif;font-size:clamp(2.8rem,5vw,5.8rem);
+  line-height:0.9;letter-spacing:0.01em;text-transform:uppercase;color:var(--chalk);margin-bottom:1.8rem;
 }
-.coach-card:hover .coach-photo { filter: grayscale(85%) brightness(0.55) contrast(1.1); transform: scale(1.04); }
-.coach-card::after {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(10,10,10,1) 0%, rgba(10,10,10,0) 55%);
-  pointer-events: none;
+.about-body{font-size:1.05rem;font-weight:300;color:var(--dim);line-height:1.8;margin-bottom:1.4rem;max-width:520px;}
+.about-divider{width:48px;height:3px;background:var(--acid);margin:1.8rem 0;}
+.about-stat{display:flex;gap:3rem;flex-wrap:wrap;}
+.about-stat-item{display:flex;flex-direction:column;}
+.about-stat-num{font-family:'Anton',sans-serif;font-size:2.4rem;color:var(--acid);line-height:1;}
+.about-stat-lbl{font-size:0.66rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--steel);margin-top:0.15rem;}
+.about-img-wrap{position:relative;}
+.about-img{
+  width:100%;aspect-ratio:4/5;
+  background:url('https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=1000&q=80') center/cover;
+  filter:contrast(1.1) brightness(0.82);position:relative;
 }
-.coach-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 1.2rem; z-index: 1; }
-.coach-idx { font-size: 0.52rem; font-weight: 700; letter-spacing: 0.22em; color: var(--acid); display: block; margin-bottom: 0.2rem; }
-.coach-name {
-  font-family: 'Anton', sans-serif; font-size: 1.4rem; text-transform: uppercase;
-  line-height: 0.95; color: var(--white); margin-bottom: 0.35rem;
-  transition: color 0.18s;
+.about-img::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(197,255,0,0.06),transparent 60%);}
+.about-tag{
+  position:absolute;bottom:-1.5rem;right:-1.5rem;
+  background:var(--acid);color:var(--black);padding:1.4rem 1.6rem;
+  font-family:'Anton',sans-serif;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,0.5);
 }
-.coach-card:hover .coach-name { color: var(--acid); }
-.coach-role { font-size: 0.6rem; color: var(--steel); line-height: 1.45; letter-spacing: 0.06em; }
-.coach-bar {
-  position: absolute; top: 0; left: 0; right: 0; height: 3px;
-  background: var(--acid); transform: scaleX(0); transform-origin: left;
-  transition: transform 0.2s ease; z-index: 2;
-}
-.coach-card:hover .coach-bar { transform: scaleX(1); }
+.about-tag-num{font-size:2.2rem;line-height:1;}
+.about-tag-txt{font-size:0.6rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;margin-top:0.15rem;}
 
-/* ══ MEMBERSHIP ══════════════════════════════════════════════════════ */
-#membership { background: var(--void); padding: 9rem 4%; }
-.membership-header { max-width: 1100px; margin: 0 auto 4rem; display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; }
-.membership-eyebrow { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; color: var(--acid); display: block; margin-bottom: 0.6rem; }
-.membership-h2 { font-family: 'Anton', sans-serif; font-size: clamp(2.5rem, 5.5vw, 5.5rem); line-height: 0.9; text-transform: uppercase; color: var(--white); }
-.membership-note { font-size: 0.7rem; color: var(--steel); max-width: 260px; line-height: 1.75; text-align: right; flex-shrink: 0; }
-.tiers-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  max-width: 1100px; margin: 0 auto;
-  border: 1px solid var(--concrete);
+/* ── PROGRAMS ── */
+#programs{padding:8rem 5%;background:var(--black);}
+.programs-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--border);
 }
-.tier {
-  padding: 3rem 2.5rem;
-  border-right: 1px solid var(--concrete);
-  position: relative;
-  transition: background 0.2s ease;
+.prog-card{
+  background:var(--pit);padding:2.6rem 2.2rem;
+  position:relative;overflow:hidden;cursor:default;
 }
-.tier:last-child { border-right: none; }
-.tier.featured { background: var(--surface); }
-.tier-badge {
-  position: absolute; top: 0; right: 2rem;
-  background: var(--acid); color: var(--void);
-  font-size: 0.52rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
-  padding: 0.25rem 0.65rem;
+.prog-card::before{
+  content:'';position:absolute;inset:0;background:var(--acid);
+  transform:scaleX(0);transform-origin:left;transition:transform 0.22s var(--snap);
 }
-.tier-code { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--steel); display: block; margin-bottom: 0.4rem; }
-.tier.featured .tier-code { color: var(--acid); }
-.tier-name { font-family: 'Anton', sans-serif; font-size: 2.8rem; text-transform: uppercase; line-height: 0.9; color: var(--white); margin-bottom: 1.8rem; }
-.tier-price { display: flex; align-items: baseline; gap: 0.15rem; margin-bottom: 0.4rem; }
-.tier-dollar { font-family: 'Space Mono', monospace; font-size: 1.2rem; font-weight: 700; color: var(--steel); margin-bottom: 0.3rem; }
-.tier-amount { font-family: 'Anton', sans-serif; font-size: 3.8rem; line-height: 1; color: var(--white); }
-.tier.featured .tier-amount { color: var(--acid); }
-.tier-per { font-size: 0.65rem; color: var(--steel); letter-spacing: 0.08em; }
-.tier-desc { font-size: 0.7rem; color: var(--steel); margin-bottom: 2rem; line-height: 1.7; letter-spacing: 0.02em; }
-.tier-list { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; margin-bottom: 2.5rem; }
-.tier-list li { font-size: 0.68rem; color: var(--ghost); padding-left: 1.2rem; position: relative; line-height: 1.5; letter-spacing: 0.02em; }
-.tier-list li::before { content: '//'; position: absolute; left: 0; color: var(--acid); font-size: 0.58rem; font-weight: 700; top: 0.05em; }
-.tier-cta {
-  display: block; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
-  text-align: center; padding: 0.9rem;
-  border: 1px solid var(--concrete); color: var(--ghost);
-  transition: border-color 0.15s, color 0.15s, background 0.15s;
-}
-.tier-cta:hover { border-color: var(--acid); color: var(--acid); }
-.tier.featured .tier-cta { background: var(--acid); color: var(--void); border-color: var(--acid); }
-.tier.featured .tier-cta:hover { background: #d4ff1a; border-color: #d4ff1a; }
+.prog-card > *{position:relative;z-index:1;transition:color 0.18s;}
+.prog-card:hover::before{transform:scaleX(1);}
+.prog-card:hover .prog-num{color:rgba(10,10,10,0.22);}
+.prog-card:hover .prog-name{color:var(--black);}
+.prog-card:hover .prog-desc{color:rgba(10,10,10,0.68);}
+.prog-card:hover .prog-tag{border-color:rgba(10,10,10,0.25);color:rgba(10,10,10,0.6);}
+.prog-num{font-family:'Anton',sans-serif;font-size:0.76rem;letter-spacing:0.2em;color:var(--steel);margin-bottom:1.6rem;display:block;}
+.prog-name{font-family:'Anton',sans-serif;font-size:1.5rem;letter-spacing:0.03em;text-transform:uppercase;color:var(--chalk);margin-bottom:0.8rem;line-height:1;}
+.prog-desc{font-size:0.95rem;font-weight:300;color:var(--dim);line-height:1.7;}
+.prog-tag{display:inline-block;margin-top:1.4rem;font-size:0.6rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--steel);border:1px solid var(--border);padding:0.2rem 0.7rem;}
 
-/* ══ TESTIMONIALS ════════════════════════════════════════════════════ */
-#testimonials { background: var(--dark); padding: 9rem 4%; border-top: 1px solid var(--concrete); }
-.testimonials-header { max-width: 1200px; margin: 0 auto 4rem; }
-.testimonials-eyebrow { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; color: var(--acid); display: block; margin-bottom: 0.6rem; }
-.testimonials-h2 { font-family: 'Anton', sans-serif; font-size: clamp(2.5rem, 5.5vw, 5.5rem); line-height: 0.9; text-transform: uppercase; color: var(--white); }
-.testi-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 2px; background: var(--concrete); max-width: 1200px; margin: 0 auto;
+/* ── STATS ── */
+#stats{padding:7rem 5%;background:var(--concrete);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
+.stat-block{background:var(--pit);padding:4rem 3rem;text-align:center;position:relative;overflow:hidden;}
+.stat-block::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--acid);
+  transform:scaleX(0);transform-origin:left;transition:transform 0.6s var(--ease);
 }
-.testi-card { background: var(--dark); padding: 2.5rem; }
-.testi-mark {
-  font-family: 'Anton', sans-serif; font-size: 5rem; line-height: 0.7;
-  color: var(--acid); opacity: 0.35; margin-bottom: 0.5rem; display: block; user-select: none;
+.stat-block.visible::after{transform:scaleX(1);}
+.stat-num{font-family:'Anton',sans-serif;font-size:clamp(3.5rem,7vw,6.5rem);color:var(--acid);line-height:1;letter-spacing:-0.01em;}
+.stat-suffix{font-size:clamp(2rem,4vw,4rem);}
+.stat-label{font-size:0.74rem;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:var(--steel);margin-top:0.8rem;}
+
+/* ── MEMBERSHIP ── */
+#membership{padding:8rem 5%;background:var(--black);}
+.mem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
+.mem-card{background:var(--pit);padding:3rem 2.5rem;position:relative;overflow:hidden;}
+.mem-card.featured{background:var(--concrete);border:1px solid var(--acid);}
+.mem-card.featured::before{
+  content:'MOST POPULAR';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  background:var(--acid);color:var(--black);
+  font-size:0.58rem;font-weight:700;letter-spacing:0.2em;padding:0.22rem 0.9rem;white-space:nowrap;
 }
-.testi-quote { font-size: 0.78rem; line-height: 2; color: var(--chalk); margin-bottom: 2rem; letter-spacing: 0.02em; }
-.testi-name { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--acid); display: block; }
-.testi-detail { font-size: 0.58rem; color: var(--steel); letter-spacing: 0.1em; margin-top: 0.2rem; }
-
-/* ══ LOCATION ════════════════════════════════════════════════════════ */
-#location { background: var(--void); padding: 9rem 4%; }
-.location-grid {
-  display: grid; grid-template-columns: 1fr 1.3fr;
-  gap: 7rem; align-items: start; max-width: 1200px; margin: 0 auto;
+.mem-tier{font-family:'Anton',sans-serif;font-size:2rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--chalk);margin-bottom:0.5rem;}
+.mem-card.featured .mem-tier{color:var(--acid);}
+.mem-price{font-family:'Anton',sans-serif;font-size:clamp(2.5rem,5vw,4rem);color:var(--chalk);line-height:1;margin-bottom:0.3rem;}
+.mem-price .pmo{font-size:1rem;color:var(--steel);vertical-align:middle;margin-left:0.15rem;}
+.mem-desc{font-size:0.85rem;font-weight:300;color:var(--dim);margin-bottom:1.8rem;}
+.mem-divider{width:100%;height:1px;background:var(--border);margin:1.5rem 0;}
+.mem-features{list-style:none;display:flex;flex-direction:column;gap:0.72rem;margin-bottom:2.5rem;}
+.mem-features li{font-size:0.92rem;font-weight:400;color:var(--dim);display:flex;align-items:flex-start;gap:0.6rem;}
+.mem-features li::before{content:'';display:inline-block;width:8px;height:2px;background:var(--acid);margin-top:0.65rem;flex-shrink:0;}
+.mem-cta{
+  display:block;text-align:center;
+  font-family:'Barlow Condensed',sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--black);background:var(--acid);padding:0.9rem;
+  border:2px solid var(--acid);transition:background 0.15s,color 0.15s;
 }
-.location-eyebrow { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; color: var(--acid); display: block; margin-bottom: 0.6rem; }
-.location-h2 { font-family: 'Anton', sans-serif; font-size: clamp(2.5rem, 5.5vw, 5.5rem); line-height: 0.9; text-transform: uppercase; color: var(--white); margin-bottom: 3rem; }
-.loc-block { margin-bottom: 1.8rem; padding-bottom: 1.8rem; border-bottom: 1px solid var(--concrete); }
-.loc-block:last-of-type { border-bottom: none; margin-bottom: 0; }
-.loc-lbl { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; color: var(--acid); display: block; margin-bottom: 0.45rem; }
-.loc-txt { font-size: 0.78rem; color: var(--ghost); line-height: 1.85; letter-spacing: 0.02em; }
-.loc-txt a { color: var(--ghost); transition: color 0.15s; }
-.loc-txt a:hover { color: var(--acid); }
-.loc-map {
-  width: 100%; aspect-ratio: 4/3; border: none; display: block;
-  border: 1px solid var(--concrete);
-  filter: grayscale(100%) invert(95%) contrast(85%);
+.mem-cta:hover{background:transparent;color:var(--acid);}
+.mem-card:not(.featured) .mem-cta{background:transparent;color:var(--chalk);border-color:var(--border);}
+.mem-card:not(.featured) .mem-cta:hover{border-color:var(--acid);color:var(--acid);}
+
+/* ── COACHES ── */
+#coaches{padding:8rem 5%;background:var(--concrete);}
+.coaches-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);}
+.coach-card{position:relative;overflow:hidden;aspect-ratio:3/4;background:var(--pit);}
+.coach-img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.1);transition:filter 0.35s,transform 0.5s var(--ease);}
+.coach-card:hover .coach-img{filter:grayscale(0.5) contrast(1.15);transform:scale(1.04);}
+.coach-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(10,10,10,0.95) 0%,rgba(10,10,10,0.35) 45%,transparent 75%);
+  display:flex;flex-direction:column;justify-content:flex-end;padding:1.8rem 1.6rem;
 }
+.coach-name{font-family:'Anton',sans-serif;font-size:1.3rem;letter-spacing:0.04em;text-transform:uppercase;color:var(--chalk);margin-bottom:0.2rem;transition:color 0.2s;}
+.coach-card:hover .coach-name{color:var(--acid);}
+.coach-title{font-size:0.74rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--steel);}
+.coach-cert{display:inline-block;margin-top:0.7rem;font-size:0.57rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--black);background:var(--acid);padding:0.15rem 0.5rem;}
 
-/* ══ FOOTER ══════════════════════════════════════════════════════════ */
-#footer {
-  background: var(--dark);
-  border-top: 3px solid var(--acid);
-  padding: 4.5rem 4% 2.5rem;
+/* ── THE SPACE ── */
+#space{padding:8rem 5%;background:var(--black);}
+.space-hero{
+  width:100%;height:60vh;min-height:380px;
+  background:url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+  position:relative;overflow:hidden;margin-bottom:1px;
+  filter:contrast(1.08) brightness(0.65);
 }
-.footer-inner { max-width: 1200px; margin: 0 auto; }
-.footer-top {
-  display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr;
-  gap: 3.5rem; padding-bottom: 3rem; border-bottom: 1px solid var(--concrete); margin-bottom: 2rem;
+.space-hero-label{
+  position:absolute;bottom:2.5rem;left:5%;
+  font-family:'Anton',sans-serif;font-size:clamp(1.4rem,4vw,3.5rem);
+  color:rgba(232,232,232,0.88);letter-spacing:0.12em;text-transform:uppercase;
+  filter:brightness(1.3);
 }
-.footer-brand-name {
-  font-family: 'Anton', sans-serif; font-size: 1.6rem; letter-spacing: 0.08em;
-  text-transform: uppercase; color: var(--white); margin-bottom: 0.25rem;
+.space-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
+.space-img{aspect-ratio:4/3;overflow:hidden;background:var(--pit);}
+.space-img img{width:100%;height:100%;object-fit:cover;filter:contrast(1.05) brightness(0.72);transition:transform 0.5s var(--ease);}
+.space-img:hover img{transform:scale(1.05);}
+
+/* ── TESTIMONIALS ── */
+#testimonials{padding:8rem 5%;background:var(--concrete);position:relative;overflow:hidden;}
+#testimonials::before{
+  content:'"';position:absolute;top:-4rem;left:3%;
+  font-family:'Anton',sans-serif;font-size:clamp(16rem,32vw,30rem);
+  color:rgba(197,255,0,0.035);line-height:1;pointer-events:none;user-select:none;
 }
-.footer-brand-name .a { color: var(--acid); }
-.footer-brand-tag { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--steel); display: block; margin-bottom: 1.2rem; }
-.footer-brand-text { font-size: 0.72rem; color: var(--steel); line-height: 1.9; }
-.footer-col-lbl { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; color: var(--acid); display: block; margin-bottom: 1.2rem; }
-.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
-.footer-col ul a { font-size: 0.72rem; color: var(--steel); transition: color 0.15s; letter-spacing: 0.04em; }
-.footer-col ul a:hover { color: var(--acid); }
-.footer-bottom {
-  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
+.testi-block{background:var(--pit);padding:3rem 2.4rem;position:relative;}
+.testi-accent{
+  position:absolute;top:0;left:0;width:3px;height:0;background:var(--acid);
+  transition:height 0.6s var(--ease);
 }
-.footer-bottom p { font-size: 0.6rem; color: var(--concrete); letter-spacing: 0.08em; }
-.footer-bottom a { color: var(--acid); opacity: 0.7; transition: opacity 0.15s; }
-.footer-bottom a:hover { opacity: 1; }
-.footer-signoff { font-family: 'Anton', sans-serif; font-size: 0.85rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--acid); }
+.testi-block.visible .testi-accent{height:100%;}
+.testi-text{font-size:0.98rem;font-weight:300;color:var(--dim);line-height:1.75;font-style:italic;margin-bottom:2rem;}
+.testi-author{font-size:0.7rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--acid);}
+.testi-role{font-size:0.68rem;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;color:var(--steel);margin-top:0.2rem;}
 
-/* ══ RESPONSIVE ══════════════════════════════════════════════════════ */
-@media (max-width: 1024px) {
-  .coaches-grid { grid-template-columns: repeat(2, 1fr); }
-  .footer-top { grid-template-columns: 1fr 1fr; }
-  .footer-top > *:first-child { grid-column: 1 / -1; }
+/* ── LOCATION ── */
+#location{padding:8rem 5%;background:var(--black);}
+.location-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:start;}
+.location-info{padding-right:2rem;}
+.location-address{
+  font-family:'Anton',sans-serif;font-size:clamp(1.8rem,3.5vw,3.2rem);
+  text-transform:uppercase;line-height:0.97;color:var(--chalk);margin-bottom:2.5rem;
 }
-@media (max-width: 768px) {
-  .nav-links, .nav-cta { display: none; }
-  .hamburger { display: flex; }
+.location-detail{display:flex;flex-direction:column;gap:1.8rem;}
+.loc-row{display:flex;flex-direction:column;gap:0.25rem;}
+.loc-label{font-size:0.64rem;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;color:var(--acid);}
+.loc-value{font-size:1rem;font-weight:300;color:var(--dim);}
+.hours-grid{display:grid;grid-template-columns:auto 1fr;gap:0.28rem 1.5rem;}
+.hours-day{font-size:0.88rem;font-weight:600;color:var(--chalk);}
+.hours-time{font-size:0.88rem;font-weight:300;color:var(--dim);}
+.map-wrap{width:100%;height:480px;overflow:hidden;filter:grayscale(1) contrast(1.1) brightness(0.85);}
+.map-wrap iframe{width:100%;height:100%;border:0;display:block;}
 
-  .manifesto-grid { grid-template-columns: 1fr; gap: 3.5rem; }
-  .manifesto-image-wrap { order: -1; }
-  .manifesto-ghost-num { display: none; }
-  .manifesto-specs { grid-template-columns: 1fr 1fr; }
-
-  .programs-header { flex-direction: column; align-items: flex-start; }
-  .programs-note { text-align: left; }
-  .programs-grid { grid-template-columns: repeat(2, 1fr); }
-
-  .space-stats { grid-template-columns: repeat(2, 1fr); }
-
-  .coaches-grid { grid-template-columns: repeat(2, 1fr); }
-
-  .membership-header { flex-direction: column; align-items: flex-start; }
-  .membership-note { text-align: left; }
-  .tiers-grid { grid-template-columns: 1fr; }
-  .tier { border-right: none; border-bottom: 1px solid var(--concrete); }
-  .tier:last-child { border-bottom: none; }
-
-  .testi-grid { grid-template-columns: 1fr; }
-
-  .location-grid { grid-template-columns: 1fr; gap: 3rem; }
-
-  .footer-top { grid-template-columns: 1fr 1fr; }
+/* ── FOOTER ── */
+#footer{background:var(--pit);border-top:3px solid var(--acid);padding:5rem 5% 2.5rem;position:relative;overflow:hidden;}
+#footer::before{
+  content:'IRON DISTRICT';position:absolute;bottom:-2rem;right:-1%;
+  font-family:'Anton',sans-serif;font-size:clamp(6rem,13vw,14rem);
+  color:rgba(232,232,232,0.018);letter-spacing:0.04em;line-height:1;
+  pointer-events:none;user-select:none;white-space:nowrap;
 }
-@media (max-width: 480px) {
-  .programs-grid { grid-template-columns: 1fr; }
-  .coaches-grid { grid-template-columns: 1fr; }
-  .space-stats { grid-template-columns: 1fr 1fr; }
-  .hero-h1 { font-size: clamp(4rem, 18vw, 18vw); }
-  .footer-top { grid-template-columns: 1fr; }
-}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:4rem;margin-bottom:4rem;padding-bottom:3rem;border-bottom:1px solid var(--border);}
+.footer-brand-name{font-family:'Anton',sans-serif;font-size:1.5rem;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.6rem;}
+.footer-brand-name .a{color:var(--acid);}
+.footer-tagline{font-size:0.9rem;font-weight:300;color:var(--dim);margin-bottom:1.6rem;max-width:280px;}
+.footer-socials{display:flex;gap:0.8rem;}
+.footer-social{width:36px;height:36px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--steel);transition:border-color 0.2s,color 0.2s;}
+.footer-social:hover{border-color:var(--acid);color:var(--acid);}
+.footer-col h4{font-size:0.65rem;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;color:var(--acid);margin-bottom:1.4rem;}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:0.72rem;}
+.footer-col a{font-size:0.92rem;font-weight:300;color:var(--dim);transition:color 0.15s;}
+.footer-col a:hover{color:var(--chalk);}
+.footer-col p{font-size:0.92rem;font-weight:300;color:var(--dim);margin-bottom:0.7rem;}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.footer-copy{font-size:0.67rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(110,110,110,0.45);}
 
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .coaches-grid{grid-template-columns:repeat(2,1fr);}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:2.5rem;}
+}
+@media(max-width:768px){
+  .nav-links,.back-link{display:none;}
+  .hamburger{display:flex;}
+  .about-grid{grid-template-columns:1fr;gap:3rem;}
+  .about-img-wrap{order:-1;}
+  .about-tag{right:0;bottom:-1rem;}
+  #about::before{font-size:clamp(10rem,28vw,18rem);}
+  .programs-grid{grid-template-columns:1fr 1fr;}
+  .stats-grid{grid-template-columns:1fr;}
+  .mem-grid{grid-template-columns:1fr;}
+  .coaches-grid{grid-template-columns:repeat(2,1fr);}
+  .testi-grid{grid-template-columns:1fr;}
+  .location-grid{grid-template-columns:1fr;}
+  .location-info{padding-right:0;}
+  .footer-grid{grid-template-columns:1fr;gap:2.5rem;}
+  .footer-bottom{flex-direction:column;text-align:center;}
+  .space-grid{grid-template-columns:1fr 1fr;}
+  .hero-headline{font-size:clamp(4rem,16vw,10rem);}
+}
+@media(max-width:480px){
+  .programs-grid{grid-template-columns:1fr;}
+  .coaches-grid{grid-template-columns:1fr 1fr;}
+  .space-grid{grid-template-columns:1fr;}
+  .hero-ctas{flex-direction:column;}
+  .btn-acid,.btn-ghost{text-align:center;}
+  .map-wrap{height:320px;}
+  .about-stat{gap:2rem;}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:0.01ms !important;transition-duration:0.01ms !important;}
+  .marquee-track{animation:none;}
+}
 </style>
 </head>
 <body>
 
-<!-- SVG grain texture overlay -->
-<svg class="grain-layer" aria-hidden="true" focusable="false">
-  <filter id="gf">
-    <feTurbulence type="fractalNoise" baseFrequency="0.78" numOctaves="4" stitchTiles="stitch"/>
-    <feColorMatrix type="saturate" values="0"/>
-  </filter>
-  <rect width="100%" height="100%" filter="url(#gf)" opacity="0.055"/>
-</svg>
-
-<!-- NAV -->
-<nav id="nav" aria-label="Main navigation">
-  <a href="#" class="nav-brand">IRON <span class="a">DISTRICT</span></a>
+<!-- ============================================================
+     NAV
+     ============================================================ -->
+<nav id="nav" role="navigation">
+  <a href="#hero" class="nav-brand" aria-label="Iron District NYC">
+    IRON <span class="a">DISTRICT</span>
+  </a>
   <ul class="nav-links">
-    <li><a href="#manifesto">About</a></li>
+    <li><a href="#about">About</a></li>
     <li><a href="#programs">Programs</a></li>
-    <li><a href="#coaches">Coaches</a></li>
     <li><a href="#membership">Membership</a></li>
-    <li><a href="#location">Find Us</a></li>
+    <li><a href="#coaches">Coaches</a></li>
+    <li><a href="#location">Location</a></li>
   </ul>
-  <a href="#membership" class="nav-cta">Join Now</a>
-  <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
+  <div style="display:flex;align-items:center;gap:1.5rem;">
+    <a href="https://www.raffinatodesigns.com/work.html" class="back-link" target="_blank" rel="noopener noreferrer">Raffinato Portfolio</a>
+    <a href="#membership" class="nav-cta">Start Training</a>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
-<div id="mobile-menu" role="dialog" aria-label="Navigation menu">
-  <a href="#manifesto"  class="ml">About</a>
-  <a href="#programs"   class="ml">Programs</a>
-  <a href="#coaches"    class="ml">Coaches</a>
-  <a href="#membership" class="ml">Membership</a>
-  <a href="#location"   class="ml">Find Us</a>
-  <a href="#membership" class="m-cta">Join Now</a>
+<div id="mobile-menu">
+  <a href="#about">About</a>
+  <a href="#programs">Programs</a>
+  <a href="#membership">Membership</a>
+  <a href="#coaches">Coaches</a>
+  <a href="#location">Location</a>
+  <a href="#membership" class="mcta">Start Training</a>
 </div>
 
-<!-- HERO -->
-<section id="hero" aria-label="Hero">
-  <div class="hero-bg"></div>
-  <div class="hero-overlay"></div>
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section id="hero" aria-labelledby="hero-heading">
+  <div class="hero-bg" aria-hidden="true"></div>
   <div class="hero-content">
-    <span class="hero-eyebrow">Bushwick, Brooklyn, NYC &nbsp;//&nbsp; Est. 2013</span>
-    <h1 class="hero-h1">IRON<br>DIS<span class="acid-line">TRICT</span></h1>
-    <div class="hero-bottom">
-      <p class="hero-sub">
-        This is not a fitness center.<br>
-        No machines. No mirrors. No excuses.<br>
-        Raw iron. Concrete floors. Serious work.
-      </p>
-      <div class="hero-cta-group">
-        <a href="#programs" class="btn-acid">Start Training</a>
-        <a href="#membership" class="btn-wire">View Membership</a>
-      </div>
+    <span class="hero-eyebrow">Gowanus, Brooklyn &nbsp;/&nbsp; Est. 2019</span>
+    <h1 class="hero-headline" id="hero-heading">
+      IRON<br><span class="hl2">DISTRICT</span>
+    </h1>
+    <p class="hero-sub">No mirrors. No machines. No excuses. Brooklyn's underground strength gym for people who are serious about the bar.</p>
+    <div class="hero-ctas">
+      <a href="#membership" class="btn-acid">Start Training</a>
+      <a href="#programs" class="btn-ghost">Our Programs</a>
     </div>
   </div>
 </section>
 
-<!-- KINETIC TICKER -->
-<div id="ticker" aria-hidden="true">
-  <div class="ticker-track">
-    <span class="ticker-item">IRON DISTRICT <span class="ticker-sep">//</span></span>
-    <span class="ticker-item">TRAIN HARD <span class="ticker-sep">//</span></span>
-    <span class="ticker-item">NO EXCUSES <span class="ticker-sep">//</span></span>
-    <span class="ticker-item">BUSHWICK BK <span class="ticker-sep">//</span></span>
-    <span class="ticker-item">FORGED IN STEEL <span class="ticker-sep">//</span></span>
-    <span class="ticker-item">NEW YORK CITY <span class="ticker-sep">//</span></span>
-    <span class="ticker-item">SHOW UP <span class="ticker-sep">//</span></span>
-    <span class="ticker-item">PUT IN WORK <span class="ticker-sep">//</span></span>
-    <!-- duplicate for seamless loop -->
-    <span class="ticker-item">IRON DISTRICT <span class="ticker-sep">//</span></span>
-    <span class="ticker-item">TRAIN HARD <span class="ticker-sep">//</span></span>
-    <span class="ticker-item">NO EXCUSES <span class="ticker-sep">//</span></span>
-    <span class="ticker-item">BUSHWICK BK <span class="ticker-sep">//</span></span>
-    <span class="ticker-item">FORGED IN STEEL <span class="ticker-sep">//</span></span>
-    <span class="ticker-item">NEW YORK CITY <span class="ticker-sep">//</span></span>
-    <span class="ticker-item">SHOW UP <span class="ticker-sep">//</span></span>
-    <span class="ticker-item">PUT IN WORK <span class="ticker-sep">//</span></span>
+<!-- ============================================================
+     MARQUEE
+     ============================================================ -->
+<div class="marquee-band" aria-hidden="true" role="presentation">
+  <div class="marquee-track">
+    <span class="marquee-item">TRAIN HARD</span><span class="marquee-sep">&nbsp;|&nbsp;</span>
+    <span class="marquee-item">NO EXCUSES</span><span class="marquee-sep">&nbsp;|&nbsp;</span>
+    <span class="marquee-item">IRON DISTRICT NYC</span><span class="marquee-sep">&nbsp;|&nbsp;</span>
+    <span class="marquee-item">LIFT MORE</span><span class="marquee-sep">&nbsp;|&nbsp;</span>
+    <span class="marquee-item">GOWANUS BROOKLYN</span><span class="marquee-sep">&nbsp;|&nbsp;</span>
+    <span class="marquee-item">BUILT DIFFERENT</span><span class="marquee-sep">&nbsp;|&nbsp;</span>
+    <span class="marquee-item">EARN YOUR IRON</span><span class="marquee-sep">&nbsp;|&nbsp;</span>
+    <span class="marquee-item">TRAIN HARD</span><span class="marquee-sep">&nbsp;|&nbsp;</span>
+    <span class="marquee-item">NO EXCUSES</span><span class="marquee-sep">&nbsp;|&nbsp;</span>
+    <span class="marquee-item">IRON DISTRICT NYC</span><span class="marquee-sep">&nbsp;|&nbsp;</span>
+    <span class="marquee-item">LIFT MORE</span><span class="marquee-sep">&nbsp;|&nbsp;</span>
+    <span class="marquee-item">GOWANUS BROOKLYN</span><span class="marquee-sep">&nbsp;|&nbsp;</span>
+    <span class="marquee-item">BUILT DIFFERENT</span><span class="marquee-sep">&nbsp;|&nbsp;</span>
+    <span class="marquee-item">EARN YOUR IRON</span><span class="marquee-sep">&nbsp;|&nbsp;</span>
   </div>
 </div>
 
-<!-- MANIFESTO / ABOUT -->
-<section id="manifesto" aria-label="About Iron District">
-  <div class="manifesto-ghost-num" aria-hidden="true">01</div>
-  <div class="manifesto-grid">
-    <div class="manifesto-text">
-      <span class="manifesto-eyebrow rv">The Philosophy</span>
-      <h2 class="manifesto-h2 rv">Built in a<br>Warehouse.<br>Built for War.</h2>
-      <div class="manifesto-pull rv">No chrome. No carpet. No playlist.</div>
-      <p class="manifesto-body rv">
-        Iron District opened in 2013 in a converted industrial space off Wyckoff Avenue in Bushwick.
-        We built it because Brooklyn had no serious training facility. Every box-gym in the borough
-        catered to beginners with machines and group fitness classes. We went the other direction.
-      </p>
-      <p class="manifesto-body rv">
-        Our floor is 3,200 square feet of rubber, steel, chalk, and purpose. We train powerlifters,
-        strongman competitors, Olympic lifters, boxers, and athletes who want to get strong without
-        the nonsense. The bar is 400 lbs when you walk in. That is the standard.
-      </p>
-      <div class="manifesto-specs rv">
-        <div class="spec-item"><span class="spec-label">Founded</span><span class="spec-val">2013</span></div>
-        <div class="spec-item"><span class="spec-label">Location</span><span class="spec-val">Bushwick, BK</span></div>
-        <div class="spec-item"><span class="spec-label">Floor Size</span><span class="spec-val">3,200 sq ft</span></div>
-        <div class="spec-item"><span class="spec-label">Hours</span><span class="spec-val">24 / 7</span></div>
+<!-- ============================================================
+     ABOUT
+     ============================================================ -->
+<section id="about" aria-labelledby="about-heading">
+  <div class="max-w">
+    <div class="about-grid">
+      <div>
+        <span class="about-label rv">Our Philosophy</span>
+        <h2 class="about-heading rv d1" id="about-heading">THIS IS NOT A FITNESS CENTER</h2>
+        <div class="about-divider rv d2"></div>
+        <p class="about-body rv d2">Iron District was built in a converted warehouse on Nevins Street because we needed a place where the bar actually matters. We are a raw training facility for powerlifters, strongmen, Olympic lifters, boxers, and anyone willing to put in serious work under load.</p>
+        <p class="about-body rv d3">No spin classes. No monthly challenges. No motivational posters. We have competition-grade equipment, world-class coaching, and a floor full of people who show up every day and do the work. If that is what you are looking for, you belong here.</p>
+        <div class="about-stat rv d4">
+          <div class="about-stat-item">
+            <span class="about-stat-num">7+</span>
+            <span class="about-stat-lbl">Years Running</span>
+          </div>
+          <div class="about-stat-item">
+            <span class="about-stat-num">2,400</span>
+            <span class="about-stat-lbl">Members Trained</span>
+          </div>
+          <div class="about-stat-item">
+            <span class="about-stat-num">13</span>
+            <span class="about-stat-lbl">National Qualifiers</span>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="manifesto-image-wrap rv d2">
-      <img
-        class="manifesto-img"
-        src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?auto=format&fit=crop&w=900&q=80"
-        alt="Iron District NYC gym floor"
-        loading="lazy"
-      >
-      <span class="manifesto-img-tag">Iron District NYC</span>
+      <div class="about-img-wrap rv d2">
+        <div class="about-img" role="img" aria-label="Athlete training at Iron District NYC"></div>
+        <div class="about-tag">
+          <div class="about-tag-num">6,200</div>
+          <div class="about-tag-txt">SQ FT OF IRON</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- PROGRAMS -->
-<section id="programs" aria-label="Training Programs">
-  <div class="programs-header">
+<!-- ============================================================
+     PROGRAMS
+     ============================================================ -->
+<section id="programs" aria-labelledby="programs-heading">
+  <div class="max-w section-header">
+    <span class="section-label rv">What We Train</span>
+    <h2 class="section-heading rv d1" id="programs-heading">THE DISCIPLINES</h2>
+  </div>
+  <div class="max-w">
+    <div class="programs-grid" role="list">
+      <div class="prog-card rv" role="listitem">
+        <span class="prog-num">01</span>
+        <p class="prog-name">Powerlifting</p>
+        <p class="prog-desc">Full meet-prep programming for squat, bench, and deadlift. IPF-approved equipment. In-house competition lifting every quarter.</p>
+        <span class="prog-tag">USAPL / IPF</span>
+      </div>
+      <div class="prog-card rv d1" role="listitem">
+        <span class="prog-num">02</span>
+        <p class="prog-name">Olympic Lifting</p>
+        <p class="prog-desc">Snatch and clean-and-jerk coaching from USAW Level 3 certified staff. Jerk blocks, competition platforms, calibrated plates.</p>
+        <span class="prog-tag">USAW CERTIFIED</span>
+      </div>
+      <div class="prog-card rv d2" role="listitem">
+        <span class="prog-num">03</span>
+        <p class="prog-name">Strongman</p>
+        <p class="prog-desc">Atlas stones, yoke carry, log press, farmer carries, and tire flip. Full implements. Backyard contest prep available year-round.</p>
+        <span class="prog-tag">WSM STANDARD</span>
+      </div>
+      <div class="prog-card rv d1" role="listitem">
+        <span class="prog-num">04</span>
+        <p class="prog-name">Boxing</p>
+        <p class="prog-desc">Fundamentals through advanced striking. Four heavy bags, double-end bags, speed bags, and a full-size ring. NYBC certified instruction.</p>
+        <span class="prog-tag">ALL LEVELS</span>
+      </div>
+      <div class="prog-card rv d2" role="listitem">
+        <span class="prog-num">05</span>
+        <p class="prog-name">Barbell Conditioning</p>
+        <p class="prog-desc">High-intensity barbell complexes built for raw strength endurance. Not cardio with weights. Conditioning with a barbell.</p>
+        <span class="prog-tag">METABOLIC STRENGTH</span>
+      </div>
+      <div class="prog-card rv d3" role="listitem">
+        <span class="prog-num">06</span>
+        <p class="prog-name">Functional Strength</p>
+        <p class="prog-desc">Foundational athletic performance programming. Bilateral and unilateral loading, loaded carries, and movement quality under heavy load.</p>
+        <span class="prog-tag">ATHLETIC BASE</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     STATS
+     ============================================================ -->
+<section id="stats" aria-label="Iron District numbers">
+  <div class="max-w">
+    <div class="stats-grid">
+      <div class="stat-block rv" data-target="2400">
+        <div class="stat-num"><span class="count-val">0</span><span class="stat-suffix">+</span></div>
+        <p class="stat-label">Members Trained Since 2019</p>
+      </div>
+      <div class="stat-block rv d1" data-target="13">
+        <div class="stat-num"><span class="count-val">0</span></div>
+        <p class="stat-label">National-Level Competitive Athletes</p>
+      </div>
+      <div class="stat-block rv d2" data-target="6200">
+        <div class="stat-num"><span class="count-val">0</span><span class="stat-suffix" style="font-size:clamp(1.6rem,3vw,3rem);"> SQFT</span></div>
+        <p class="stat-label">Of Industrial Training Space</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     MEMBERSHIP
+     ============================================================ -->
+<section id="membership" aria-labelledby="membership-heading">
+  <div class="max-w section-header" style="text-align:center;">
+    <span class="section-label rv" style="display:block;">Choose Your Level</span>
+    <h2 class="section-heading rv d1" id="membership-heading">JOIN THE DISTRICT</h2>
+  </div>
+  <div class="max-w">
+    <div class="mem-grid">
+      <div class="mem-card rv">
+        <p class="mem-tier">Iron</p>
+        <div class="mem-price">$99<span class="pmo">/mo</span></div>
+        <p class="mem-desc">Full floor access. No contracts. Cancel anytime.</p>
+        <div class="mem-divider"></div>
+        <ul class="mem-features">
+          <li>Open floor access, 24/7</li>
+          <li>All competition equipment</li>
+          <li>Locker and chalk access</li>
+          <li>Member-only events</li>
+          <li>Iron District app</li>
+        </ul>
+        <a href="#location" class="mem-cta">Get Started</a>
+      </div>
+      <div class="mem-card featured rv d1">
+        <p class="mem-tier">Forge</p>
+        <div class="mem-price">$149<span class="pmo">/mo</span></div>
+        <p class="mem-desc">Floor access plus group training and coaching check-ins.</p>
+        <div class="mem-divider"></div>
+        <ul class="mem-features">
+          <li>Everything in Iron</li>
+          <li>Unlimited group classes</li>
+          <li>Bi-monthly coaching check-in</li>
+          <li>Programming templates included</li>
+          <li>Priority platform booking</li>
+        </ul>
+        <a href="#location" class="mem-cta">Get Started</a>
+      </div>
+      <div class="mem-card rv d2">
+        <p class="mem-tier">District</p>
+        <div class="mem-price">$229<span class="pmo">/mo</span></div>
+        <p class="mem-desc">The full Iron District experience. Elite-level access and coaching.</p>
+        <div class="mem-divider"></div>
+        <ul class="mem-features">
+          <li>Everything in Forge</li>
+          <li>4 personal training sessions per month</li>
+          <li>Individual meet or contest prep</li>
+          <li>Monthly nutrition consultation</li>
+          <li>Guest pass privileges</li>
+        </ul>
+        <a href="#location" class="mem-cta">Get Started</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     COACHES
+     ============================================================ -->
+<section id="coaches" aria-labelledby="coaches-heading">
+  <div class="max-w section-header">
+    <span class="section-label rv">The Staff</span>
+    <h2 class="section-heading rv d1" id="coaches-heading">WHO TRAINS YOU</h2>
+  </div>
+  <div class="max-w">
+    <div class="coaches-grid" role="list">
+      <div class="coach-card rv" role="listitem">
+        <img class="coach-img"
+          src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?auto=format&fit=crop&w=600&q=80"
+          alt="Marcus Webb, Head Strength Coach at Iron District NYC"
+          loading="lazy">
+        <div class="coach-overlay">
+          <p class="coach-name">Marcus Webb</p>
+          <p class="coach-title">Head Strength Coach</p>
+          <span class="coach-cert">2x IPF Masters Champion</span>
+        </div>
+      </div>
+      <div class="coach-card rv d1" role="listitem">
+        <img class="coach-img"
+          src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=600&q=80"
+          alt="Daniela Cruz, Olympic Lifting Coach at Iron District NYC"
+          loading="lazy">
+        <div class="coach-overlay">
+          <p class="coach-name">Daniela Cruz</p>
+          <p class="coach-title">Olympic Lifting Coach</p>
+          <span class="coach-cert">USAW Level 3</span>
+        </div>
+      </div>
+      <div class="coach-card rv d2" role="listitem">
+        <img class="coach-img"
+          src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=600&q=80"
+          alt="Theo Karras, Strongman Specialist at Iron District NYC"
+          loading="lazy">
+        <div class="coach-overlay">
+          <p class="coach-name">Theo Karras</p>
+          <p class="coach-title">Strongman Specialist</p>
+          <span class="coach-cert">WSM Qualifier 2022</span>
+        </div>
+      </div>
+      <div class="coach-card rv d3" role="listitem">
+        <img class="coach-img"
+          src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&w=600&q=80"
+          alt="Nia Price, Boxing Coach at Iron District NYC"
+          loading="lazy">
+        <div class="coach-overlay">
+          <p class="coach-name">Nia Price</p>
+          <p class="coach-title">Boxing Coach</p>
+          <span class="coach-cert">NYBC Certified</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     THE SPACE
+     ============================================================ -->
+<section id="space" aria-labelledby="space-heading">
+  <div class="max-w section-header">
+    <span class="section-label rv">The Facility</span>
+    <h2 class="section-heading rv d1" id="space-heading">THE SPACE</h2>
+  </div>
+  <div class="max-w">
+    <div class="space-hero rv" role="img" aria-label="Interior of Iron District NYC, Gowanus Brooklyn">
+      <p class="space-hero-label">237 NEVINS ST &nbsp;/&nbsp; GOWANUS</p>
+    </div>
+    <div class="space-grid">
+      <div class="space-img rv">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80" alt="Iron District weight room" loading="lazy">
+      </div>
+      <div class="space-img rv d1">
+        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=800&q=80" alt="Iron District barbell platforms" loading="lazy">
+      </div>
+      <div class="space-img rv d2">
+        <img src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?auto=format&fit=crop&w=800&q=80" alt="Iron District strongman implements" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TESTIMONIALS
+     ============================================================ -->
+<section id="testimonials" aria-labelledby="testi-heading">
+  <div class="max-w" style="margin-bottom:4rem;">
+    <span class="section-label rv">From the Floor</span>
+    <h2 class="section-heading rv d1" id="testi-heading">WHAT MEMBERS SAY</h2>
+  </div>
+  <div class="max-w">
+    <div class="testi-grid">
+      <div class="testi-block rv">
+        <div class="testi-accent"></div>
+        <p class="testi-text">"This is not a gym. It is a forge. I've trained in 12 different facilities across the country and nothing comes close to what Iron District builds in you. The coaching is world-class. The equipment is serious. The culture is the best I've seen."</p>
+        <p class="testi-author">J. Romano</p>
+        <p class="testi-role">Powerlifter / Member since 2021</p>
+      </div>
+      <div class="testi-block rv d1">
+        <div class="testi-accent"></div>
+        <p class="testi-text">"Six months at Iron District and I pulled 500 lbs for the first time in my life. Marcus knows exactly how to push you past what you think your limit is, and Theo's strongman programming turned my weakness into my strongest event."</p>
+        <p class="testi-author">K. Park</p>
+        <p class="testi-role">Strongman Competitor / Member since 2023</p>
+      </div>
+      <div class="testi-block rv d2">
+        <div class="testi-accent"></div>
+        <p class="testi-text">"Brooklyn's best kept secret. World-class coaching without any ego or pretense. You come in, you train hard, you leave better. The District membership is worth every dollar for the personal training alone."</p>
+        <p class="testi-author">A. Torres</p>
+        <p class="testi-role">Olympic Lifter / Member since 2022</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     LOCATION
+     ============================================================ -->
+<section id="location" aria-labelledby="location-heading">
+  <div class="max-w section-header">
+    <span class="section-label rv">Find Us</span>
+    <h2 class="section-heading rv d1" id="location-heading">WHERE WE ARE</h2>
+  </div>
+  <div class="max-w">
+    <div class="location-grid">
+      <div class="location-info rv">
+        <div class="location-address">
+          237 NEVINS ST<br>GOWANUS<br>BROOKLYN, NY 11217
+        </div>
+        <div class="location-detail">
+          <div class="loc-row">
+            <span class="loc-label">Phone</span>
+            <span class="loc-value">(718) 555-0142</span>
+          </div>
+          <div class="loc-row">
+            <span class="loc-label">Email</span>
+            <span class="loc-value">train@irondistrict.nyc</span>
+          </div>
+          <div class="loc-row">
+            <span class="loc-label">Hours</span>
+            <div class="hours-grid">
+              <span class="hours-day">Mon - Fri</span><span class="hours-time">5:00 am - 11:00 pm</span>
+              <span class="hours-day">Saturday</span><span class="hours-time">7:00 am - 9:00 pm</span>
+              <span class="hours-day">Sunday</span><span class="hours-time">8:00 am - 8:00 pm</span>
+            </div>
+          </div>
+          <div class="loc-row">
+            <span class="loc-label">Transit</span>
+            <span class="loc-value">F/G train to Smith-9th Sts. R/D train to Bergen St. 10 min walk.</span>
+          </div>
+        </div>
+        <div style="margin-top:2.5rem;">
+          <a href="#membership" class="btn-acid">Claim Your Spot</a>
+        </div>
+      </div>
+      <div class="map-wrap rv d1">
+        <iframe
+          src="https://maps.google.com/maps?q=Nevins+Street+Gowanus+Brooklyn+NY+11217&z=15&output=embed"
+          title="Iron District NYC location map"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer id="footer" role="contentinfo">
+  <div class="footer-grid">
     <div>
-      <span class="programs-eyebrow rv">What We Train</span>
-      <h2 class="programs-h2 rv">Programs</h2>
-    </div>
-    <p class="programs-note rv">Hover each program. All levels welcome. Zero tolerance for bad form.</p>
-  </div>
-  <div class="programs-grid rv d1">
-
-    <div class="prog-card">
-      <img class="prog-img" src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=800&q=80" alt="Powerlifting" loading="lazy">
-      <div class="prog-shade"></div>
-      <div class="prog-info">
-        <span class="prog-code">01 // Strength</span>
-        <h3 class="prog-name">Powerlifting</h3>
-        <p class="prog-desc">Competition prep and raw strength. Squat, bench, deadlift. Programs run 12-week cycles with RPE-based periodization.</p>
+      <div class="footer-brand-name">IRON <span class="a">DISTRICT</span></div>
+      <p class="footer-tagline">Brooklyn's underground strength gym. Built in Gowanus. Forged in iron.</p>
+      <div class="footer-socials">
+        <a href="#" class="footer-social" aria-label="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+        </a>
+        <a href="#" class="footer-social" aria-label="Twitter / X">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a href="#" class="footer-social" aria-label="YouTube">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </a>
       </div>
     </div>
-
-    <div class="prog-card">
-      <img class="prog-img" src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&w=800&q=80" alt="Strongman" loading="lazy">
-      <div class="prog-shade"></div>
-      <div class="prog-info">
-        <span class="prog-code">02 // Power</span>
-        <h3 class="prog-name">Strongman</h3>
-        <p class="prog-desc">Atlas stones, farmer walks, log press, yoke carry, tire flips. Full implement setup on our outdoor pad.</p>
-      </div>
-    </div>
-
-    <div class="prog-card">
-      <img class="prog-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80" alt="Olympic Lifting" loading="lazy">
-      <div class="prog-shade"></div>
-      <div class="prog-info">
-        <span class="prog-code">03 // Technical</span>
-        <h3 class="prog-name">Olympic Lifting</h3>
-        <p class="prog-desc">Snatch and clean and jerk with dedicated platforms, bumper plates, and a coach who has stood on a podium.</p>
-      </div>
-    </div>
-
-    <div class="prog-card">
-      <img class="prog-img" src="https://images.unsplash.com/photo-1549476464-37392f717541?auto=format&fit=crop&w=800&q=80" alt="Boxing" loading="lazy">
-      <div class="prog-shade"></div>
-      <div class="prog-info">
-        <span class="prog-code">04 // Combat</span>
-        <h3 class="prog-name">Boxing</h3>
-        <p class="prog-desc">Technical boxing and pad work. Footwork, combinations, defense. No sparring without coach clearance.</p>
-      </div>
-    </div>
-
-    <div class="prog-card">
-      <img class="prog-img" src="https://images.unsplash.com/photo-1517130038641-a774d04afb3c?auto=format&fit=crop&w=800&q=80" alt="Conditioning" loading="lazy">
-      <div class="prog-shade"></div>
-      <div class="prog-info">
-        <span class="prog-code">05 // Engine</span>
-        <h3 class="prog-name">Conditioning</h3>
-        <p class="prog-desc">GPP, metabolic work, cardio base development. Sleds, kettlebells, assault bike, and VO2 protocols.</p>
-      </div>
-    </div>
-
-    <div class="prog-card">
-      <img class="prog-img" src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?auto=format&fit=crop&w=800&q=80" alt="Open Gym" loading="lazy">
-      <div class="prog-shade"></div>
-      <div class="prog-info">
-        <span class="prog-code">06 // Access</span>
-        <h3 class="prog-name">Open Gym</h3>
-        <p class="prog-desc">24/7 badge access to the full floor. All equipment, chalk buckets, and a community that keeps to itself and lifts heavy.</p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- THE SPACE -->
-<section id="the-space" aria-label="Facility Stats">
-  <div class="space-bg"></div>
-  <div class="space-overlay"></div>
-  <div class="space-content">
-    <span class="space-label">The Numbers</span>
-    <div class="space-stats">
-      <div class="space-stat">
-        <span class="space-num" data-count="3200" data-suffix="">0</span>
-        <span class="space-stat-label">Square Feet</span>
-      </div>
-      <div class="space-stat">
-        <span class="space-num" data-count="600" data-suffix="+">0+</span>
-        <span class="space-stat-label">Active Members</span>
-      </div>
-      <div class="space-stat">
-        <span class="space-num" data-count="12" data-suffix="">0</span>
-        <span class="space-stat-label">Years in Bushwick</span>
-      </div>
-      <div class="space-stat">
-        <span class="space-num" data-count="24" data-suffix="/7">0/7</span>
-        <span class="space-stat-label">Hours Access</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- COACHES -->
-<section id="coaches" aria-label="Coaching Staff">
-  <div class="coaches-header">
-    <span class="coaches-eyebrow rv">The Staff</span>
-    <h2 class="coaches-h2 rv">Coaches</h2>
-  </div>
-  <div class="coaches-grid">
-
-    <div class="coach-card rv">
-      <div class="coach-bar"></div>
-      <img class="coach-photo" src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?auto=format&fit=crop&w=600&q=80" alt="Darius Cole, Head Coach" loading="lazy">
-      <div class="coach-info">
-        <span class="coach-idx">01 // Head Coach</span>
-        <p class="coach-name">Darius Cole</p>
-        <p class="coach-role">Powerlifting and Strength Programming<br>USAPL 2x National Qualifier</p>
-      </div>
-    </div>
-
-    <div class="coach-card rv d1">
-      <div class="coach-bar"></div>
-      <img class="coach-photo" src="https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&w=600&q=80" alt="Maya Reyes, Olympic Lifting Coach" loading="lazy">
-      <div class="coach-info">
-        <span class="coach-idx">02 // Oly Coach</span>
-        <p class="coach-name">Maya Reyes</p>
-        <p class="coach-role">Olympic Lifting and Technical Strength<br>2x CrossFit Regionals Qualifier</p>
-      </div>
-    </div>
-
-    <div class="coach-card rv d2">
-      <div class="coach-bar"></div>
-      <img class="coach-photo" src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=600&q=80" alt="Kevin Bradshaw, Strongman Coach" loading="lazy">
-      <div class="coach-info">
-        <span class="coach-idx">03 // Strongman</span>
-        <p class="coach-name">Kev Bradshaw</p>
-        <p class="coach-role">Strongman and Combat Conditioning<br>4x NYC Strongman Champion</p>
-      </div>
-    </div>
-
-    <div class="coach-card rv d3">
-      <div class="coach-bar"></div>
-      <img class="coach-photo" src="https://images.unsplash.com/photo-1518310383802-640c2de311b2?auto=format&fit=crop&w=600&q=80" alt="Priya Nair, Boxing Coach" loading="lazy">
-      <div class="coach-info">
-        <span class="coach-idx">04 // Boxing</span>
-        <p class="coach-name">Priya Nair</p>
-        <p class="coach-role">Boxing, HIIT, and Recovery Protocols<br>Licensed NY Golden Gloves Trainer</p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- MEMBERSHIP -->
-<section id="membership" aria-label="Membership Tiers">
-  <div class="membership-header">
-    <div>
-      <span class="membership-eyebrow rv">Get In</span>
-      <h2 class="membership-h2 rv">Membership</h2>
-    </div>
-    <p class="membership-note rv">Month-to-month, no contracts. Cancel anytime. First week free, no card required.</p>
-  </div>
-  <div class="tiers-grid rv d1">
-
-    <div class="tier">
-      <span class="tier-code">Tier 01</span>
-      <p class="tier-name">Iron</p>
-      <div class="tier-price">
-        <span class="tier-dollar">$</span>
-        <span class="tier-amount">99</span>
-        <span class="tier-per">&nbsp;/ month</span>
-      </div>
-      <p class="tier-desc">24/7 open gym access. Everything you need, nothing you don't.</p>
-      <ul class="tier-list">
-        <li>24/7 keycard floor access</li>
-        <li>Full equipment access</li>
-        <li>Chalk, collars, straps provided</li>
-        <li>2 group classes per week</li>
-        <li>Locker and shower access</li>
+    <div class="footer-col">
+      <h4>Train</h4>
+      <ul>
+        <li><a href="#programs">Powerlifting</a></li>
+        <li><a href="#programs">Olympic Lifting</a></li>
+        <li><a href="#programs">Strongman</a></li>
+        <li><a href="#programs">Boxing</a></li>
+        <li><a href="#programs">Conditioning</a></li>
       </ul>
-      <a href="#" class="tier-cta">Start Iron</a>
     </div>
-
-    <div class="tier featured">
-      <span class="tier-badge">Most Popular</span>
-      <span class="tier-code">Tier 02</span>
-      <p class="tier-name">Steel</p>
-      <div class="tier-price">
-        <span class="tier-dollar">$</span>
-        <span class="tier-amount">149</span>
-        <span class="tier-per">&nbsp;/ month</span>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>237 Nevins St, Gowanus<br>Brooklyn, NY 11217</p>
+      <p>(718) 555-0142</p>
+      <p>train@irondistrict.nyc</p>
+      <div style="margin-top:1.5rem;">
+        <a href="#membership" class="btn-acid" style="font-size:0.72rem;padding:0.65rem 1.4rem;">Join Now</a>
       </div>
-      <p class="tier-desc">Unlimited classes, priority programming, and a dedicated training block.</p>
-      <ul class="tier-list">
-        <li>Everything in Iron</li>
-        <li>Unlimited group classes</li>
-        <li>Monthly programming review</li>
-        <li>2 guest passes per month</li>
-        <li>Gear discount (10% off)</li>
-        <li>Priority event booking</li>
-      </ul>
-      <a href="#" class="tier-cta">Start Steel</a>
-    </div>
-
-    <div class="tier">
-      <span class="tier-code">Tier 03</span>
-      <p class="tier-name">District</p>
-      <div class="tier-price">
-        <span class="tier-dollar">$</span>
-        <span class="tier-amount">229</span>
-        <span class="tier-per">&nbsp;/ month</span>
-      </div>
-      <p class="tier-desc">Full access plus unlimited 1-on-1 coaching. For athletes who are serious.</p>
-      <ul class="tier-list">
-        <li>Everything in Steel</li>
-        <li>Unlimited personal training sessions</li>
-        <li>Custom 12-week program build</li>
-        <li>Weekly form review video call</li>
-        <li>Nutrition framework</li>
-        <li>Competition prep support</li>
-      </ul>
-      <a href="#" class="tier-cta">Start District</a>
-    </div>
-
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section id="testimonials" aria-label="Member Testimonials">
-  <div class="testimonials-header">
-    <span class="testimonials-eyebrow rv">The Members</span>
-    <h2 class="testimonials-h2 rv">Straight Talk</h2>
-  </div>
-  <div class="testi-grid">
-    <div class="testi-card rv">
-      <span class="testi-mark" aria-hidden="true">"</span>
-      <p class="testi-quote">I have trained at 8 gyms in Brooklyn. Iron District is the only one that treated me like an athlete instead of a subscription. Darius wrote my first actual program. I pulled 405 six months later.</p>
-      <span class="testi-name">Marcus T.</span>
-      <span class="testi-detail">Member since 2019 // Powerlifting</span>
-    </div>
-    <div class="testi-card rv d1">
-      <span class="testi-mark" aria-hidden="true">"</span>
-      <p class="testi-quote">There is chalk dust on every surface and I have never felt more at home. Maya is the best Olympic coach I have worked with, and I have worked with a lot. The community here is different.</p>
-      <span class="testi-name">Aisha K.</span>
-      <span class="testi-detail">Member since 2021 // Olympic Lifting</span>
-    </div>
-    <div class="testi-card rv d2">
-      <span class="testi-mark" aria-hidden="true">"</span>
-      <p class="testi-quote">I drove from the Upper West Side three times a week for a year before I finally moved to Bushwick. That is the honest review. There is nothing in Manhattan that compares.</p>
-      <span class="testi-name">James B.</span>
-      <span class="testi-detail">Member since 2020 // Strongman</span>
     </div>
   </div>
-</section>
-
-<!-- LOCATION -->
-<section id="location" aria-label="Location">
-  <div class="location-grid">
-    <div class="location-text">
-      <span class="location-eyebrow rv">Find the Gym</span>
-      <h2 class="location-h2 rv">We're in<br>Bushwick.</h2>
-      <div class="loc-block rv">
-        <span class="loc-lbl">Address</span>
-        <address class="loc-txt">
-          247 Wyckoff Avenue<br>
-          Bushwick, Brooklyn, NY 11237
-        </address>
-      </div>
-      <div class="loc-block rv">
-        <span class="loc-lbl">Phone</span>
-        <p class="loc-txt"><a href="tel:17183849200">(718) 384-9200</a></p>
-      </div>
-      <div class="loc-block rv">
-        <span class="loc-lbl">Hours</span>
-        <p class="loc-txt">24 / 7 keycard access for all members<br>Staffed: Mon-Fri 7am-9pm / Sat-Sun 9am-5pm</p>
-      </div>
-      <div class="loc-block rv">
-        <span class="loc-lbl">Transit</span>
-        <p class="loc-txt">L train / Jefferson St (3 min walk)<br>M train / Myrtle-Wyckoff Avs (6 min walk)</p>
-      </div>
-    </div>
-    <div class="rv d2">
-      <iframe
-        class="loc-map"
-        title="Iron District NYC Location"
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.62!2d-73.92556!3d40.70538!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25c4a6fc7c76f%3A0x1!2s247+Wyckoff+Ave%2C+Brooklyn%2C+NY+11237!5e0!3m2!1sen!2sus!4v1620000000000"
-        allowfullscreen=""
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-      ></iframe>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer id="footer" aria-label="Footer">
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <p class="footer-brand-name">IRON <span class="a">DISTRICT</span></p>
-        <span class="footer-brand-tag">Bushwick, Brooklyn &nbsp;//&nbsp; Est. 2013</span>
-        <p class="footer-brand-text">
-          247 Wyckoff Avenue<br>
-          Bushwick, Brooklyn, NY 11237<br>
-          (718) 384-9200
-        </p>
-      </div>
-      <div class="footer-col">
-        <span class="footer-col-lbl">Train</span>
-        <ul>
-          <li><a href="#programs">Powerlifting</a></li>
-          <li><a href="#programs">Strongman</a></li>
-          <li><a href="#programs">Olympic Lifting</a></li>
-          <li><a href="#programs">Boxing</a></li>
-          <li><a href="#programs">Conditioning</a></li>
-          <li><a href="#programs">Open Gym</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <span class="footer-col-lbl">The Gym</span>
-        <ul>
-          <li><a href="#manifesto">About</a></li>
-          <li><a href="#coaches">Coaches</a></li>
-          <li><a href="#membership">Membership</a></li>
-          <li><a href="#location">Location</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <span class="footer-col-lbl">Connect</span>
-        <ul>
-          <li><a href="#">Instagram</a></li>
-          <li><a href="#">YouTube</a></li>
-          <li><a href="#">TikTok</a></li>
-          <li><a href="#">Newsletter</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2025 Iron District NYC. All rights reserved.</p>
-      <span class="footer-signoff">No Excuses. Just Iron.</span>
-      <p>Website concept by <a href="https://raffinatodesigns.com" target="_blank" rel="noopener">Raffinato Designs</a></p>
-    </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">2025 Iron District NYC. All rights reserved.</p>
+    <p class="footer-copy" style="opacity:0.25;">Demo built by <a href="https://www.raffinatodesigns.com" style="color:inherit;" target="_blank" rel="noopener noreferrer">Raffinato Designs</a></p>
   </div>
 </footer>
 
 <script>
-(function () {
-  'use strict';
+// Nav scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
 
-  /* Nav scroll state */
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 60);
-  }, { passive: true });
+// Hamburger
+const hb = document.getElementById('hamburger');
+const mm = document.getElementById('mobile-menu');
+hb.addEventListener('click', () => {
+  const open = hb.classList.toggle('open');
+  hb.setAttribute('aria-expanded', open);
+  mm.classList.toggle('open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+});
+mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  hb.classList.remove('open');
+  mm.classList.remove('open');
+  document.body.style.overflow = '';
+}));
 
-  /* Hamburger */
-  const hamburger  = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobile-menu');
-  function closeMobile() {
-    hamburger.classList.remove('open');
-    mobileMenu.classList.remove('open');
-    hamburger.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-  }
-  hamburger.addEventListener('click', () => {
-    const open = mobileMenu.classList.toggle('open');
-    hamburger.classList.toggle('open', open);
-    hamburger.setAttribute('aria-expanded', String(open));
-    document.body.style.overflow = open ? 'hidden' : '';
+// Scroll reveal
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
   });
-  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobile));
+}, { threshold: 0.08 });
+document.querySelectorAll('.rv').forEach(el => revealObs.observe(el));
 
-  /* Scroll reveal */
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
-  document.querySelectorAll('.rv, .rvx').forEach(el => io.observe(el));
+// Animated counters on stat blocks
+function animateCount(el, target) {
+  const duration = 1600;
+  let startTime = null;
+  const step = ts => {
+    if (!startTime) startTime = ts;
+    const p = Math.min((ts - startTime) / duration, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.floor(eased * target).toLocaleString();
+    if (p < 1) requestAnimationFrame(step);
+    else el.textContent = target.toLocaleString();
+  };
+  requestAnimationFrame(step);
+}
 
-  /* Animated stat counters */
-  function easeOut(t) { return 1 - Math.pow(1 - t, 2); }
-  function countUp(el, target, suffix, duration) {
-    const start = performance.now();
-    const isLarge = target >= 1000;
-    function tick(now) {
-      const pct = Math.min((now - start) / duration, 1);
-      const val = Math.round(easeOut(pct) * target);
-      el.textContent = (isLarge ? val.toLocaleString() : val) + suffix;
-      if (pct < 1) requestAnimationFrame(tick);
+const counterObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const block = e.target;
+    const target = parseInt(block.dataset.target, 10);
+    const countEl = block.querySelector('.count-val');
+    if (countEl && !block.dataset.counted) {
+      block.dataset.counted = '1';
+      animateCount(countEl, target);
     }
-    requestAnimationFrame(tick);
-  }
-
-  let counted = false;
-  const spaceSection = document.getElementById('the-space');
-  const ioStats = new IntersectionObserver((entries) => {
-    if (entries[0].isIntersecting && !counted) {
-      counted = true;
-      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      document.querySelectorAll('[data-count]').forEach(el => {
-        const target = parseInt(el.dataset.count, 10);
-        const suffix = el.dataset.suffix || '';
-        if (reduced) {
-          el.textContent = (target >= 1000 ? target.toLocaleString() : target) + suffix;
-        } else {
-          countUp(el, target, suffix, 1800);
-        }
-      });
-      ioStats.unobserve(spaceSection);
-    }
-  }, { threshold: 0.35 });
-  ioStats.observe(spaceSection);
-
-  /* Smooth hash nav */
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener('click', e => {
-      const target = document.querySelector(link.getAttribute('href'));
-      if (target) { e.preventDefault(); closeMobile(); target.scrollIntoView({ behavior: 'smooth' }); }
-    });
+    counterObs.unobserve(block);
   });
+}, { threshold: 0.35 });
+document.querySelectorAll('.stat-block[data-target]').forEach(el => counterObs.observe(el));
 
-})();
+// Smooth anchor scroll (offset for fixed nav)
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e) {
+    const id = this.getAttribute('href').slice(1);
+    if (!id) return;
+    const target = document.getElementById(id);
+    if (target) {
+      e.preventDefault();
+      const offset = nav.offsetHeight + 16;
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  });
+});
 </script>
 </body>
 </html>
