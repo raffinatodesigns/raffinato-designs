@@ -225,9 +225,15 @@ a { text-decoration: none; color: inherit; }
 .card:nth-child(4) .card-preview::before { inset:0; background:rgba(5,13,31,0.44); border:none; }
 .card:nth-child(4) .card-preview::after  { display:none; }
 
-.card:nth-child(5) .card-preview { background: linear-gradient(45deg, #050D1F 0%, #0c1f3a 100%); }
-.card:nth-child(5) .card-preview::before { top:30%; left:20%; width:60%; height:40%; border-left:2px solid var(--electric); border-bottom:2px solid rgba(14,165,255,0.3); }
-.card:nth-child(5) .card-preview::after  { top:25%; right:15%; width:20%; height:20%; background:var(--glow); border-radius:50%; }
+.card:nth-child(5) .card-preview {
+  background-image: url('https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=800&q=80');
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+.card:nth-child(5):hover .card-preview { transform: scale(1.04); }
+.card:nth-child(5) .card-preview::before { inset:0; background:rgba(5,13,31,0.32); border:none; }
+.card:nth-child(5) .card-preview::after  { display:none; }
 
 .card:nth-child(6) .card-preview { background: radial-gradient(ellipse at 60% 30%, #0b2040 0%, #050D1F 70%); }
 .card:nth-child(6) .card-preview::before { inset:15% 10% 40% 50%; border:1px solid rgba(14,165,255,0.22); background:rgba(14,165,255,0.04); border-radius:2px; }
@@ -525,13 +531,13 @@ a { text-decoration: none; color: inherit; }
         <span class="card-view">View Live Demo →</span>
       </div>
     </div>
-    <div class="card" data-category="restaurant" data-name="Solano Bakery" data-desc="Artisan bakery brand with online ordering, seasonal specials, loyalty program sign-up, and location pages. Ready in 3 days." tabindex="0" role="article">
+    <div class="card" data-category="restaurant" data-name="Solano Bakery" data-desc="A warm, inviting website concept for a Knoxville artisan bakery, designed to bring the neighborhood through the door." data-url="/work/solano-bakery/" tabindex="0" role="article" aria-label="Solano Bakery - view live demo">
       <div class="card-preview" aria-hidden="true"></div>
       <div class="card-info"><p class="card-info-name">Solano Bakery</p><p class="card-info-tag">Restaurant</p></div>
       <div class="card-overlay">
         <span class="card-tag">Restaurant</span>
         <p class="card-name">Solano Bakery</p>
-        <span class="card-view">View Project →</span>
+        <span class="card-view">View Live Demo →</span>
       </div>
     </div>
     <div class="card" data-category="professional" data-name="Crest Financial" data-desc="Financial advisory firm with wealth management service pages, team profiles, client portal link, and lead capture forms. Launched in 7 days." tabindex="0" role="article">
