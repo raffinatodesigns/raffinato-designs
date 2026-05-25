@@ -93,3 +93,39 @@ Each case study is completely standalone — its own Google Fonts, CSS variables
 - `sitemap.xml` and `robots.txt` are in the project root. Sitemap lists all pages including case studies.
 - `robots.txt` disallows `/api/`.
 - Site is registered in Google Search Console.
+
+## Web Design Skills
+### Core
+- HyperText Markup Language / Cascading Style Sheets / JavaScript
+- Responsive design (mobile-first)
+- Typography and layout
+- Color theory
+- User Interface / User Experience principles
+
+### Visual Design
+- Figma / Adobe Experience Design (wireframing, mockups)
+- Brand identity and design systems
+- Iconography and illustration
+- Image editing (Adobe Photoshop, Adobe Lightroom)
+
+### Development
+- Cascading Style Sheets frameworks (Tailwind CSS, Bootstrap)
+- JavaScript frameworks (React, Vue, Next.js)
+- Animation (CSS transitions, GreenSock Animation Platform, Framer Motion)
+- Performance optimization (Core Web Vitals, image compression)
+- Accessibility (Web Content Accessibility Guidelines, Accessible Rich Internet Applications)
+- Search Engine Optimization basics
+
+### Tools and Workflow
+- Git / version control
+- Command line interface
+- Browser Developer Tools
+- Deployment platforms (Vercel, Netlify)
+- Content Management Systems (WordPress, Webflow, Sanity)
+
+### Business and Client
+- Copywriting for conversion
+- Analytics (Google Analytics 4, heatmaps)
+- Form handling and contact flows
+- Hosting and Domain Name System management
+- Client communication and project scoping
