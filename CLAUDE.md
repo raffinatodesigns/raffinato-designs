@@ -129,3 +129,21 @@ Each case study is completely standalone — its own Google Fonts, CSS variables
 - Form handling and contact flows
 - Hosting and Domain Name System management
 - Client communication and project scoping
+
+## Available Claude Code Skills
+Invoke with `/skill-name` in the prompt.
+
+| Skill | When to use |
+|---|---|
+| `/update-config` | Change settings.json — permissions, hooks, env vars, automated behaviors ("always do X before Y") |
+| `/keybindings-help` | Customize keyboard shortcuts or add chord bindings |
+| `/verify` | Run the site and confirm a change works in the browser before shipping |
+| `/code-review` | Review the current diff for bugs (pass `--comment` to post as inline PR comments) |
+| `/security-review` | Security audit of pending branch changes |
+| `/fewer-permission-prompts` | Scan transcripts and add a tool allowlist to reduce approval prompts |
+| `/run` | Launch and drive the app to see a change working live |
+| `/review` | Review a pull request |
+| `/loop` | Run a prompt on a recurring interval (e.g. `/loop 5m /verify`) |
+| `/schedule` | Schedule a one-time or recurring remote agent (cron-based) |
+| `/init` | Regenerate or update this CLAUDE.md from the current codebase |
+| `/claude-api` | Build or debug anything using the Anthropic SDK / Claude API |
