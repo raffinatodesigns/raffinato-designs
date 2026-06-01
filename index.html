@@ -1573,7 +1573,7 @@ body { animation: pageIn 0.35s var(--ease) both; }
     </div>
   </div>
   <div class="footer-bottom">
-    <p class="footer-copy">© 2025 Raffinato Designs</p>
+    <p class="footer-copy">© <span id="copyright-year"></span> Raffinato Designs</p>
     <p class="footer-copy" style="opacity:0.2;">Crafted with precision in the United States</p>
   </div>
 </footer>
@@ -1582,6 +1582,7 @@ body { animation: pageIn 0.35s var(--ease) both; }
      SCRIPTS
      ============================================================ -->
 <script>
+document.getElementById('copyright-year').textContent = new Date().getFullYear();
 // ── Cursor — mouse-only ───────────────────────────────────────
 if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
   const dot = document.getElementById('cursor-dot');
