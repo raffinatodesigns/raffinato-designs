@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://www.raffinatodesigns.com/contact.html">
+<title>Get Started | Raffinato Designs</title>
+<meta name="description" content="Ready to get started? Tell us about your project and we'll be in touch within 24 hours. Premium, done-for-you web design for US small businesses.">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#050D1F">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@1,400;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap');
+
+:root {
+  --navy:        #050D1F;
+  --navy-mid:    #0A1628;
+  --electric:    #0EA5FF;
+  --chrome:      #C8D4E0;
+  --chalk:       #F0F4F8;
+  --glow:        rgba(14,165,255,0.15);
+  --dark-border: rgba(14,165,255,0.12);
+  --ease:        cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body { background:var(--navy); color:var(--chrome); font-family:'Jost',sans-serif; overflow-x:hidden; animation:pageIn 0.35s var(--ease) both; }
+a { text-decoration:none; color:inherit; }
+@keyframes pageIn { from{opacity:0} to{opacity:1} }
+
+/* Cursor — mouse-only */
+@media (hover: hover) and (pointer: fine) {
+  body { cursor: none; }
+  #cursor-dot  { position:fixed; width:12px; height:12px; background:var(--electric); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); }
+  #cursor-ring { position:fixed; width:36px; height:36px; border:1.5px solid var(--electric); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); opacity:0.6; }
+}
+@media (hover: none), (pointer: coarse) {
+  body { cursor: auto; }
+  #cursor-dot, #cursor-ring { display: none !important; }
+}
+
+/* Nav */
+#nav { position:fixed; top:0; left:0; right:0; z-index:1000; display:flex; align-items:center; justify-content:space-between; padding:1.25rem 4%; transition:background 0.4s var(--ease),backdrop-filter 0.4s,box-shadow 0.4s; }
+#nav.scrolled { background:rgba(5,13,31,0.88); backdrop-filter:blur(18px); box-shadow:0 1px 0 var(--dark-border); }
+@keyframes logoGlow {
+  0%, 100% { filter: drop-shadow(0 0 6px rgba(14,165,255,0.4)); }
+  50%       { filter: drop-shadow(0 0 20px rgba(14,165,255,0.9)) drop-shadow(0 0 40px rgba(14,165,255,0.3)); }
+}
+.nav-logo { display:flex; align-items:center; gap:0.6rem; flex-shrink:0; }
+.nav-logo img {
+  height: 52px;
+  width: auto;
+  animation: logoGlow 3s ease-in-out infinite;
+  transition: transform 0.3s ease;
+}
+.nav-logo img:hover {
+  animation: logoGlow 0.8s ease-in-out infinite;
+  transform: scale(1.05);
+}
+.nav-links { display:flex; align-items:center; gap:2.5rem; list-style:none; position:absolute; left:50%; transform:translateX(-50%); }
+.nav-links a { font-family:'Jost',sans-serif; font-size:0.82rem; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:var(--chrome); transition:color 0.25s; position:relative; }
+.nav-links a::after { content:''; position:absolute; bottom:-3px; left:0; right:0; height:1px; background:var(--electric); transform:scaleX(0); transform-origin:left; transition:transform 0.3s var(--ease); }
+.nav-links a:hover { color:var(--chalk); }
+.nav-links a:hover::after, .nav-links a.active::after { transform:scaleX(1); }
+.nav-links a.active { color:var(--chalk); }
+.nav-cta { font-family:'Jost',sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:var(--electric); border:1px solid var(--electric); padding:0.55rem 1.4rem; border-radius:2px; transition:background 0.25s,color 0.25s; white-space:nowrap; }
+.nav-cta:hover { background:var(--electric); color:var(--navy); }
+.hamburger { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px; }
+.hamburger span { display:block; width:26px; height:2px; background:var(--chalk); transition:transform 0.3s var(--ease),opacity 0.3s; }
+.hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity:0; }
+.hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+#mobile-menu { position:fixed; inset:0; background:rgba(5,13,31,0.97); backdrop-filter:blur(20px); z-index:999; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2.5rem; opacity:0; pointer-events:none; transition:opacity 0.35s var(--ease); }
+#mobile-menu.open { opacity:1; pointer-events:all; }
+#mobile-menu a { font-family:'Bebas Neue',sans-serif; font-size:3rem; color:var(--chalk); letter-spacing:0.08em; }
+#mobile-menu a:hover { color:var(--electric); }
+#mobile-menu .mobile-cta { font-family:'Jost',sans-serif; font-size:0.85rem; letter-spacing:0.14em; text-transform:uppercase; font-weight:600; color:var(--electric); border:1px solid var(--electric); padding:0.8rem 2.5rem; border-radius:2px; }
+
+/* Utils */
+.section-label { font-family:'Jost',sans-serif; font-size:0.7rem; font-weight:500; letter-spacing:0.3em; text-transform:uppercase; color:var(--electric); margin-bottom:1.2rem; }
+.section-heading { font-family:'Bebas Neue',sans-serif; letter-spacing:0.03em; color:var(--chalk); line-height:0.95; }
+.rv { opacity:0; transform:translateY(40px); transition:opacity 0.75s var(--ease),transform 0.75s var(--ease); }
+.rv.visible { opacity:1; transform:translateY(0); }
+
+/* ── HERO ── */
+#hero {
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  background: var(--navy);
+  padding: 0 4%;
+  position: relative;
+  overflow: hidden;
+}
+#hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 50% 80% at 70% 50%, rgba(14,165,255,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-content { position:relative; z-index:1; }
+.hero-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(2.8rem,10vw,11rem); color:var(--chalk); letter-spacing:0.03em; line-height:0.92; }
+.hero-title span { color:var(--electric); }
+.hero-sub { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(1.1rem,2vw,1.5rem); color:var(--chrome); margin-top:1.2rem; }
+
+/* ── PRICING ── */
+#pricing { padding:6rem 4%; background:var(--navy-mid); }
+.pricing-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1.2rem; align-items:start; }
+.price-card {
+  background: var(--navy);
+  border: 1px solid var(--dark-border);
+  padding: 2.5rem 2rem;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease), box-shadow 0.35s;
+}
+.price-card.visible { opacity:1; transform:translateY(0); }
+.price-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--electric);
+  opacity: 0;
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 0.5s var(--ease), opacity 0.3s;
+  pointer-events: none;
+}
+.price-card:hover::before { opacity:1; clip-path:inset(0 0 0 0); }
+.price-card:hover { box-shadow:0 20px 60px rgba(14,165,255,0.12); }
+.price-badge {
+  display: inline-block;
+  font-family:'Jost',sans-serif;
+  font-size:0.6rem;
+  font-weight:700;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  background:var(--electric);
+  color:var(--navy);
+  padding:0.2rem 0.6rem;
+  border-radius:2px;
+  margin-bottom:0.8rem;
+}
+.price-tier { font-family:'Jost',sans-serif; font-size:0.7rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--electric); margin-bottom:0.5rem; }
+.price-name { font-family:'Bebas Neue',sans-serif; font-size:2rem; color:var(--chalk); letter-spacing:0.04em; margin-bottom:1.2rem; }
+.price-table { width:100%; border-collapse:collapse; margin-bottom:1.5rem; }
+.price-table td { font-size:0.82rem; padding:0.4rem 0; color:var(--chrome); border-bottom:1px solid var(--dark-border); }
+.price-table td:first-child { color:rgba(200,212,224,0.5); font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; }
+.price-table td:last-child { text-align:right; color:var(--chalk); font-weight:500; }
+.price-features { list-style:none; margin-bottom:2rem; }
+.price-features li { font-size:0.85rem; color:var(--chrome); padding:0.35rem 0; border-bottom:1px solid var(--dark-border); display:flex; align-items:center; gap:0.5rem; }
+.price-features li::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--electric); flex-shrink:0; }
+.price-features li.feat-ok { color: var(--chalk); }
+.price-features li.feat-ok::before {
+  content: '✓';
+  color: var(--electric);
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background: none;
+  font-weight: 700;
+  font-size: 0.85rem;
+  line-height: 1;
+}
+.price-features li.feat-no {
+  text-decoration: line-through;
+  opacity: 0.4;
+  color: var(--chrome);
+}
+.price-features li.feat-no::before {
+  background: rgba(200,212,224,0.25);
+}
+.price-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--chrome);
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+.price-card.featured {
+  border-color: var(--electric);
+  box-shadow: 0 0 30px rgba(14,165,255,0.15);
+  position: relative;
+  z-index: 1;
+}
+.price-cta { display:block; font-family:'Jost',sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:var(--electric); border:1px solid var(--electric); padding:0.75rem; text-align:center; border-radius:2px; transition:background 0.25s,color 0.25s; }
+.price-cta:hover { background:var(--electric); color:var(--navy); }
+.price-card.featured .price-cta { background:var(--electric); color:var(--navy); }
+.price-card.featured .price-cta:hover { background:#3bbcff; }
+/* Remodel card special */
+.price-card.remodel { border-top:2px solid rgba(200,212,224,0.2); }
+.price-card.remodel .price-tier { color:var(--chrome); }
+.price-card.remodel .price-name { color:var(--chalk); }
+.remodel-desc { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.05rem; color:var(--chrome); line-height:1.6; margin-bottom:1.5rem; margin-top:0.5rem; }
+
+/* ── FORM ── */
+#contact-form-section { padding:6rem 4%; background:var(--navy); }
+.form-header { margin-bottom:3.5rem; }
+.form-header .section-heading { font-size:clamp(2.8rem,5vw,5.5rem); }
+.form-grid { display:grid; grid-template-columns:1fr 1fr; gap:2rem; max-width:900px; }
+.form-full { grid-column:1 / -1; }
+.form-group { position:relative; }
+.form-group label {
+  position: absolute;
+  top: 1rem; left: 0;
+  font-size: 0.85rem;
+  color: var(--chrome);
+  opacity: 0.6;
+  transition: top 0.25s var(--ease), font-size 0.25s, opacity 0.25s, color 0.25s;
+  pointer-events: none;
+  font-family: 'Jost', sans-serif;
+  letter-spacing: 0.06em;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(200,212,224,0.2);
+  padding: 1rem 0 0.5rem;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.95rem;
+  color: var(--chalk);
+  outline: none;
+  transition: border-color 0.25s;
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+.form-group select { cursor:pointer; }
+.form-group select option { background:var(--navy-mid); color:var(--chalk); }
+.form-group textarea { resize:vertical; min-height:120px; padding-top:1.4rem; }
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus { border-bottom-color:var(--electric); }
+.form-group input:-webkit-autofill,
+.form-group input:-webkit-autofill:hover,
+.form-group input:-webkit-autofill:focus,
+.form-group input:-webkit-autofill:active,
+.form-group textarea:-webkit-autofill,
+.form-group textarea:-webkit-autofill:hover,
+.form-group textarea:-webkit-autofill:focus,
+.form-group textarea:-webkit-autofill:active,
+.form-group select:-webkit-autofill,
+.form-group select:-webkit-autofill:hover,
+.form-group select:-webkit-autofill:focus,
+.form-group select:-webkit-autofill:active {
+  -webkit-text-fill-color: var(--chalk);
+  -webkit-box-shadow: 0 0 0 1000px var(--navy) inset !important;
+  transition: background-color 9999s ease-in-out 0s;
+  caret-color: var(--electric);
+}
+.form-group input:focus + label,
+.form-group select:focus + label,
+.form-group textarea:focus + label,
+.form-group input:not(:placeholder-shown) + label,
+.form-group select:not([value=""]) + label,
+.form-group textarea:not(:placeholder-shown) + label {
+  top: -0.6rem; font-size:0.7rem; opacity:1; color:var(--electric); letter-spacing:0.15em; text-transform:uppercase;
+}
+.form-group::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 1px;
+  background: var(--electric);
+  transition: width 0.35s var(--ease);
+  box-shadow: 0 0 8px rgba(14,165,255,0.5);
+}
+.form-group:focus-within::after { width:100%; }
+
+/* Radio cards */
+.radio-label { font-family:'Jost',sans-serif; font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--electric); margin-bottom:1rem; display:block; }
+.radio-cards { display:flex; flex-wrap:wrap; gap:0.6rem; }
+.radio-card {
+  position: relative;
+}
+.radio-card input { position:absolute; opacity:0; width:0; height:0; }
+.radio-card label {
+  display: block;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--chrome);
+  border: 1px solid var(--dark-border);
+  padding: 0.55rem 1.1rem;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: border-color 0.25s, color 0.25s, background 0.25s;
+  position: static;
+  pointer-events: all;
+  opacity: 1;
+  top: auto; left: auto;
+}
+.radio-card input:checked + label { border-color:var(--electric); color:var(--electric); background:var(--glow); }
+.radio-card label:hover { border-color:var(--electric); color:var(--electric); }
+
+/* Submit button */
+.submit-btn {
+  width: 100%;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.3rem;
+  letter-spacing: 0.14em;
+  color: var(--chalk);
+  background: var(--electric);
+  border: none;
+  padding: 1.2rem;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.25s, box-shadow 0.25s, transform 0.2s;
+  position: relative;
+  overflow: hidden;
+  margin-top: 1rem;
+}
+.submit-btn:hover { background:#3bbcff; box-shadow:0 0 30px rgba(14,165,255,0.45); }
+.submit-btn:active { transform:scale(0.99); }
+.submit-btn.success { background:#1ecb7a; }
+.submit-btn.success::after { content:'✓  Message Sent!'; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:#1ecb7a; font-size:1.3rem; letter-spacing:0.14em; }
+.success-msg { display:none; text-align:center; padding:2rem; }
+.success-msg.show { display:block; }
+.success-msg h3 { font-family:'Bebas Neue',sans-serif; font-size:2.5rem; color:var(--electric); letter-spacing:0.06em; margin-bottom:0.5rem; }
+.success-msg p { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.1rem; color:var(--chrome); }
+
+/* ── TRUST SIGNALS ── */
+#trust { padding:5rem 4%; background:var(--navy-mid); }
+.trust-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; margin-top:3rem; }
+.trust-item { text-align:center; }
+.trust-icon { width:48px; height:48px; margin:0 auto 1.2rem; color:var(--electric); }
+.trust-title { font-family:'Bebas Neue',sans-serif; font-size:1.5rem; color:var(--chalk); letter-spacing:0.06em; margin-bottom:0.5rem; }
+.trust-body { font-size:0.88rem; color:var(--chrome); line-height:1.7; }
+
+/* ── FOOTER ── */
+#footer { background:var(--navy); border-top:1px solid var(--electric); padding:4rem 4% 2rem; }
+.footer-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:3rem; margin-bottom:3rem; padding-bottom:3rem; border-bottom:1px solid var(--dark-border); }
+.footer-tagline { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1rem; color:var(--chrome); margin-top:0.8rem; opacity:0.7; }
+.footer-nav h4, .footer-contact h4 { font-family:'Jost',sans-serif; font-size:0.7rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--electric); margin-bottom:1.2rem; font-weight:500; }
+.footer-nav ul { list-style:none; display:flex; flex-direction:column; gap:0.7rem; }
+.footer-nav a { font-size:0.9rem; color:var(--chrome); transition:color 0.2s; }
+.footer-nav a:hover { color:var(--chalk); }
+.footer-contact p { font-size:0.9rem; color:var(--chrome); margin-bottom:1rem; }
+.footer-socials { display:flex; gap:1rem; margin-top:0.5rem; }
+.footer-social { width:36px; height:36px; border:1px solid var(--dark-border); display:flex; align-items:center; justify-content:center; color:var(--chrome); transition:border-color 0.25s,color 0.25s; border-radius:2px; }
+.footer-social:hover { border-color:var(--electric); color:var(--electric); }
+.footer-bottom { display:flex; justify-content:space-between; align-items:center; }
+.footer-copy { font-size:0.72rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(200,212,224,0.35); }
+
+@media (max-width:1024px) { .pricing-grid { grid-template-columns:1fr 1fr; } }
+@media (max-width:768px) {
+  .nav-links { display:none; }
+  .hamburger { display:flex; }
+  .pricing-grid { grid-template-columns:1fr; }
+  .form-grid { grid-template-columns:1fr; }
+  .trust-grid { grid-template-columns:1fr; }
+  .footer-grid { grid-template-columns:1fr; gap:2rem; }
+  .footer-bottom { flex-direction:column; gap:1rem; text-align:center; }
+  /* Hero */
+  #hero { padding: 6rem 5% 3rem; height: auto; min-height: 40vh; }
+  /* Sections — reduce side padding */
+  #pricing { padding: 4rem 5%; }
+  #contact-form-section { padding: 4rem 5%; }
+  #trust { padding: 4rem 5%; }
+  /* Form inputs — 16px prevents iOS zoom-on-focus */
+  .form-group input,
+  .form-group select,
+  .form-group textarea { font-size: 16px; }
+  /* Pricing cards */
+  .price-table td { font-size: 0.78rem; }
+  .price-card { padding: 2rem 1.5rem; }
+  /* Form heading */
+  .form-header .section-heading { font-size: clamp(2rem, 6vw, 4rem); }
+}
+@media (max-width:480px) {
+  .hero-title { font-size: clamp(2rem, 9vw, 4rem); }
+  .radio-card label { padding: 0.5rem 0.75rem; font-size: 0.72rem; }
+  .submit-btn { font-size: 1.1rem; }
+  .trust-title { font-size: 1.3rem; }
+  /* Feature list — tighter on mobile */
+  .price-features li { padding: 0.22rem 0; font-size: 0.8rem; }
+}
+@media (prefers-reduced-motion:reduce) {
+  *,*::before,*::after { animation-duration:0.01ms !important; transition-duration:0.01ms !important; }
+}
+
+/* ── Form validation errors ── */
+.field-error {
+  display: none;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.72rem;
+  color: #ff4757;
+  margin-top: 0.3rem;
+  letter-spacing: 0.04em;
+}
+.field-error.show { display: block; }
+.form-group.has-error input,
+.form-group.has-error select,
+.form-group.has-error textarea { border-bottom-color: #ff4757; }
+.form-error-banner {
+  display: none;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.82rem;
+  color: #ff4757;
+  border: 1px solid rgba(255,71,87,0.3);
+  background: rgba(255,71,87,0.06);
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.04em;
+}
+.form-error-banner.show { display: block; }
+.form-submit-error {
+  display: none;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.82rem;
+  color: #ff4757;
+  margin-top: 1rem;
+  letter-spacing: 0.04em;
+  line-height: 1.6;
+}
+.form-submit-error.show { display: block; }
+.form-submit-error a { color: #ff4757; text-decoration: underline; }
+
+/* ── Card Flip ── */
+.flip-wrap { position: relative; }
+.flip-inner { position: relative; width: 100%; }
+.flip-front { width: 100%; }
+.flip-back {
+  position: absolute;
+  inset: 0;
+  display: none;
+  background: var(--navy);
+  border: 1px solid var(--dark-border);
+  padding: 2.5rem 2rem;
+  flex-direction: column;
+  overflow-y: auto;
+  z-index: 2;
+}
+.flip-front.featured ~ .flip-back { border-color: var(--electric); }
+.price-learn-more {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  color: var(--electric);
+  font-family: 'Jost', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: opacity 0.2s;
+  z-index: 2;
+}
+.price-learn-more:hover { opacity: 0.7; }
+.flip-back-close {
+  background: none;
+  border: none;
+  color: var(--electric);
+  cursor: pointer;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: opacity 0.2s;
+  align-self: flex-start;
+}
+.flip-back-close:hover { opacity: 0.7; }
+.flip-back-heading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.2rem;
+  color: var(--chalk);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  margin-bottom: 0.7rem;
+}
+.flip-back-tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--electric);
+  margin-bottom: 1.2rem;
+  line-height: 1.5;
+}
+.flip-back-body {
+  font-size: 0.92rem;
+  color: var(--chrome);
+  line-height: 1.78;
+  flex: 1;
+  margin-bottom: 1.8rem;
+}
+.flip-back-cta {
+  display: block;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--navy);
+  background: var(--electric);
+  padding: 0.75rem;
+  text-align: center;
+  border-radius: 2px;
+  transition: background 0.25s;
+  text-decoration: none;
+}
+.flip-back-cta:hover { background: #3bbcff; }
+</style>
+</head>
+<body>
+
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<!-- ============================================================
+     NAV
+     ============================================================ -->
+<nav id="nav" role="navigation">
+  <a href="index.html" class="nav-logo" aria-label="Raffinato Designs Home">
+    <img src="logo2.png" alt="Raffinato Designs">
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="work.html">Our Work</a></li>
+    <li><a href="contact.html" class="active">Get Started</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:1.2rem;">
+    <a href="contact.html" class="nav-cta">Get Started</a>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div id="mobile-menu">
+  <a href="index.html">Home</a>
+  <a href="work.html">Our Work</a>
+  <a href="contact.html">Get Started</a>
+  <a href="contact.html" class="mobile-cta">Build My Website →</a>
+</div>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section id="hero" aria-labelledby="hero-title">
+  <div class="hero-content">
+    <p class="section-label">Start Here</p>
+    <h1 class="hero-title" id="hero-title">Let's Build<br><span>Something</span></h1>
+    <p class="hero-sub">Tell us about your business. We'll handle the rest.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     PRICING — Section 1
+     ============================================================ -->
+<section id="pricing" aria-labelledby="pricing-heading">
+  <div class="rv" style="margin-bottom:3rem;">
+    <p class="section-label">Our Packages</p>
+    <h2 class="section-heading" id="pricing-heading" style="font-size:clamp(2.5rem,5vw,5rem);">Simple, Honest Pricing</h2>
+  </div>
+  <div class="pricing-grid">
+
+    <!-- Basic -->
+    <div class="flip-wrap">
+      <div class="flip-inner">
+        <div class="flip-front price-card" style="transition-delay:0s">
+          <button class="price-learn-more" aria-label="Learn more about Starter Presence">Learn More ›</button>
+          <p class="price-tier">Basic</p>
+          <h3 class="price-name">Starter Presence</h3>
+          <p class="price-subtitle">A clean, professional site to get you online.</p>
+          <table class="price-table" aria-label="Basic package pricing">
+            <tr><td>Setup</td><td>$199</td></tr>
+            <tr><td>Monthly</td><td>$19.99</td></tr>
+          </table>
+          <ul class="price-features">
+            <li class="feat-ok">Custom design, flawless on every device</li>
+            <li class="feat-ok">Contact form that sends leads to your inbox</li>
+            <li class="feat-ok">Fast, secure hosting fully managed by us</li>
+            <li class="feat-no">Accept payments directly on your site</li>
+            <li class="feat-no">SEO setup so customers find you on Google</li>
+            <li class="feat-no">Automated email follow-up that works leads around the clock</li>
+            <li class="feat-no">AI assistant answering questions instantly, day or night</li>
+            <li class="feat-no">Priority support when you need a hand</li>
+            <li class="feat-no">Advanced analytics on customer behavior</li>
+            <li class="feat-no">Website heatmaps</li>
+          </ul>
+          <a href="#contact-form?pkg=basic" class="price-cta">Get Started →</a>
+        </div>
+        <div class="flip-back">
+          <button class="flip-back-close">&#8592; Back</button>
+          <p class="flip-back-heading">Starter Presence</p>
+          <p class="flip-back-tagline">Perfect for new businesses getting online for the first time.</p>
+          <p class="flip-back-body">You don't need to understand web design, hosting, or code. You tell us about your business, and we deliver a polished, professional site that works flawlessly on every device. It's live in days, fully managed by us, and ready to take payments from day one. No tech headaches, no monthly surprises, just a site you're proud to share.</p>
+          <a href="#contact-form?pkg=basic" class="flip-back-cta price-cta">Get Started →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pro (featured) -->
+    <div class="flip-wrap">
+      <div class="flip-inner">
+        <div class="flip-front price-card featured" style="transition-delay:0.1s">
+          <button class="price-learn-more" aria-label="Learn more about Growth Engine">Learn More ›</button>
+          <span class="price-badge">★ Most Popular</span>
+          <p class="price-tier">Pro</p>
+          <h3 class="price-name">Growth Engine</h3>
+          <p class="price-subtitle">Everything you need to actually get customers.</p>
+          <table class="price-table" aria-label="Pro package pricing">
+            <tr><td>Setup</td><td>$499</td></tr>
+            <tr><td>Monthly</td><td>$49.99</td></tr>
+          </table>
+          <ul class="price-features">
+            <li class="feat-ok">Custom design, flawless on every device</li>
+            <li class="feat-ok">Contact form that sends leads to your inbox</li>
+            <li class="feat-ok">Fast, secure hosting fully managed by us</li>
+            <li class="feat-ok">Accept payments directly on your site</li>
+            <li class="feat-ok">SEO setup so customers find you on Google</li>
+            <li class="feat-ok">Automated email follow-up that works leads around the clock</li>
+            <li class="feat-ok">AI assistant answering questions instantly, day or night</li>
+            <li class="feat-no">Priority support when you need a hand</li>
+            <li class="feat-no">Advanced analytics on customer behavior</li>
+            <li class="feat-no">Website heatmaps</li>
+          </ul>
+          <a href="#contact-form?pkg=pro" class="price-cta">Get Started →</a>
+        </div>
+        <div class="flip-back">
+          <button class="flip-back-close">&#8592; Back</button>
+          <p class="flip-back-heading">Growth Engine</p>
+          <p class="flip-back-tagline">Our most popular package, and it's not close.</p>
+          <p class="flip-back-body">Basic gets you online. Pro gets you customers. You get everything in Basic plus the tools that actually grow a business: SEO so people find you on Google, automated email follow-up that works your leads while you sleep, and an AI assistant answering customer questions 24/7. Most small businesses don't need a website, they need customers. This is how you get them.</p>
+          <a href="#contact-form?pkg=pro" class="flip-back-cta price-cta">Get Started →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Premium -->
+    <div class="flip-wrap">
+      <div class="flip-inner">
+        <div class="flip-front price-card" style="transition-delay:0.2s">
+          <button class="price-learn-more" aria-label="Learn more about Total Domination">Learn More ›</button>
+          <p class="price-tier">Premium</p>
+          <h3 class="price-name">Total Domination</h3>
+          <p class="price-subtitle">For established businesses ready to scale.</p>
+          <table class="price-table" aria-label="Premium package pricing">
+            <tr><td>Setup</td><td>$999</td></tr>
+            <tr><td>Monthly</td><td>$99.99</td></tr>
+          </table>
+          <ul class="price-features">
+            <li class="feat-ok">Custom design, flawless on every device</li>
+            <li class="feat-ok">Contact form that sends leads to your inbox</li>
+            <li class="feat-ok">Fast, secure hosting fully managed by us</li>
+            <li class="feat-ok">Accept payments directly on your site</li>
+            <li class="feat-ok">SEO setup so customers find you on Google</li>
+            <li class="feat-ok">Automated email follow-up that works leads around the clock</li>
+            <li class="feat-ok">AI assistant answering questions instantly, day or night</li>
+            <li class="feat-ok">Priority support when you need a hand</li>
+            <li class="feat-ok">Advanced analytics on customer behavior</li>
+            <li class="feat-ok">Website heatmaps</li>
+          </ul>
+          <a href="#contact-form?pkg=premium" class="price-cta">Get Started →</a>
+        </div>
+        <div class="flip-back">
+          <button class="flip-back-close">&#8592; Back</button>
+          <p class="flip-back-heading">Total Domination</p>
+          <p class="flip-back-tagline">For established businesses ready to dominate their market.</p>
+          <p class="flip-back-body">Everything in Pro, supercharged. Advanced analytics show you exactly where your customers come from and what they do on your site. Website heatmaps reveal what's working and what's costing you sales. With priority support and a dedicated point of contact, you're not just getting a website, you're getting a growth partner invested in your results.</p>
+          <a href="#contact-form?pkg=premium" class="flip-back-cta price-cta">Get Started →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Remodel -->
+    <div class="price-card remodel" style="transition-delay:0.3s">
+      <p class="price-tier">Remodel</p>
+      <h3 class="price-name">Website Remodel</h3>
+      <p class="remodel-desc">Already have a site? We'll transform it into something that actually converts.</p>
+      <ul class="price-features">
+        <li>Full redesign</li>
+        <li>Content migration</li>
+        <li>Speed optimization</li>
+        <li>SEO audit + fixes</li>
+      </ul>
+      <a href="#contact-form?pkg=remodel" class="price-cta">Get a Quote →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTACT FORM — Section 2
+     ============================================================ -->
+<section id="contact-form-section" aria-labelledby="form-heading">
+  <div class="form-header rv">
+    <p class="section-label">Ready to Begin</p>
+    <h2 class="section-heading" id="form-heading">Tell Us About<br>Your Project</h2>
+  </div>
+
+  <form id="contact-form" class="rv" novalidate aria-label="Project inquiry form">
+    <div id="form-error-banner" class="form-error-banner" role="alert">Please complete all required fields.</div>
+    <div class="form-grid">
+      <div class="form-group">
+        <input type="text" id="fname" name="fname" placeholder=" " autocomplete="given-name" required>
+        <label for="fname">Full Name *</label>
+        <span class="field-error" id="err-fname">Required</span>
+      </div>
+      <div class="form-group">
+        <input type="text" id="bname" name="bname" placeholder=" " autocomplete="organization" required>
+        <label for="bname">Business Name *</label>
+        <span class="field-error" id="err-bname">Required</span>
+      </div>
+      <div class="form-group">
+        <input type="email" id="email" name="email" placeholder=" " autocomplete="email" required>
+        <label for="email">Email Address *</label>
+        <span class="field-error" id="err-email">Please enter a valid email</span>
+      </div>
+      <div class="form-group">
+        <input type="tel" id="phone" name="phone" placeholder=" " autocomplete="tel" required>
+        <label for="phone">Phone Number *</label>
+        <span class="field-error" id="err-phone">Required</span>
+      </div>
+      <div class="form-group">
+        <select id="btype" name="btype" required aria-label="Business type">
+          <option value="" disabled selected></option>
+          <option value="restaurant">Restaurant / Food</option>
+          <option value="retail">Retail / E-Commerce</option>
+          <option value="professional">Professional Services</option>
+          <option value="fitness">Fitness / Wellness</option>
+          <option value="other">Other</option>
+        </select>
+        <label for="btype">Business Type *</label>
+        <span class="field-error" id="err-btype">Required</span>
+      </div>
+      <div class="form-group">
+        <select id="heard" name="heard" aria-label="How did you hear about us">
+          <option value="" disabled selected></option>
+          <option value="google">Google Search</option>
+          <option value="social">Social Media</option>
+          <option value="referral">Referral / Word of Mouth</option>
+          <option value="ad">Online Ad</option>
+          <option value="other">Other</option>
+        </select>
+        <label for="heard">How Did You Hear About Us?</label>
+      </div>
+
+      <!-- Package radio cards -->
+      <div class="form-full">
+        <span class="radio-label">Which package interests you?</span>
+        <div class="radio-cards" role="radiogroup" aria-label="Package selection">
+          <div class="radio-card">
+            <input type="radio" id="pkg-basic"   name="package" value="basic">
+            <label for="pkg-basic">Basic</label>
+          </div>
+          <div class="radio-card">
+            <input type="radio" id="pkg-pro"     name="package" value="pro">
+            <label for="pkg-pro">Pro</label>
+          </div>
+          <div class="radio-card">
+            <input type="radio" id="pkg-premium" name="package" value="premium">
+            <label for="pkg-premium">Premium</label>
+          </div>
+          <div class="radio-card">
+            <input type="radio" id="pkg-remodel" name="package" value="remodel">
+            <label for="pkg-remodel">Remodel</label>
+          </div>
+          <div class="radio-card">
+            <input type="radio" id="pkg-unsure"  name="package" value="unsure" checked>
+            <label for="pkg-unsure">Not Sure Yet</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group form-full">
+        <textarea id="details" name="details" placeholder=" " rows="5" required></textarea>
+        <label for="details">Tell Us About Your Project *</label>
+        <span class="field-error" id="err-details">Required</span>
+      </div>
+
+      <!-- Honeypot — hidden from real users, catches bots -->
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" aria-hidden="true">
+
+      <div class="form-full">
+        <button type="submit" class="submit-btn" id="submit-btn">Send My Project Details →</button>
+        <div class="form-submit-error" id="submit-error">
+          Something went wrong. Please email <a href="mailto:designs@raffinatodesigns.com">designs@raffinatodesigns.com</a> directly.
+        </div>
+        <p style="margin-top:1rem;font-size:0.75rem;color:rgba(200,212,224,0.45);line-height:1.6;">By submitting, you agree to our <a href="privacy-policy.html" style="color:var(--electric);text-underline-offset:3px;text-decoration:underline;">Privacy Policy</a> and <a href="terms-of-service.html" style="color:var(--electric);text-underline-offset:3px;text-decoration:underline;">Terms of Service</a>.</p>
+      </div>
+    </div>
+  </form>
+  <div class="success-msg" id="success-msg" role="alert" aria-live="polite">
+    <h3>You're In Good Hands</h3>
+    <p>We'll be in touch within 24 hours to discuss your project. Check your inbox for a confirmation email.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     TRUST SIGNALS — Section 3
+     ============================================================ -->
+<section id="trust" aria-labelledby="trust-heading">
+  <div class="rv" style="text-align:center;">
+    <p class="section-label" style="text-align:center;">Why Trust Us</p>
+    <h2 class="section-heading" id="trust-heading" style="font-size:clamp(2.5rem,5vw,5rem);text-align:center;">Our Promise To You</h2>
+  </div>
+  <div class="trust-grid">
+    <div class="trust-item rv" style="transition-delay:0s">
+      <svg class="trust-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+        <circle cx="24" cy="24" r="20"/>
+        <path d="M24 14v10l6 4"/>
+        <path d="M16 8l-4-4M32 8l4-4M8 16l-4-4M40 16l4-4"/>
+      </svg>
+      <h3 class="trust-title">7-Day Delivery</h3>
+      <p class="trust-body">Most sites delivered in under a week. We move fast without cutting corners.</p>
+    </div>
+    <div class="trust-item rv" style="transition-delay:0.1s">
+      <svg class="trust-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+        <path d="M24 4L28 16L40 16L30 24L34 36L24 28L14 36L18 24L8 16L20 16Z"/>
+        <path d="M12 42h24"/>
+      </svg>
+      <h3 class="trust-title">100% Satisfaction</h3>
+      <p class="trust-body">We revise until you love it. No arbitrary revision limits, no extra charges.</p>
+    </div>
+    <div class="trust-item rv" style="transition-delay:0.2s">
+      <svg class="trust-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+        <path d="M8 40V20L24 8L40 20V40"/>
+        <rect x="18" y="28" width="12" height="12"/>
+        <path d="M24 20v4M20 24h8"/>
+      </svg>
+      <h3 class="trust-title">Real Support</h3>
+      <p class="trust-body">Talk to a real person, not a chatbot. Our team is always a message away.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer id="footer" role="contentinfo">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="nav-logo" style="margin-bottom:0.8rem;" aria-label="Raffinato Designs">
+        <img src="logo2.png" alt="Raffinato Designs">
+      </a>
+      <p class="footer-tagline">Premium web design for ambitious businesses.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="work.html">Our Work</a></li>
+        <li><a href="contact.html">Get Started</a></li>
+        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="terms-of-service.html">Terms of Service</a></li>
+      </ul>
+    </nav>
+    <div class="footer-contact">
+      <h4>Connect</h4>
+      <p><a href="mailto:designs@raffinatodesigns.com">designs@raffinatodesigns.com</a></p>
+      <div class="footer-socials">
+        <a href="https://www.instagram.com/raffinato_designs" target="_blank" rel="noopener noreferrer" class="footer-social" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg></a>
+        <a href="https://www.facebook.com/profile.php?id=61569265648588" class="footer-social" aria-label="Raffinato Designs on Facebook" target="_blank" rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></svg></a>
+        <a href="https://x.com/Raffinatodesig" target="_blank" rel="noopener noreferrer" class="footer-social" aria-label="Twitter / X"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© <span id="copyright-year"></span> Raffinato Designs</p>
+    <p class="footer-copy" style="opacity:0.2;">Crafted with precision in the United States</p>
+  </div>
+</footer>
+
+<script>
+document.getElementById('copyright-year').textContent = new Date().getFullYear();
+// Cursor — mouse-only
+if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  const dot = document.getElementById('cursor-dot');
+  const ring = document.getElementById('cursor-ring');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+  (function lerp(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;dot.style.left=mx+'px';dot.style.top=my+'px';ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(lerp);})();
+}
+
+// Nav
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60),{passive:true});
+
+// Hamburger
+const hb=document.getElementById('hamburger'),mm=document.getElementById('mobile-menu');
+hb.addEventListener('click',()=>{
+  const open=hb.classList.toggle('open');
+  hb.setAttribute('aria-expanded',open);
+  mm.classList.toggle('open',open);
+  document.body.style.overflow=open?'hidden':'';
+});
+mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{hb.classList.remove('open');mm.classList.remove('open');document.body.style.overflow='';}));
+
+// Scroll reveal
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
+},{threshold:0.1});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+
+// Pricing card stagger
+const priceObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    document.querySelectorAll('.price-card').forEach((c,i)=>{
+      setTimeout(()=>c.classList.add('visible'),i*120);
+    });
+    priceObs.disconnect();
+  });
+},{threshold:0.1});
+const pg=document.getElementById('pricing');
+if(pg)priceObs.observe(pg);
+
+// Form floating label fix for select
+document.querySelectorAll('select').forEach(sel=>{
+  sel.addEventListener('change',()=>{
+    const lbl=sel.nextElementSibling;
+    if(lbl&&lbl.tagName==='LABEL'){
+      lbl.style.top='-0.6rem';
+      lbl.style.fontSize='0.7rem';
+      lbl.style.opacity='1';
+      lbl.style.color='var(--electric)';
+      lbl.style.letterSpacing='0.15em';
+      lbl.style.textTransform='uppercase';
+    }
+  });
+});
+
+// Form submit — validates then POSTs to /api/contact
+document.getElementById('contact-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const form = this;
+  const btn         = document.getElementById('submit-btn');
+  const successMsg  = document.getElementById('success-msg');
+  const banner      = document.getElementById('form-error-banner');
+  const submitError = document.getElementById('submit-error');
+
+  // Clear previous error state
+  banner.classList.remove('show');
+  submitError.classList.remove('show');
+  form.querySelectorAll('.field-error').forEach(el => el.classList.remove('show'));
+  form.querySelectorAll('.form-group').forEach(el => el.classList.remove('has-error'));
+
+  // Collect values
+  const fname   = document.getElementById('fname').value.trim();
+  const bname   = document.getElementById('bname').value.trim();
+  const email   = document.getElementById('email').value.trim();
+  const phone   = document.getElementById('phone').value.trim();
+  const btype   = document.getElementById('btype').value;
+  const details = document.getElementById('details').value.trim();
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  let valid = true;
+  function markError(inputId, errId) {
+    const input = document.getElementById(inputId);
+    if (input) input.closest('.form-group').classList.add('has-error');
+    const err = document.getElementById(errId);
+    if (err) err.classList.add('show');
+    valid = false;
+  }
+
+  if (!fname)                          markError('fname',   'err-fname');
+  if (!bname)                          markError('bname',   'err-bname');
+  if (!email || !EMAIL_RE.test(email)) markError('email',   'err-email');
+  if (!phone)                          markError('phone',   'err-phone');
+  if (!btype)                          markError('btype',   'err-btype');
+  if (!details)                        markError('details', 'err-details');
+
+  if (!valid) {
+    banner.classList.add('show');
+    banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    return;
+  }
+
+  const pkg      = (form.querySelector('input[name="package"]:checked') || {}).value || 'unsure';
+  const howHeard = document.getElementById('heard').value || '';
+  const honeypot = (form.querySelector('input[name="_gotcha"]') || {}).value || '';
+
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        fullName: fname, businessName: bname, email, phone,
+        businessType: btype, projectDetails: details,
+        package: pkg, howHeard, _gotcha: honeypot
+      })
+    });
+    const data = await res.json();
+
+    if (data.success) {
+      form.style.display = 'none';
+      successMsg.classList.add('show');
+      successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    } else {
+      submitError.classList.add('show');
+      btn.textContent = 'Send My Project Details →';
+      btn.disabled = false;
+    }
+  } catch {
+    submitError.classList.add('show');
+    btn.textContent = 'Send My Project Details →';
+    btn.disabled = false;
+  }
+});
+
+// Pricing CTAs — smooth scroll + auto-select package radio
+function parsePkg(str) {
+  const valid = ['basic','pro','premium','remodel'];
+  const m = String(str||'').match(/pkg=([a-z]+)/);
+  const v = m ? m[1] : new URLSearchParams(window.location.search).get('pkg') || '';
+  return valid.includes(v) ? v : null;
+}
+
+function applyPkg(pkg) {
+  if (!pkg) return;
+  const radio = document.getElementById('pkg-' + pkg);
+  if (!radio) return;
+  radio.checked = true;
+  const card = radio.closest('.radio-card');
+  if (!card) return;
+  card.style.transition = 'box-shadow 0.2s, outline 0.2s';
+  card.style.outline = '2px solid var(--electric)';
+  card.style.boxShadow = '0 0 12px rgba(14,165,255,0.35)';
+  setTimeout(() => {
+    card.style.outline = '';
+    card.style.boxShadow = '';
+  }, 1500);
+}
+
+document.querySelectorAll('a.price-cta').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const pkg = parsePkg(a.getAttribute('href'));
+    document.getElementById('contact-form-section').scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => applyPkg(pkg), 400);
+  });
+});
+
+// Handle direct landing with ?pkg= or #contact-form?pkg=
+(function() {
+  const pkg = parsePkg(window.location.hash) || parsePkg('pkg=' + (new URLSearchParams(window.location.search).get('pkg') || ''));
+  if (pkg) {
+    applyPkg(pkg);
+    setTimeout(function() {
+      const section = document.getElementById('contact-form-section');
+      if (section) section.scrollIntoView({ behavior: 'smooth' });
+    }, 150);
+  }
+})();
+
+window.addEventListener('hashchange', () => applyPkg(parsePkg(window.location.hash)));
+
+// Page transitions
+document.querySelectorAll('a[href]').forEach(a=>{
+  if(a.href.includes('#'))return;
+  a.addEventListener('click',function(e){
+    const href=this.getAttribute('href');
+    if(!href||href.startsWith('http')||href.startsWith('mailto'))return;
+    e.preventDefault();
+    document.body.style.transition='opacity 0.3s ease';
+    document.body.style.opacity='0';
+    setTimeout(()=>window.location.href=href,310);
+  });
+});
+</script>
+
+<!-- ═══════════════════════════ AI CHAT WIDGET ═══════════════════════════ -->
+<style>
+  #chat-btn {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 9000;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #0ea5ff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 24px rgba(14,165,255,0.45);
+    animation: chatPulse 3s ease-in-out infinite;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  #chat-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 32px rgba(14,165,255,0.65);
+    animation: none;
+  }
+  #chat-btn svg { width: 26px; height: 26px; fill: #fff; }
+  @keyframes chatPulse {
+    0%, 100% { box-shadow: 0 4px 24px rgba(14,165,255,0.45); }
+    50%       { box-shadow: 0 4px 40px rgba(14,165,255,0.8), 0 0 0 8px rgba(14,165,255,0.12); }
+  }
+
+  #chat-window {
+    position: fixed;
+    bottom: 100px;
+    right: 28px;
+    z-index: 9000;
+    width: 380px;
+    height: 520px;
+    background: #0d0d0d;
+    border: 1px solid rgba(14,165,255,0.25);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 16px 64px rgba(0,0,0,0.7), 0 0 0 1px rgba(14,165,255,0.08);
+    transform: translateY(20px) scale(0.96);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.25s cubic-bezier(0.16,1,0.3,1), opacity 0.25s ease;
+  }
+  #chat-window.chat-open {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  #chat-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 18px;
+    background: #111;
+    border-bottom: 1px solid rgba(14,165,255,0.15);
+    flex-shrink: 0;
+  }
+  #chat-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+    flex-shrink: 0;
+    box-shadow: 0 0 6px rgba(34,197,94,0.6);
+  }
+  #chat-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.15rem;
+    letter-spacing: 0.08em;
+    color: #f0f0f0;
+    flex: 1;
+  }
+  #chat-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgba(255,255,255,0.4);
+    font-size: 1.4rem;
+    line-height: 1;
+    padding: 2px 4px;
+    transition: color 0.15s;
+  }
+  #chat-close:hover { color: #fff; }
+
+  #chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(14,165,255,0.3) transparent;
+  }
+  #chat-messages::-webkit-scrollbar { width: 4px; }
+  #chat-messages::-webkit-scrollbar-track { background: transparent; }
+  #chat-messages::-webkit-scrollbar-thumb { background: rgba(14,165,255,0.3); border-radius: 2px; }
+
+  .chat-msg {
+    max-width: 88%;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-family: 'Inter', 'DM Sans', sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    word-break: break-word;
+  }
+  .chat-msg.bot {
+    background: rgba(14,165,255,0.1);
+    border: 1px solid rgba(14,165,255,0.2);
+    color: #d0e8ff;
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+  }
+  .chat-msg.user {
+    background: #0ea5ff;
+    color: #fff;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+  }
+
+  #chat-typing {
+    display: none;
+    align-self: flex-start;
+    gap: 5px;
+    padding: 10px 14px;
+    background: rgba(14,165,255,0.08);
+    border: 1px solid rgba(14,165,255,0.15);
+    border-radius: 12px;
+    border-bottom-left-radius: 4px;
+  }
+  #chat-typing span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(14,165,255,0.7);
+    display: inline-block;
+    animation: typingDot 1.2s ease-in-out infinite;
+  }
+  #chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+  #chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes typingDot {
+    0%, 80%, 100% { transform: scale(0.7); opacity: 0.4; }
+    40%           { transform: scale(1);   opacity: 1;   }
+  }
+
+  #chat-input-area {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 14px;
+    border-top: 1px solid rgba(14,165,255,0.15);
+    background: #111;
+    flex-shrink: 0;
+  }
+  #chat-input {
+    flex: 1;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(14,165,255,0.2);
+    border-radius: 8px;
+    padding: 9px 12px;
+    color: #f0f0f0;
+    font-family: 'Inter', 'DM Sans', sans-serif;
+    font-size: 0.875rem;
+    outline: none;
+    transition: border-color 0.15s;
+    resize: none;
+  }
+  #chat-input:focus { border-color: rgba(14,165,255,0.5); }
+  #chat-input::placeholder { color: rgba(255,255,255,0.3); }
+  #chat-send {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    background: #0ea5ff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.15s, transform 0.1s;
+  }
+  #chat-send:hover { background: #38beff; }
+  #chat-send:active { transform: scale(0.93); }
+  #chat-send svg { width: 16px; height: 16px; fill: #fff; }
+
+  @media (max-width: 480px) {
+    #chat-window { width: calc(100vw - 24px); right: 12px; bottom: 88px; }
+    #chat-btn { right: 16px; bottom: 20px; }
+    #chat-input { font-size: 16px; }
+  }
+</style>
+
+<button id="chat-btn" aria-label="Chat with Raffinato AI">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/></svg>
+</button>
+
+<div id="chat-window" role="dialog" aria-label="Raffinato AI Chat">
+  <div id="chat-header">
+    <div id="chat-status-dot"></div>
+    <div id="chat-title">Raffinato AI</div>
+    <button id="chat-close" aria-label="Close chat">×</button>
+  </div>
+  <div id="chat-messages">
+    <div class="chat-msg bot">Hey! I'm the Raffinato AI assistant. Ask me anything about our web design packages, process, or pricing.</div>
+    <div id="chat-typing"><span></span><span></span><span></span></div>
+  </div>
+  <div id="chat-input-area">
+    <textarea id="chat-input" rows="1" placeholder="Ask anything…" aria-label="Chat input"></textarea>
+    <button id="chat-send" aria-label="Send message">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- ── Card Flip Controller ── -->
+<script>
+(function () {
+  var HALF = 220;
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function swapIn(inner, front, back) {
+    inner.style.height = front.offsetHeight + 'px';
+    front.style.display = 'none';
+    back.style.display  = 'flex';
+  }
+
+  function swapOut(inner, front, back) {
+    back.style.display  = 'none';
+    front.style.display = '';
+    inner.style.height  = '';
+  }
+
+  function foldTo(inner, front, back, toBack) {
+    if (reducedMotion) {
+      toBack ? swapIn(inner, front, back) : swapOut(inner, front, back);
+      return;
+    }
+    inner.style.transition = 'transform ' + HALF + 'ms ease-in';
+    inner.style.transform  = 'scaleX(0)';
+    setTimeout(function () {
+      toBack ? swapIn(inner, front, back) : swapOut(inner, front, back);
+      inner.style.transition = 'transform ' + HALF + 'ms ease-out';
+      inner.style.transform  = 'scaleX(1)';
+      setTimeout(function () { inner.style.transition = ''; }, HALF);
+    }, HALF);
+  }
+
+  function closeAll(except) {
+    document.querySelectorAll('.flip-wrap.flipped').forEach(function (w) {
+      if (w === except) return;
+      var i = w.querySelector('.flip-inner');
+      var f = w.querySelector('.flip-front');
+      var b = w.querySelector('.flip-back');
+      b.style.display = 'none';
+      f.style.display = '';
+      i.style.height  = '';
+      i.style.transform = '';
+      w.classList.remove('flipped');
+    });
+  }
+
+  document.querySelectorAll('.flip-wrap').forEach(function (wrap) {
+    var inner    = wrap.querySelector('.flip-inner');
+    var front    = wrap.querySelector('.flip-front');
+    var back     = wrap.querySelector('.flip-back');
+    var learnBtn = wrap.querySelector('.price-learn-more');
+    var closeBtn = wrap.querySelector('.flip-back-close');
+
+    if (learnBtn) {
+      learnBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        closeAll(wrap);
+        wrap.classList.add('flipped');
+        foldTo(inner, front, back, true);
+      });
+    }
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        wrap.classList.remove('flipped');
+        foldTo(inner, front, back, false);
+      });
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeAll(null);
+  });
+})();
+</script>
+
+<script>
+(function raffinatoChat() {
+  const API_URL = '/api/chat';
+  const SYSTEM = `You are the AI assistant for Raffinato Designs, a premium web design agency serving US small businesses. Be concise, warm, and professional. Only discuss topics relevant to web design, our services, and helping potential clients. If a visitor asks about anything off-topic, gently steer back to how we can help their business.
+
+Core positioning:
+- Done-for-you websites. Clients do not need any technical knowledge. We handle design, build, hosting, and launch. They just share their vision; we deliver a finished site.
+- We build conversion-focused sites for ambitious US small business owners.
+
+Our packages (all prices in USD, setup fee + monthly that covers hosting and upkeep):
+
+1) BASIC: "Starter Presence"
+   - $199 setup + $19.99/month
+   - Custom design flawless on every device, contact form that sends leads to your inbox, fast secure hosting fully managed by us
+
+2) PRO: "Growth Engine" (most popular)
+   - $499 setup + $49.99/month
+   - Everything in Basic, plus: accept payments directly on your site, SEO setup so customers find you on Google, automated email follow-up that works leads around the clock, AI assistant answering questions instantly day or night
+
+3) PREMIUM: "Total Domination"
+   - $999 setup + $99.99/month
+   - Everything in Pro, plus: priority support when you need a hand, advanced analytics on customer behavior, website heatmaps
+
+4) WEBSITE REMODEL: for businesses that already have a site
+   - Custom quote (the price depends on the existing site)
+   - Full redesign, content migration, speed optimization, SEO audit + fixes
+   - Encourage these visitors to use the contact form for a quote
+
+Process: (1) Client shares their vision via the contact form, (2) we design it, (3) client reviews and gives feedback, (4) we launch it.
+
+Turnaround: Most sites delivered in under a week. We move fast without cutting corners.
+
+Contact: Visitors can fill out the contact form on the Get Started page, or email designs@raffinatodesigns.com. We respond within 24 hours.
+
+Rules:
+- Always quote prices in US dollars exactly as listed above. Never invent prices or discounts.
+- For Remodel quotes or anything custom, direct visitors to the contact form.
+- Keep replies under 120 words unless the question genuinely needs more detail.
+- Never mention competitors by name or compare pricing to other agencies.`;
+
+  const btn     = document.getElementById('chat-btn');
+  const win     = document.getElementById('chat-window');
+  const closeBtn= document.getElementById('chat-close');
+  const msgs    = document.getElementById('chat-messages');
+  const typing  = document.getElementById('chat-typing');
+  const input   = document.getElementById('chat-input');
+  const send    = document.getElementById('chat-send');
+
+  let history = [];
+  let busy = false;
+
+  btn.addEventListener('click', () => {
+    const open = win.classList.toggle('chat-open');
+    if (open) { input.focus(); scrollBottom(); }
+  });
+  closeBtn.addEventListener('click', () => win.classList.remove('chat-open'));
+
+  function scrollBottom() {
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function addMsg(text, role) {
+    const el = document.createElement('div');
+    el.className = 'chat-msg ' + role;
+    el.textContent = text;
+    msgs.insertBefore(el, typing);
+    scrollBottom();
+    return el;
+  }
+
+  function showTyping() {
+    typing.style.display = 'flex';
+    msgs.appendChild(typing);
+    scrollBottom();
+  }
+
+  function hideTyping() {
+    typing.style.display = 'none';
+  }
+
+  async function handleSend() {
+    const text = input.value.trim();
+    if (!text || busy) return;
+    busy = true;
+    input.value = '';
+    input.style.height = 'auto';
+
+    addMsg(text, 'user');
+    history.push({ role: 'user', content: text });
+    showTyping();
+
+    try {
+      const res = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: history, system: SYSTEM })
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error?.message || `HTTP ${res.status}`);
+      }
+
+      const data = await res.json();
+      const reply = data.content?.[0]?.text || 'Sorry, I didn\'t catch that.';
+      history.push({ role: 'assistant', content: reply });
+      hideTyping();
+      addMsg(reply, 'bot');
+    } catch (e) {
+      hideTyping();
+      addMsg('Sorry, something went wrong. Please try again or contact us directly.', 'bot');
+      console.error('[Raffinato Chat]', e);
+    }
+
+    busy = false;
+  }
+
+  send.addEventListener('click', handleSend);
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); }
+  });
+  input.addEventListener('input', () => {
+    input.style.height = 'auto';
+    input.style.height = Math.min(input.scrollHeight, 96) + 'px';
+  });
+})();
+</script>
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+</body>
+</html>

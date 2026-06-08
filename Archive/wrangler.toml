@@ -1,0 +1,15 @@
+name = "raffinato-chat"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+account_id = "720431745ded77de2e1126f48ae5d30f"
+
+routes = [
+  { pattern = "raffinatodesigns.com/api/*", zone_name = "raffinatodesigns.com" },
+  { pattern = "www.raffinatodesigns.com/api/*", zone_name = "raffinatodesigns.com" }
+]
+
+[vars]
+# Set CORS_ORIGIN and ANTHROPIC_API_KEY via `wrangler secret put`, not here.
+# CORS_ORIGIN is safe to set as a plain var:
+CORS_ORIGIN = "https://raffinatodesigns.com"

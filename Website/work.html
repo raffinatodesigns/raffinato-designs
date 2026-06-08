@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://www.raffinatodesigns.com/work.html">
+<title>Our Work | Raffinato Designs</title>
+<meta name="description" content="Browse websites built by Raffinato Designs. Premium, done-for-you web design for US small businesses. See what we can build for you.">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#050D1F">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@1,400;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap');
+
+:root {
+  --navy:        #050D1F;
+  --navy-mid:    #0A1628;
+  --electric:    #0EA5FF;
+  --chrome:      #C8D4E0;
+  --chalk:       #F0F4F8;
+  --glow:        rgba(14,165,255,0.15);
+  --dark-border: rgba(14,165,255,0.12);
+  --ease:        cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--navy); color: var(--chrome); font-family: 'Jost', sans-serif; overflow-x: hidden; animation: pageIn 0.35s var(--ease) both; }
+a { text-decoration: none; color: inherit; }
+
+@keyframes pageIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ── Cursor — mouse-only ── */
+@media (hover: hover) and (pointer: fine) {
+  body { cursor: none; }
+  #cursor-dot  { position:fixed; width:12px; height:12px; background:var(--electric); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); }
+  #cursor-ring { position:fixed; width:36px; height:36px; border:1.5px solid var(--electric); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); opacity:0.6; }
+}
+@media (hover: none), (pointer: coarse) {
+  body { cursor: auto; }
+  #cursor-dot, #cursor-ring { display: none !important; }
+}
+
+/* ── Nav ── */
+#nav { position:fixed; top:0; left:0; right:0; z-index:1000; display:flex; align-items:center; justify-content:space-between; padding:1.25rem 4%; transition:background 0.4s var(--ease),backdrop-filter 0.4s,box-shadow 0.4s; }
+#nav.scrolled { background:rgba(5,13,31,0.88); backdrop-filter:blur(18px); box-shadow:0 1px 0 var(--dark-border); }
+@keyframes logoGlow {
+  0%, 100% { filter: drop-shadow(0 0 6px rgba(14,165,255,0.4)); }
+  50%       { filter: drop-shadow(0 0 20px rgba(14,165,255,0.9)) drop-shadow(0 0 40px rgba(14,165,255,0.3)); }
+}
+.nav-logo { display:flex; align-items:center; gap:0.6rem; flex-shrink:0; }
+.nav-logo img {
+  height: 52px;
+  width: auto;
+  animation: logoGlow 3s ease-in-out infinite;
+  transition: transform 0.3s ease;
+}
+.nav-logo img:hover {
+  animation: logoGlow 0.8s ease-in-out infinite;
+  transform: scale(1.05);
+}
+.nav-links { display:flex; align-items:center; gap:2.5rem; list-style:none; position:absolute; left:50%; transform:translateX(-50%); }
+.nav-links a { font-family:'Jost',sans-serif; font-size:0.82rem; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:var(--chrome); transition:color 0.25s; position:relative; }
+.nav-links a::after { content:''; position:absolute; bottom:-3px; left:0; right:0; height:1px; background:var(--electric); transform:scaleX(0); transform-origin:left; transition:transform 0.3s var(--ease); }
+.nav-links a:hover { color:var(--chalk); }
+.nav-links a:hover::after, .nav-links a.active::after { transform:scaleX(1); }
+.nav-links a.active { color:var(--chalk); }
+.nav-cta { font-family:'Jost',sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:var(--electric); border:1px solid var(--electric); padding:0.55rem 1.4rem; border-radius:2px; transition:background 0.25s,color 0.25s; white-space:nowrap; }
+.nav-cta:hover { background:var(--electric); color:var(--navy); }
+.hamburger { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px; z-index:1001; }
+.hamburger span { display:block; width:26px; height:2px; background:var(--chalk); transition:transform 0.3s var(--ease),opacity 0.3s; }
+.hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity:0; }
+.hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+#mobile-menu { position:fixed; inset:0; background:rgba(5,13,31,0.97); backdrop-filter:blur(20px); z-index:999; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2.5rem; opacity:0; pointer-events:none; transition:opacity 0.35s var(--ease); }
+#mobile-menu.open { opacity:1; pointer-events:all; }
+#mobile-menu a { font-family:'Bebas Neue',sans-serif; font-size:3rem; color:var(--chalk); letter-spacing:0.08em; }
+#mobile-menu a:hover { color:var(--electric); }
+#mobile-menu .mobile-cta { font-family:'Jost',sans-serif; font-size:0.85rem; letter-spacing:0.14em; text-transform:uppercase; font-weight:600; color:var(--electric); border:1px solid var(--electric); padding:0.8rem 2.5rem; border-radius:2px; }
+
+/* ── Section utils ── */
+.section-label { font-family:'Jost',sans-serif; font-size:0.7rem; font-weight:500; letter-spacing:0.3em; text-transform:uppercase; color:var(--electric); margin-bottom:1.2rem; }
+.section-heading { font-family:'Bebas Neue',sans-serif; letter-spacing:0.03em; color:var(--chalk); line-height:0.95; }
+.rv  { opacity:0; transform:translateY(40px); transition:opacity 0.75s var(--ease),transform 0.75s var(--ease); }
+.rv.visible { opacity:1; transform:translateY(0); }
+
+/* ── Circuit BG ── */
+#workGrid { position:absolute; inset:0; z-index:0; pointer-events:none; }
+
+/* ── HERO ── */
+#hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  padding: 0 4%;
+}
+.hero-headline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 14vw, 16rem);
+  color: var(--chalk);
+  letter-spacing: 0.04em;
+  line-height: 0.9;
+  position: relative;
+  z-index: 2;
+}
+.hero-headline .char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(110%);
+  animation: charIn 0.55s var(--ease) forwards;
+}
+@keyframes charIn { to { opacity:1; transform:translateY(0); } }
+.hero-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+  color: var(--chrome);
+  margin-top: 1.5rem;
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  animation: fadeUp 0.7s var(--ease) 1s forwards;
+}
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+.hero-glow { position:absolute; inset:0; background:radial-gradient(ellipse 60% 60% at 50% 50%, rgba(14,165,255,0.07) 0%, transparent 70%); pointer-events:none; z-index:1; }
+
+/* ── FILTER TABS ── */
+#portfolio { padding: 5rem 4%; background: var(--navy); }
+.filter-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 3rem;
+}
+.filter-btn {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--chrome);
+  background: none;
+  border: 1px solid var(--dark-border);
+  padding: 0.55rem 1.2rem;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: border-color 0.25s, color 0.25s, background 0.25s;
+}
+.filter-btn:hover, .filter-btn.active {
+  border-color: var(--electric);
+  color: var(--electric);
+  background: var(--glow);
+}
+
+/* ── PORTFOLIO GRID ── */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 320px;
+  gap: 1.2rem;
+}
+.portfolio-grid .card:nth-child(1) { grid-row: span 2; }
+.portfolio-grid .card:nth-child(4) { grid-row: span 2; }
+
+.card {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--navy-mid);
+  border: 1px solid var(--dark-border);
+  opacity: 0;
+  transform: translateY(30px) scale(0.97);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease), box-shadow 0.35s;
+}
+.card.visible { opacity: 1; transform: translateY(0) scale(1); }
+.card:hover { box-shadow: 0 20px 60px rgba(14,165,255,0.14); }
+
+/* Abstract CSS preview */
+.card-preview {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.card-preview::before, .card-preview::after { content: ''; position: absolute; }
+
+/* Per-card unique geometric previews */
+.card:nth-child(1) .card-preview {
+  background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80');
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+.card:nth-child(1):hover .card-preview { transform: scale(1.04); }
+.card:nth-child(1) .card-preview::before { inset:0; background:rgba(5,13,31,0.32); border:none; }
+.card:nth-child(1) .card-preview::after  { display:none; }
+
+.card:nth-child(2) .card-preview {
+  background-image: url('https://images.unsplash.com/photo-1493552152660-f915ab47ae9d?auto=format&fit=crop&w=800&q=80');
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+.card:nth-child(2):hover .card-preview { transform: scale(1.04); }
+.card:nth-child(2) .card-preview::before { inset:0; background:rgba(5,13,31,0.38); border:none; }
+.card:nth-child(2) .card-preview::after  { display:none; }
+
+.card:nth-child(3) .card-preview {
+  background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80');
+  background-size: cover;
+  background-position: center 40%;
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+.card:nth-child(3):hover .card-preview { transform: scale(1.04); }
+.card:nth-child(3) .card-preview::before { inset:0; background:rgba(5,13,31,0.40); border:none; }
+.card:nth-child(3) .card-preview::after  { display:none; }
+
+.card:nth-child(4) .card-preview {
+  background-image: url('https://images.unsplash.com/photo-1517130038641-a774d04afb3c?auto=format&fit=crop&w=800&q=80');
+  background-size: cover;
+  background-position: center 25%;
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+.card:nth-child(4):hover .card-preview { transform: scale(1.04); }
+.card:nth-child(4) .card-preview::before { inset:0; background:rgba(5,13,31,0.44); border:none; }
+.card:nth-child(4) .card-preview::after  { display:none; }
+
+.card:nth-child(5) .card-preview {
+  background-image: url('https://images.unsplash.com/photo-1586444248902-2f64eddc13df?auto=format&fit=crop&w=800&q=80');
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+.card:nth-child(5):hover .card-preview { transform: scale(1.04); }
+.card:nth-child(5) .card-preview::before { inset:0; background:rgba(5,13,31,0.32); border:none; }
+.card:nth-child(5) .card-preview::after  { display:none; }
+
+.card:nth-child(6) .card-preview {
+  background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80');
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+.card:nth-child(6):hover .card-preview { transform: scale(1.04); }
+.card:nth-child(6) .card-preview::before { inset:0; background:rgba(5,13,31,0.35); border:none; }
+.card:nth-child(6) .card-preview::after  { display:none; }
+
+.card:nth-child(7) .card-preview {
+  background-image: url('https://images.unsplash.com/photo-1605296867304-46d5465a13f1?auto=format&fit=crop&w=800&q=80');
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+.card:nth-child(7):hover .card-preview { transform: scale(1.04); }
+.card:nth-child(7) .card-preview::before { inset:0; background:rgba(5,13,31,0.38); border:none; }
+.card:nth-child(7) .card-preview::after  { display:none; }
+
+.card:nth-child(8) .card-preview {
+  background-image: url('https://images.unsplash.com/photo-1543007630-9710e4a00a20?auto=format&fit=crop&w=800&q=80');
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+.card:nth-child(8):hover .card-preview { transform: scale(1.04); }
+.card:nth-child(8) .card-preview::before { inset:0; background:rgba(5,13,31,0.42); border:none; }
+.card:nth-child(8) .card-preview::after  { display:none; }
+
+.card:nth-child(9) .card-preview {
+  background-image: url('https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=800&q=80');
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+.card:nth-child(9):hover .card-preview { transform: scale(1.04); }
+.card:nth-child(9) .card-preview::before { inset:0; background:rgba(5,13,31,0.28); border:none; }
+.card:nth-child(9) .card-preview::after  { display:none; }
+
+
+/* Card overlay (slide up on hover) */
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(14,165,255,0.18);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 2rem;
+  transform: translateY(100%);
+  transition: transform 0.4s var(--ease);
+  backdrop-filter: blur(2px);
+}
+.card:hover .card-overlay { transform: translateY(0); }
+.card-tag {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--electric);
+  background: rgba(14,165,255,0.12);
+  border: 1px solid rgba(14,165,255,0.3);
+  padding: 0.2rem 0.6rem;
+  border-radius: 2px;
+  margin-bottom: 0.6rem;
+}
+.card-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem;
+  color: var(--chalk);
+  letter-spacing: 0.04em;
+  margin-bottom: 1rem;
+}
+.card-view {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--chalk);
+  border: 1px solid rgba(240,244,248,0.4);
+  padding: 0.5rem 1.2rem;
+  border-radius: 2px;
+  transition: background 0.2s, border-color 0.2s;
+}
+.card:hover .card-view { background: var(--chalk); color: var(--navy); border-color: var(--chalk); }
+
+/* Card info strip always visible */
+.card-info {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 1.2rem 1.5rem;
+  background: linear-gradient(to top, rgba(5,13,31,0.9) 0%, transparent 100%);
+  transition: opacity 0.3s;
+}
+.card:hover .card-info { opacity: 0; }
+.card-info-name { font-family:'Bebas Neue',sans-serif; font-size:1.2rem; color:var(--chalk); letter-spacing:0.06em; }
+.card-info-tag  { font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--chrome); opacity:0.6; margin-top:0.1rem; }
+
+/* Lightbox */
+#lightbox {
+  position: fixed; inset: 0; z-index: 9000;
+  background: rgba(5,13,31,0.96);
+  backdrop-filter: blur(16px);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.35s var(--ease);
+  padding: 2rem;
+}
+#lightbox.open { opacity: 1; pointer-events: all; }
+.lightbox-inner {
+  max-width: 800px; width: 100%;
+  background: var(--navy-mid);
+  border: 1px solid var(--dark-border);
+  padding: 3rem;
+  position: relative;
+}
+.lightbox-close {
+  position: absolute; top: 1.2rem; right: 1.2rem;
+  background: none; border: none; color: var(--chrome);
+  cursor: pointer; font-size: 1.5rem; line-height: 1;
+  transition: color 0.2s;
+}
+.lightbox-close:hover { color: var(--electric); }
+.lightbox-preview {
+  width: 100%; height: 240px;
+  background: var(--navy);
+  border: 1px solid var(--dark-border);
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+.lightbox-tag { font-family:'Jost',sans-serif; font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--electric); margin-bottom:0.5rem; }
+.lightbox-title { font-family:'Bebas Neue',sans-serif; font-size:2.5rem; color:var(--chalk); margin-bottom:1rem; letter-spacing:0.04em; }
+.lightbox-desc { font-size:0.95rem; color:var(--chrome); line-height:1.7; margin-bottom:2rem; }
+.lightbox-cta { display:inline-block; font-family:'Jost',sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:var(--navy); background:var(--electric); padding:0.8rem 2rem; border-radius:2px; transition:background 0.2s; }
+.lightbox-cta:hover { background:#3bbcff; }
+
+/* ── CAPABILITIES ── */
+#capabilities {
+  padding: 6rem 4%;
+  background: var(--navy-mid);
+}
+.cap-header { margin-bottom: 3rem; }
+.cap-header .section-heading { font-size: clamp(2.5rem, 5vw, 5rem); }
+.cap-scroll-wrap { overflow-x: auto; cursor: grab; user-select: none; padding-bottom: 1rem; }
+.cap-scroll-wrap:active { cursor: grabbing; }
+.cap-list {
+  display: flex;
+  gap: 0.8rem;
+  width: max-content;
+  padding: 0.5rem 0;
+}
+.cap-pill {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--chrome);
+  border: 1px solid var(--dark-border);
+  padding: 0.65rem 1.4rem;
+  border-radius: 40px;
+  white-space: nowrap;
+  transition: border-color 0.25s, color 0.25s, background 0.25s;
+  flex-shrink: 0;
+}
+.cap-pill:hover { border-color: var(--electric); color: var(--electric); background: var(--glow); }
+
+/* ── PROCESS CTA ── */
+#process-cta {
+  padding: 5rem 4%;
+  background: var(--navy);
+  text-align: center;
+  border-top: 1px solid var(--dark-border);
+}
+.process-cta-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(3rem,7vw,8rem); color:var(--chalk); letter-spacing:0.03em; margin-bottom:2rem; }
+.btn-filled { font-family:'Jost',sans-serif; font-size:0.82rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:var(--navy); background:var(--electric); padding:0.95rem 2.5rem; border-radius:2px; border:1px solid var(--electric); transition:background 0.25s,box-shadow 0.25s; display:inline-block; }
+.btn-filled:hover { background:#3bbcff; box-shadow:0 0 28px rgba(14,165,255,0.45); }
+
+/* ── FOOTER ── */
+#footer { background:var(--navy); border-top:1px solid var(--electric); padding:4rem 4% 2rem; }
+.footer-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:3rem; margin-bottom:3rem; padding-bottom:3rem; border-bottom:1px solid var(--dark-border); }
+.footer-tagline { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1rem; color:var(--chrome); margin-top:0.8rem; opacity:0.7; }
+.footer-nav h4, .footer-contact h4 { font-family:'Jost',sans-serif; font-size:0.7rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--electric); margin-bottom:1.2rem; font-weight:500; }
+.footer-nav ul { list-style:none; display:flex; flex-direction:column; gap:0.7rem; }
+.footer-nav a { font-size:0.9rem; color:var(--chrome); transition:color 0.2s; }
+.footer-nav a:hover { color:var(--chalk); }
+.footer-contact p { font-size:0.9rem; color:var(--chrome); margin-bottom:1rem; }
+.footer-socials { display:flex; gap:1rem; margin-top:0.5rem; }
+.footer-social { width:36px; height:36px; border:1px solid var(--dark-border); display:flex; align-items:center; justify-content:center; color:var(--chrome); transition:border-color 0.25s,color 0.25s; border-radius:2px; }
+.footer-social:hover { border-color:var(--electric); color:var(--electric); }
+.footer-bottom { display:flex; justify-content:space-between; align-items:center; }
+.footer-copy { font-size:0.72rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(200,212,224,0.35); }
+
+@media (max-width:768px) {
+  .nav-links { display:none; }
+  .hamburger { display:flex; }
+  .portfolio-grid { grid-template-columns:1fr; grid-auto-rows:260px; }
+  .portfolio-grid .card:nth-child(1), .portfolio-grid .card:nth-child(4) { grid-row:span 1; }
+  .footer-grid { grid-template-columns:1fr; gap:2rem; }
+  .footer-bottom { flex-direction:column; gap:1rem; text-align:center; }
+  #portfolio { padding: 4rem 5%; }
+  #capabilities { padding: 4rem 5%; }
+  #process-cta { padding: 4rem 5%; }
+  #hero { padding: 0 5%; }
+  .hero-sub { font-size: clamp(1rem, 2.5vw, 1.4rem); }
+  .lightbox-inner { padding: 1.5rem; }
+  .lightbox-preview { height: 160px; }
+  .cap-header .section-heading { font-size: clamp(2rem, 6vw, 4rem); }
+  .process-cta-title { font-size: clamp(2rem, 7vw, 6rem); }
+}
+@media (max-width:480px) {
+  .hero-headline { font-size: clamp(2.2rem, 10vw, 5rem); }
+  .filter-btn { padding: 0.5rem 0.8rem; font-size: 0.7rem; }
+  .portfolio-grid { grid-auto-rows: 220px; }
+  .card-overlay { padding: 1.2rem; }
+}
+@media (prefers-reduced-motion:reduce) {
+  *,*::before,*::after { animation-duration:0.01ms !important; transition-duration:0.01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<!-- ============================================================
+     NAV
+     ============================================================ -->
+<nav id="nav" role="navigation">
+  <a href="index.html" class="nav-logo" aria-label="Raffinato Designs Home">
+    <img src="logo2.png" alt="Raffinato Designs">
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="work.html" class="active">Our Work</a></li>
+    <li><a href="contact.html">Get Started</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:1.2rem;">
+    <a href="contact.html" class="nav-cta">Get Started</a>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div id="mobile-menu">
+  <a href="index.html">Home</a>
+  <a href="work.html">Our Work</a>
+  <a href="contact.html">Get Started</a>
+  <a href="contact.html" class="mobile-cta">Build My Website →</a>
+</div>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section id="hero" aria-labelledby="work-heading">
+  <canvas id="workGrid" aria-hidden="true"></canvas>
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div style="position:relative;z-index:2;text-align:center;">
+    <h1 class="hero-headline" id="work-heading" aria-label="Our Work">
+      <span id="hero-word"></span>
+    </h1>
+    <p class="hero-sub">Every site we build is a statement.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     PORTFOLIO GRID
+     ============================================================ -->
+<section id="portfolio" aria-labelledby="portfolio-heading">
+  <div class="rv" style="margin-bottom:1rem;">
+    <p class="section-label">Selected Projects</p>
+    <h2 class="section-heading" id="portfolio-heading" style="font-size:clamp(2.5rem,5vw,5rem);margin-bottom:2.5rem;">The Work</h2>
+  </div>
+  <div class="filter-tabs" role="tablist" aria-label="Filter by industry">
+    <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All</button>
+    <button class="filter-btn" data-filter="restaurant" role="tab" aria-selected="false">Restaurant</button>
+    <button class="filter-btn" data-filter="retail" role="tab" aria-selected="false">Retail</button>
+    <button class="filter-btn" data-filter="professional" role="tab" aria-selected="false">Professional Services</button>
+    <button class="filter-btn" data-filter="fitness" role="tab" aria-selected="false">Fitness</button>
+    <button class="filter-btn" data-filter="wellness" role="tab" aria-selected="false">Beauty &amp; Wellness</button>
+  </div>
+  <div class="portfolio-grid" id="portfolio-grid">
+    <div class="card" data-category="restaurant" data-name="Ember & Oak" data-desc="An editorial, cinematic website concept for a Chicago fine-dining restaurant. Open-fire cuisine, seasonal menus, gallery lightbox, and private events booking." data-url="/work/ember-and-oak/" tabindex="0" role="article" aria-label="Ember &amp; Oak - view live demo">
+      <div class="card-preview" aria-hidden="true"></div>
+      <div class="card-info"><p class="card-info-name">Ember &amp; Oak</p><p class="card-info-tag">Restaurant</p></div>
+      <div class="card-overlay">
+        <span class="card-tag">Restaurant</span>
+        <p class="card-name">Ember &amp; Oak</p>
+        <span class="card-view">View Live Demo →</span>
+      </div>
+    </div>
+    <div class="card" data-category="retail" data-name="Hearth &amp; Hollow" data-desc="A warm, earthy e-commerce concept for a Kentucky home goods brand, built to turn browsers into buyers." data-url="/work/hearth-and-hollow/" tabindex="0" role="article" aria-label="Hearth &amp; Hollow - view live demo">
+      <div class="card-preview" aria-hidden="true"></div>
+      <div class="card-info"><p class="card-info-name">Hearth &amp; Hollow</p><p class="card-info-tag">Retail</p></div>
+      <div class="card-overlay">
+        <span class="card-tag">Retail</span>
+        <p class="card-name">Hearth &amp; Hollow</p>
+        <span class="card-view">View Live Demo →</span>
+      </div>
+    </div>
+    <div class="card" data-category="professional" data-name="Meridian Law" data-desc="A polished, trust-driven website concept for a Chicago law firm, designed to convey authority and convert consultations." data-url="/work/meridian-law/" tabindex="0" role="article" aria-label="Meridian Law - view live demo">
+      <div class="card-preview" aria-hidden="true"></div>
+      <div class="card-info"><p class="card-info-name">Meridian Law</p><p class="card-info-tag">Professional Services</p></div>
+      <div class="card-overlay">
+        <span class="card-tag">Professional Services</span>
+        <p class="card-name">Meridian Law</p>
+        <span class="card-view">View Live Demo →</span>
+      </div>
+    </div>
+    <div class="card" data-category="fitness" data-name="Iron District" data-desc="A raw, industrial website concept for a hardcore NYC strength gym. A deliberate contrast to our Knoxville fitness build, showing range within a single industry." data-url="/work/iron-district/" tabindex="0" role="article" aria-label="Iron District - view live demo">
+      <div class="card-preview" aria-hidden="true"></div>
+      <div class="card-info"><p class="card-info-name">Iron District</p><p class="card-info-tag">Gym &amp; Fitness</p></div>
+      <div class="card-overlay">
+        <span class="card-tag">Gym &amp; Fitness</span>
+        <p class="card-name">Iron District</p>
+        <span class="card-view">View Live Demo →</span>
+      </div>
+    </div>
+    <div class="card" data-category="restaurant" data-name="Solano Bakery" data-desc="A warm, inviting website concept for a Knoxville artisan bakery, designed to bring the neighborhood through the door." data-url="/work/solano-bakery/" tabindex="0" role="article" aria-label="Solano Bakery - view live demo">
+      <div class="card-preview" aria-hidden="true"></div>
+      <div class="card-info"><p class="card-info-name">Solano Bakery</p><p class="card-info-tag">Restaurant</p></div>
+      <div class="card-overlay">
+        <span class="card-tag">Restaurant</span>
+        <p class="card-name">Solano Bakery</p>
+        <span class="card-view">View Live Demo →</span>
+      </div>
+    </div>
+    <div class="card" data-category="professional" data-name="Crest Financial" data-desc="A modern, trust-driven website concept for a Maryland financial advisory firm, designed to turn visitors into consultations." data-url="/work/crest-financial/" tabindex="0" role="article" aria-label="Crest Financial - view live demo">
+      <div class="card-preview" aria-hidden="true"></div>
+      <div class="card-info"><p class="card-info-name">Crest Financial</p><p class="card-info-tag">Professional Services</p></div>
+      <div class="card-overlay">
+        <span class="card-tag">Professional Services</span>
+        <p class="card-name">Crest Financial</p>
+        <span class="card-view">View Live Demo →</span>
+      </div>
+    </div>
+    <div class="card" data-category="fitness" data-name="Summit Strength Co." data-desc="A bold, high-energy website concept for a Knoxville strength and fitness gym, built to drive memberships and showcase their programs and coaching staff." data-url="/work/summit-strength/" tabindex="0" role="article" aria-label="Summit Strength Co. - view live demo">
+      <div class="card-preview" aria-hidden="true"></div>
+      <div class="card-info"><p class="card-info-name">Summit Strength Co.</p><p class="card-info-tag">Gym &amp; Fitness</p></div>
+      <div class="card-overlay">
+        <span class="card-tag">Gym &amp; Fitness</span>
+        <p class="card-name">Summit Strength Co.</p>
+        <span class="card-view">View Live Demo →</span>
+      </div>
+    </div>
+    <div class="card" data-category="restaurant" data-name="The Bellwether" data-desc="A dark, moody website concept for a Nashville craft cocktail bar. Seasonal drink menus, a weekly events schedule, and a reservation CTA built to fill tables." data-url="/work/the-bellwether/" tabindex="0" role="article" aria-label="The Bellwether - view live demo">
+      <div class="card-preview" aria-hidden="true"></div>
+      <div class="card-info"><p class="card-info-name">The Bellwether</p><p class="card-info-tag">Bar &amp; Hospitality</p></div>
+      <div class="card-overlay">
+        <span class="card-tag">Bar &amp; Hospitality</span>
+        <p class="card-name">The Bellwether</p>
+        <span class="card-view">View Live Demo →</span>
+      </div>
+    </div>
+    <div class="card" data-category="wellness" data-name="Lumiere Aesthetics" data-desc="An elegant, luxurious website concept for a Chicago med-spa, designed to turn visitors into booked consultations." data-url="/work/lumiere-aesthetics/" tabindex="0" role="article" aria-label="Lumiere Aesthetics - view live demo">
+      <div class="card-preview" aria-hidden="true"></div>
+      <div class="card-info"><p class="card-info-name">Lumiere Aesthetics</p><p class="card-info-tag">Beauty &amp; Wellness</p></div>
+      <div class="card-overlay">
+        <span class="card-tag">Beauty &amp; Wellness</span>
+        <p class="card-name">Lumiere Aesthetics</p>
+        <span class="card-view">View Live Demo →</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Project details">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close">✕</button>
+    <div class="lightbox-preview" id="lightbox-preview" aria-hidden="true"></div>
+    <p class="lightbox-tag" id="lightbox-tag"></p>
+    <h3 class="lightbox-title" id="lightbox-title"></h3>
+    <p class="lightbox-desc" id="lightbox-desc"></p>
+    <a href="contact.html" class="lightbox-cta">Start a Similar Project →</a>
+  </div>
+</div>
+
+<!-- ============================================================
+     CAPABILITIES
+     ============================================================ -->
+<section id="capabilities" aria-labelledby="cap-heading">
+  <div class="cap-header rv">
+    <p class="section-label">Our Stack</p>
+    <h2 class="section-heading" id="cap-heading">What We're Capable Of</h2>
+  </div>
+  <div class="cap-scroll-wrap" id="cap-scroll" role="list" aria-label="Capabilities">
+    <div class="cap-list">
+      <span class="cap-pill" role="listitem">Custom Design</span>
+      <span class="cap-pill" role="listitem">SEO Optimization</span>
+      <span class="cap-pill" role="listitem">Mobile First</span>
+      <span class="cap-pill" role="listitem">Fast Loading</span>
+      <span class="cap-pill" role="listitem">E-Commerce</span>
+      <span class="cap-pill" role="listitem">Booking Systems</span>
+      <span class="cap-pill" role="listitem">Analytics</span>
+      <span class="cap-pill" role="listitem">Hosting</span>
+      <span class="cap-pill" role="listitem">Security</span>
+      <span class="cap-pill" role="listitem">Ongoing Support</span>
+      <span class="cap-pill" role="listitem">ADA Compliance</span>
+      <span class="cap-pill" role="listitem">CRM Integration</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PROCESS CTA
+     ============================================================ -->
+<section id="process-cta" aria-labelledby="cta-heading">
+  <p class="section-label rv" style="margin-bottom:1rem;text-align:center;">Next Step</p>
+  <h2 class="process-cta-title rv" id="cta-heading">Ready To Join Them?</h2>
+  <a href="contact.html" class="btn-filled rv">Start Your Project →</a>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer id="footer" role="contentinfo">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="nav-logo" style="margin-bottom:0.8rem;" aria-label="Raffinato Designs">
+        <img src="logo2.png" alt="Raffinato Designs">
+      </a>
+      <p class="footer-tagline">Premium web design for ambitious businesses.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="work.html">Our Work</a></li>
+        <li><a href="contact.html">Get Started</a></li>
+        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="terms-of-service.html">Terms of Service</a></li>
+      </ul>
+    </nav>
+    <div class="footer-contact">
+      <h4>Connect</h4>
+      <p><a href="mailto:designs@raffinatodesigns.com">designs@raffinatodesigns.com</a></p>
+      <div class="footer-socials">
+        <a href="https://www.instagram.com/raffinato_designs" target="_blank" rel="noopener noreferrer" class="footer-social" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg></a>
+        <a href="https://www.facebook.com/profile.php?id=61569265648588" class="footer-social" aria-label="Raffinato Designs on Facebook" target="_blank" rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></svg></a>
+        <a href="https://x.com/Raffinatodesig" target="_blank" rel="noopener noreferrer" class="footer-social" aria-label="Twitter / X"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© <span id="copyright-year"></span> Raffinato Designs</p>
+    <p class="footer-copy" style="opacity:0.2;">Crafted with precision in the United States</p>
+  </div>
+</footer>
+
+<script>
+document.getElementById('copyright-year').textContent = new Date().getFullYear();
+// Cursor — mouse-only
+if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  const dot = document.getElementById('cursor-dot');
+  const ring = document.getElementById('cursor-ring');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+  (function lerp(){ rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12; dot.style.left=mx+'px'; dot.style.top=my+'px'; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(lerp); })();
+}
+
+// Nav
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 60), {passive:true});
+
+// Hamburger
+const hb = document.getElementById('hamburger');
+const mm = document.getElementById('mobile-menu');
+hb.addEventListener('click', () => {
+  const open = hb.classList.toggle('open');
+  hb.setAttribute('aria-expanded', open);
+  mm.classList.toggle('open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+});
+mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  hb.classList.remove('open'); mm.classList.remove('open'); document.body.style.overflow='';
+}));
+
+// Hero letter animation
+(function(){
+  const el = document.getElementById('hero-word');
+  const text = 'OUR WORK';
+  text.split('').forEach((ch, i) => {
+    const s = document.createElement('span');
+    s.className = 'char';
+    s.textContent = ch === ' ' ? ' ' : ch;
+    s.style.animationDelay = (0.3 + i * 0.06) + 's';
+    el.appendChild(s);
+  });
+})();
+
+// Scroll reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, {threshold:0.1});
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+// Card stagger reveal
+const cardObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(!e.isIntersecting) return;
+    const cards = document.querySelectorAll('.card');
+    cards.forEach((c,i) => setTimeout(() => c.classList.add('visible'), i*90));
+    cardObs.disconnect();
+  });
+}, {threshold:0.05});
+const grid = document.getElementById('portfolio-grid');
+if(grid) cardObs.observe(grid);
+
+// Filter
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', function(){
+    document.querySelectorAll('.filter-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+    this.classList.add('active'); this.setAttribute('aria-selected','true');
+    const f = this.dataset.filter;
+    document.querySelectorAll('.card').forEach(c => {
+      const show = f === 'all' || c.dataset.category === f;
+      c.style.display = show ? '' : 'none';
+    });
+  });
+});
+
+// Lightbox
+const lb = document.getElementById('lightbox');
+document.querySelectorAll('.card').forEach(card => {
+  function open(){
+    if (card.dataset.url) {
+      window.open(card.dataset.url, '_blank', 'noopener,noreferrer');
+      return;
+    }
+    document.getElementById('lightbox-tag').textContent   = card.querySelector('.card-tag')?.textContent || '';
+    document.getElementById('lightbox-title').textContent = card.dataset.name;
+    document.getElementById('lightbox-desc').textContent  = card.dataset.desc;
+    const prev = document.getElementById('lightbox-preview');
+    prev.style.background = getComputedStyle(card.querySelector('.card-preview')).background;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('lightbox-close').focus();
+  }
+  card.addEventListener('click', open);
+  card.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open(); } });
+});
+document.getElementById('lightbox-close').addEventListener('click', () => { lb.classList.remove('open'); document.body.style.overflow=''; });
+lb.addEventListener('click', e => { if(e.target===lb){ lb.classList.remove('open'); document.body.style.overflow=''; } });
+document.addEventListener('keydown', e => { if(e.key==='Escape'){ lb.classList.remove('open'); document.body.style.overflow=''; } });
+
+// Drag-to-scroll capabilities
+(function(){
+  const wrap = document.getElementById('cap-scroll');
+  let isDown=false, startX, scrollLeft;
+  wrap.addEventListener('mousedown', e=>{ isDown=true; startX=e.pageX-wrap.offsetLeft; scrollLeft=wrap.scrollLeft; });
+  wrap.addEventListener('mouseleave',()=>isDown=false);
+  wrap.addEventListener('mouseup',()=>isDown=false);
+  wrap.addEventListener('mousemove', e=>{ if(!isDown)return; e.preventDefault(); const x=e.pageX-wrap.offsetLeft; wrap.scrollLeft=scrollLeft-(x-startX)*1.5; });
+})();
+
+// Page transitions
+document.querySelectorAll('a[href]').forEach(a => {
+  if(a.href.includes('#')) return;
+  a.addEventListener('click', function(e){
+    const href = this.getAttribute('href');
+    if(!href||href.startsWith('http')||href.startsWith('mailto')) return;
+    e.preventDefault();
+    document.body.style.transition='opacity 0.3s ease';
+    document.body.style.opacity='0';
+    setTimeout(()=>window.location.href=href, 310);
+  });
+});
+</script>
+<script>
+(function workGridCanvas() {
+  if (window.innerWidth < 768) return;
+  const hero   = document.getElementById('hero');
+  const canvas = document.getElementById('workGrid');
+  const ctx    = canvas.getContext('2d');
+  const CELL        = 60;
+  const MAX_DEPTH   = 16;
+  const INFLUENCE_R = 240;
+  const PERSPECTIVE = 800;
+  const DEFORM_RAD  = 5;
+
+  let cols = 0, rows = 0;
+  let cells = [];
+  let mouseCol = -1, mouseRow = -1;
+  let isOver    = false;
+  let realCX    = 0, realCY = 0;
+  let drawCX    = 0, drawCY = 0;
+  let deformStr = 0;
+
+  function idx(c, r)   { return r * cols + c; }
+  function valid(c, r) { return c >= 0 && r >= 0 && c < cols && r < rows; }
+
+  function resize() {
+    const rect    = hero.getBoundingClientRect();
+    canvas.width  = rect.width;
+    canvas.height = rect.height;
+    cols  = Math.ceil(rect.width  / CELL) + 1;
+    rows  = Math.ceil(rect.height / CELL) + 1;
+    cells = new Float32Array(cols * rows);
+  }
+
+  function displace(cx, cy, refCx, refCy) {
+    const dx   = cx - drawCX;
+    const dy   = cy - drawCY;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist > INFLUENCE_R || dist < 0.5) return [cx, cy];
+    const str    = (1 - dist / INFLUENCE_R) ** 2;
+    const pushX  = (dx / dist) * str * MAX_DEPTH * 0.4;
+    const pushY  = (dy / dist) * str * MAX_DEPTH * 0.4;
+    const pushZ  = str * MAX_DEPTH;
+    const scale  = PERSPECTIVE / (PERSPECTIVE + pushZ);
+    const finalX = cx + (cx - refCx) * (scale - 1) + pushX * (1 - scale);
+    const finalY = cy + (cy - refCy) * (scale - 1) + pushY * (1 - scale);
+    return [cx + (finalX - cx) * deformStr, cy + (finalY - cy) * deformStr];
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    drawCX += (realCX - drawCX) * 0.12;
+    drawCY += (realCY - drawCY) * 0.12;
+    if (isOver) deformStr = Math.min(1, deformStr + 0.08);
+    else        deformStr = Math.max(0, deformStr - 0.04);
+
+    const effCol = Math.floor(drawCX / CELL);
+    const effRow = Math.floor(drawCY / CELL);
+
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        const i = idx(c, r);
+
+        let target = 0;
+        if (isOver && mouseCol >= 0) {
+          const d = Math.max(Math.abs(c - mouseCol), Math.abs(r - mouseRow));
+          if      (d === 0) target = 1.00;
+          else if (d === 1) target = 0.45;
+          else if (d === 2) target = 0.18;
+        }
+        const cur = cells[i];
+        if (cur < target) cells[i] = Math.min(target, cur + 0.15);
+        else if (cur > target) cells[i] = Math.max(0, cur - 0.04);
+
+        const t     = cells[i];
+        const x     = c * CELL;
+        const y     = r * CELL;
+        const refCx = x + CELL / 2;
+        const refCy = y + CELL / 2;
+
+        const inRange = deformStr > 0.001 &&
+          Math.abs(c - effCol) <= DEFORM_RAD &&
+          Math.abs(r - effRow) <= DEFORM_RAD;
+
+        const [x0, y0] = inRange ? displace(x,        y,        refCx, refCy) : [x,        y       ];
+        const [x1, y1] = inRange ? displace(x + CELL, y,        refCx, refCy) : [x + CELL, y       ];
+        const [x2, y2] = inRange ? displace(x + CELL, y + CELL, refCx, refCy) : [x + CELL, y + CELL];
+        const [x3, y3] = inRange ? displace(x,        y + CELL, refCx, refCy) : [x,        y + CELL];
+
+        ctx.beginPath();
+        ctx.moveTo(x0, y0); ctx.lineTo(x1, y1);
+        ctx.lineTo(x2, y2); ctx.lineTo(x3, y3);
+        ctx.closePath();
+
+        if (t > 0.005) {
+          ctx.fillStyle = `rgba(14,165,255,${(t * 0.18).toFixed(4)})`;
+          ctx.fill();
+          const grad = ctx.createRadialGradient(refCx, refCy, 0, refCx, refCy, CELL * 0.75);
+          grad.addColorStop(0, `rgba(14,165,255,${(t * 0.12).toFixed(4)})`);
+          grad.addColorStop(1, 'rgba(14,165,255,0)');
+          ctx.fillStyle = grad;
+          ctx.fill();
+        }
+
+        ctx.strokeStyle = `rgba(14,165,255,${(0.08 + t * 0.52).toFixed(4)})`;
+        ctx.lineWidth   = 0.5;
+        ctx.stroke();
+      }
+    }
+
+    for (let r = 0; r <= rows; r++) {
+      for (let c = 0; c <= cols; c++) {
+        const x = c * CELL;
+        const y = r * CELL;
+
+        const inRange = deformStr > 0.001 &&
+          Math.abs(c - effCol) <= DEFORM_RAD &&
+          Math.abs(r - effRow) <= DEFORM_RAD;
+
+        const [dx, dy] = inRange
+          ? displace(x, y, (c + 0.5) * CELL, (r + 0.5) * CELL)
+          : [x, y];
+
+        let tSum = 0, tCount = 0;
+        for (let dr = -1; dr <= 0; dr++)
+          for (let dc = -1; dc <= 0; dc++)
+            if (valid(c + dc, r + dr)) { tSum += cells[idx(c + dc, r + dr)]; tCount++; }
+        const tAvg = tCount > 0 ? tSum / tCount : 0;
+
+        ctx.beginPath();
+        ctx.arc(dx, dy, 1.5, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(14,165,255,${(0.15 + tAvg * 0.65).toFixed(4)})`;
+        ctx.fill();
+      }
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  hero.addEventListener('mousemove', (e) => {
+    const rect = hero.getBoundingClientRect();
+    realCX   = e.clientX - rect.left;
+    realCY   = e.clientY - rect.top;
+    mouseCol = Math.floor(realCX / CELL);
+    mouseRow = Math.floor(realCY / CELL);
+    isOver   = true;
+  });
+
+  hero.addEventListener('mouseleave', () => {
+    isOver   = false;
+    mouseCol = -1;
+    mouseRow = -1;
+  });
+
+  resize();
+  window.addEventListener('resize', resize);
+  requestAnimationFrame(draw);
+})();
+</script>
+
+<!-- ═══════════════════════════ AI CHAT WIDGET ═══════════════════════════ -->
+<style>
+  #chat-btn {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 9000;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #0ea5ff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 24px rgba(14,165,255,0.45);
+    animation: chatPulse 3s ease-in-out infinite;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  #chat-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 32px rgba(14,165,255,0.65);
+    animation: none;
+  }
+  #chat-btn svg { width: 26px; height: 26px; fill: #fff; }
+  @keyframes chatPulse {
+    0%, 100% { box-shadow: 0 4px 24px rgba(14,165,255,0.45); }
+    50%       { box-shadow: 0 4px 40px rgba(14,165,255,0.8), 0 0 0 8px rgba(14,165,255,0.12); }
+  }
+
+  #chat-window {
+    position: fixed;
+    bottom: 100px;
+    right: 28px;
+    z-index: 9000;
+    width: 380px;
+    height: 520px;
+    background: #0d0d0d;
+    border: 1px solid rgba(14,165,255,0.25);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 16px 64px rgba(0,0,0,0.7), 0 0 0 1px rgba(14,165,255,0.08);
+    transform: translateY(20px) scale(0.96);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.25s cubic-bezier(0.16,1,0.3,1), opacity 0.25s ease;
+  }
+  #chat-window.chat-open {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  #chat-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 18px;
+    background: #111;
+    border-bottom: 1px solid rgba(14,165,255,0.15);
+    flex-shrink: 0;
+  }
+  #chat-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+    flex-shrink: 0;
+    box-shadow: 0 0 6px rgba(34,197,94,0.6);
+  }
+  #chat-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.15rem;
+    letter-spacing: 0.08em;
+    color: #f0f0f0;
+    flex: 1;
+  }
+  #chat-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgba(255,255,255,0.4);
+    font-size: 1.4rem;
+    line-height: 1;
+    padding: 2px 4px;
+    transition: color 0.15s;
+  }
+  #chat-close:hover { color: #fff; }
+
+  #chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(14,165,255,0.3) transparent;
+  }
+  #chat-messages::-webkit-scrollbar { width: 4px; }
+  #chat-messages::-webkit-scrollbar-track { background: transparent; }
+  #chat-messages::-webkit-scrollbar-thumb { background: rgba(14,165,255,0.3); border-radius: 2px; }
+
+  .chat-msg {
+    max-width: 88%;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-family: 'Inter', 'DM Sans', sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    word-break: break-word;
+  }
+  .chat-msg.bot {
+    background: rgba(14,165,255,0.1);
+    border: 1px solid rgba(14,165,255,0.2);
+    color: #d0e8ff;
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+  }
+  .chat-msg.user {
+    background: #0ea5ff;
+    color: #fff;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+  }
+
+  #chat-typing {
+    display: none;
+    align-self: flex-start;
+    gap: 5px;
+    padding: 10px 14px;
+    background: rgba(14,165,255,0.08);
+    border: 1px solid rgba(14,165,255,0.15);
+    border-radius: 12px;
+    border-bottom-left-radius: 4px;
+  }
+  #chat-typing span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(14,165,255,0.7);
+    display: inline-block;
+    animation: typingDot 1.2s ease-in-out infinite;
+  }
+  #chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+  #chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes typingDot {
+    0%, 80%, 100% { transform: scale(0.7); opacity: 0.4; }
+    40%           { transform: scale(1);   opacity: 1;   }
+  }
+
+  #chat-input-area {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 14px;
+    border-top: 1px solid rgba(14,165,255,0.15);
+    background: #111;
+    flex-shrink: 0;
+  }
+  #chat-input {
+    flex: 1;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(14,165,255,0.2);
+    border-radius: 8px;
+    padding: 9px 12px;
+    color: #f0f0f0;
+    font-family: 'Inter', 'DM Sans', sans-serif;
+    font-size: 0.875rem;
+    outline: none;
+    transition: border-color 0.15s;
+    resize: none;
+  }
+  #chat-input:focus { border-color: rgba(14,165,255,0.5); }
+  #chat-input::placeholder { color: rgba(255,255,255,0.3); }
+  #chat-send {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    background: #0ea5ff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.15s, transform 0.1s;
+  }
+  #chat-send:hover { background: #38beff; }
+  #chat-send:active { transform: scale(0.93); }
+  #chat-send svg { width: 16px; height: 16px; fill: #fff; }
+
+  @media (max-width: 480px) {
+    #chat-window { width: calc(100vw - 24px); right: 12px; bottom: 88px; }
+    #chat-btn { right: 16px; bottom: 20px; }
+    #chat-input { font-size: 16px; }
+  }
+</style>
+
+<button id="chat-btn" aria-label="Chat with Raffinato AI">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/></svg>
+</button>
+
+<div id="chat-window" role="dialog" aria-label="Raffinato AI Chat">
+  <div id="chat-header">
+    <div id="chat-status-dot"></div>
+    <div id="chat-title">Raffinato AI</div>
+    <button id="chat-close" aria-label="Close chat">×</button>
+  </div>
+  <div id="chat-messages">
+    <div class="chat-msg bot">Hey! I'm the Raffinato AI assistant. Ask me anything about our web design packages, process, or pricing.</div>
+    <div id="chat-typing"><span></span><span></span><span></span></div>
+  </div>
+  <div id="chat-input-area">
+    <textarea id="chat-input" rows="1" placeholder="Ask anything…" aria-label="Chat input"></textarea>
+    <button id="chat-send" aria-label="Send message">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+(function raffinatoChat() {
+  const API_URL = '/api/chat';
+  const SYSTEM = `You are the AI assistant for Raffinato Designs, a premium web design agency serving US small businesses. Be concise, warm, and professional. Only discuss topics relevant to web design, our services, and helping potential clients. If a visitor asks about anything off-topic, gently steer back to how we can help their business.
+
+Core positioning:
+- Done-for-you websites. Clients do not need any technical knowledge. We handle design, build, hosting, and launch. They just share their vision; we deliver a finished site.
+- We build conversion-focused sites for ambitious US small business owners.
+
+Our packages (all prices in USD, setup fee + monthly that covers hosting and upkeep):
+
+1) BASIC: "Starter Presence"
+   - $199 setup + $19.99/month
+   - Custom design flawless on every device, contact form that sends leads to your inbox, fast secure hosting fully managed by us
+
+2) PRO: "Growth Engine" (most popular)
+   - $499 setup + $49.99/month
+   - Everything in Basic, plus: accept payments directly on your site, SEO setup so customers find you on Google, automated email follow-up that works leads around the clock, AI assistant answering questions instantly day or night
+
+3) PREMIUM: "Total Domination"
+   - $999 setup + $99.99/month
+   - Everything in Pro, plus: priority support when you need a hand, advanced analytics on customer behavior, website heatmaps
+
+4) WEBSITE REMODEL: for businesses that already have a site
+   - Custom quote (the price depends on the existing site)
+   - Full redesign, content migration, speed optimization, SEO audit + fixes
+   - Encourage these visitors to use the contact form for a quote
+
+Process: (1) Client shares their vision via the contact form, (2) we design it, (3) client reviews and gives feedback, (4) we launch it.
+
+Turnaround: Most sites delivered in under a week. We move fast without cutting corners.
+
+Contact: Visitors can fill out the contact form on the Get Started page, or email designs@raffinatodesigns.com. We respond within 24 hours.
+
+Rules:
+- Always quote prices in US dollars exactly as listed above. Never invent prices or discounts.
+- For Remodel quotes or anything custom, direct visitors to the contact form.
+- Keep replies under 120 words unless the question genuinely needs more detail.
+- Never mention competitors by name or compare pricing to other agencies.`;
+
+  const btn     = document.getElementById('chat-btn');
+  const win     = document.getElementById('chat-window');
+  const closeBtn= document.getElementById('chat-close');
+  const msgs    = document.getElementById('chat-messages');
+  const typing  = document.getElementById('chat-typing');
+  const input   = document.getElementById('chat-input');
+  const send    = document.getElementById('chat-send');
+
+  let history = [];
+  let busy = false;
+
+  btn.addEventListener('click', () => {
+    const open = win.classList.toggle('chat-open');
+    if (open) { input.focus(); scrollBottom(); }
+  });
+  closeBtn.addEventListener('click', () => win.classList.remove('chat-open'));
+
+  function scrollBottom() {
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function addMsg(text, role) {
+    const el = document.createElement('div');
+    el.className = 'chat-msg ' + role;
+    el.textContent = text;
+    msgs.insertBefore(el, typing);
+    scrollBottom();
+    return el;
+  }
+
+  function showTyping() {
+    typing.style.display = 'flex';
+    msgs.appendChild(typing);
+    scrollBottom();
+  }
+
+  function hideTyping() {
+    typing.style.display = 'none';
+  }
+
+  async function handleSend() {
+    const text = input.value.trim();
+    if (!text || busy) return;
+    busy = true;
+    input.value = '';
+    input.style.height = 'auto';
+
+    addMsg(text, 'user');
+    history.push({ role: 'user', content: text });
+    showTyping();
+
+    try {
+      const res = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: history, system: SYSTEM })
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error?.message || `HTTP ${res.status}`);
+      }
+
+      const data = await res.json();
+      const reply = data.content?.[0]?.text || 'Sorry, I didn\'t catch that.';
+      history.push({ role: 'assistant', content: reply });
+      hideTyping();
+      addMsg(reply, 'bot');
+    } catch (e) {
+      hideTyping();
+      addMsg('Sorry, something went wrong. Please try again or contact us directly.', 'bot');
+      console.error('[Raffinato Chat]', e);
+    }
+
+    busy = false;
+  }
+
+  send.addEventListener('click', handleSend);
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); }
+  });
+  input.addEventListener('input', () => {
+    input.style.height = 'auto';
+    input.style.height = Math.min(input.scrollHeight, 96) + 'px';
+  });
+})();
+</script>
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+</body>
+</html>

@@ -26,14 +26,36 @@ git commit -m "describe the change"
 git push
 ```
 
-Test on the live site after deploy. Hosted on **Vercel**, DNS at **GoDaddy**. NOT using Cloudflare — do not reintroduce it.
+Test on the live site after deploy. Hosted on **Vercel** (Root Directory: `Website`), DNS at **GoDaddy**. NOT using Cloudflare — do not reintroduce it.
+
+## Repo Structure
+All website code lives in the `Website/` subfolder. Vercel is configured to deploy from `Website/` as root.
+
+```
+raffinato-designs/
+├── Archive/        ← deprecated Cloudflare files (do not use)
+├── Brand Assets/   ← logos, hero video
+├── clients/        ← client assets (taylor-hvac, etc.)
+├── Finance/        ← budget/invoicing docs
+├── Operations/     ← ops docs
+├── Sales/          ← sales docs
+├── Website/        ← ALL website code (Vercel deploys from here)
+│   ├── api/
+│   ├── work/
+│   ├── index.html
+│   ├── work.html
+│   ├── contact.html
+│   └── vercel.json
+├── CLAUDE.md
+└── README.md
+```
 
 ## Tech Stack
 - Static HTML/CSS/JS, no framework, no bundler
-- Three main pages: `index.html`, `work.html`, `contact.html`
-- API backend: Vercel Serverless Functions in `/api/`
-  - `/api/chat.js` — Anthropic proxy for the AI chat widget. Uses `ANTHROPIC_API_KEY`. Model: `claude-sonnet-4-20250514`. Rate limited: 10 req/min per IP.
-  - `/api/contact.js` — Contact form handler via Resend. Uses `RESEND_API_KEY`. Rate limited: 3 req per 10 min per IP. Has honeypot field (`_gotcha`).
+- Three main pages: `Website/index.html`, `Website/work.html`, `Website/contact.html`
+- API backend: Vercel Serverless Functions in `Website/api/`
+  - `Website/api/chat.js` — Anthropic proxy for the AI chat widget. Uses `ANTHROPIC_API_KEY`. Model: `claude-sonnet-4-20250514`. Rate limited: 10 req/min per IP.
+  - `Website/api/contact.js` — Contact form handler via Resend. Uses `RESEND_API_KEY`. Rate limited: 3 req per 10 min per IP. Has honeypot field (`_gotcha`).
 - Env vars set in Vercel dashboard: `ANTHROPIC_API_KEY`, `RESEND_API_KEY`, `CORS_ORIGIN`
 
 ## Shared Elements (No Components — Copy-Paste Architecture)
@@ -90,7 +112,7 @@ Each case study is completely standalone — its own Google Fonts, CSS variables
 - No em dashes or en dashes in prose copy
 
 ## SEO
-- `sitemap.xml` and `robots.txt` are in the project root. Sitemap lists all pages including case studies.
+- `Website/sitemap.xml` and `Website/robots.txt` are in the Website folder. Sitemap lists all pages including case studies.
 - `robots.txt` disallows `/api/`.
 - Site is registered in Google Search Console.
 

@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solano Bakery — Artisan Bread & Pastries, Knoxville TN</title>
+  <meta name="description" content="Knoxville's neighborhood bakery since 2012. Handcrafted sourdough, seasonal pastries, and morning coffee on North Central Street.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #FBF3E4;
+      --peach: #E8A87C;
+      --brown: #A4794F;
+      --rose:  #D89A9E;
+      --text:  #3D2B1F;
+      --text-light: #7A5C43;
+      --white: #FFFFFF;
+      --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 2.5rem;
+      background: rgba(251, 243, 228, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(164, 121, 79, 0.15);
+      transition: box-shadow 0.3s ease;
+    }
+
+    nav.scrolled { box-shadow: 0 2px 20px rgba(61, 43, 31, 0.08); }
+
+    .nav-logo {
+      font-family: 'Fraunces', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-style: italic;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-logo span { color: var(--peach); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-light);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--peach); }
+
+    .nav-cta {
+      background: var(--peach);
+      color: var(--white) !important;
+      padding: 0.6rem 1.4rem;
+      border-radius: 100px;
+      transition: background 0.2s, transform 0.2s var(--spring) !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--brown) !important;
+      color: var(--white) !important;
+      transform: translateY(-2px) !important;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100svh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 7rem 5vw 4rem;
+      gap: 4rem;
+    }
+
+    .hero-text { position: relative; }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--brown);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 2px;
+      background: var(--peach);
+      border-radius: 2px;
+    }
+
+    .hero-headline {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(3rem, 5.5vw, 5.5rem);
+      font-weight: 800;
+      font-style: italic;
+      line-height: 1.05;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-headline em {
+      color: var(--peach);
+      font-style: italic;
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--text-light);
+      line-height: 1.7;
+      max-width: 44ch;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--peach);
+      color: var(--white);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.9rem 2rem;
+      border-radius: 100px;
+      transition: background 0.2s, transform 0.3s var(--spring);
+    }
+
+    .btn-primary:hover {
+      background: var(--brown);
+      transform: translateY(-3px);
+    }
+
+    .btn-secondary {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      padding-bottom: 2px;
+      border-bottom: 2px solid var(--peach);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .btn-secondary:hover {
+      color: var(--peach);
+    }
+
+    .hero-image-wrap {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-img-frame {
+      position: relative;
+      width: min(480px, 100%);
+      aspect-ratio: 4 / 5;
+      border-radius: 240px 240px 32px 32px;
+      overflow: hidden;
+    }
+
+    .hero-img-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 8s var(--ease-out);
+    }
+
+    .hero-img-frame:hover img { transform: scale(1.05); }
+
+    .badge {
+      position: absolute;
+      bottom: -1.5rem;
+      left: -1.5rem;
+      width: 110px;
+      height: 110px;
+      background: var(--peach);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--white);
+      box-shadow: 0 8px 24px rgba(232, 168, 124, 0.45);
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .badge-est {
+      font-family: 'Fraunces', serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      font-style: italic;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.85;
+    }
+
+    .badge-year {
+      font-family: 'Fraunces', serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(-3deg); }
+      50%       { transform: translateY(-10px) rotate(-3deg); }
+    }
+
+    .hero-crumb {
+      position: absolute;
+      top: -1rem;
+      right: -1rem;
+      width: 64px;
+      height: 64px;
+      background: var(--rose);
+      border-radius: 50%;
+      opacity: 0.7;
+      animation: float 5.5s ease-in-out infinite reverse;
+    }
+
+    /* ── SECTIONS BASE ── */
+    section { padding: 6rem 5vw; }
+
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--peach);
+      margin-bottom: 1rem;
+    }
+
+    .section-heading {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 3.5vw, 3.25rem);
+      font-weight: 700;
+      font-style: italic;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+
+    /* ── STORY ── */
+    .story {
+      background: var(--white);
+    }
+
+    .story-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .story-text .section-heading { margin-bottom: 1.5rem; }
+
+    .story-body {
+      font-size: 1.05rem;
+      color: var(--text-light);
+      line-height: 1.75;
+      margin-bottom: 1.25rem;
+    }
+
+    .story-values {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(164, 121, 79, 0.15);
+    }
+
+    .value-item { text-align: center; }
+
+    .value-num {
+      font-family: 'Fraunces', serif;
+      font-size: 2.25rem;
+      font-weight: 800;
+      font-style: italic;
+      color: var(--peach);
+      display: block;
+      line-height: 1;
+    }
+
+    .value-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-top: 0.3rem;
+    }
+
+    .story-img-col { position: relative; }
+
+    .story-img {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      border-radius: 24px;
+      overflow: hidden;
+    }
+
+    .story-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .story-pull {
+      position: absolute;
+      bottom: 2rem;
+      right: -2rem;
+      background: var(--peach);
+      color: var(--white);
+      padding: 1.5rem 1.75rem;
+      border-radius: 16px;
+      max-width: 220px;
+      box-shadow: 0 12px 32px rgba(232, 168, 124, 0.4);
+    }
+
+    .story-pull-quote {
+      font-family: 'Fraunces', serif;
+      font-size: 1rem;
+      font-style: italic;
+      line-height: 1.5;
+      margin-bottom: 0.75rem;
+    }
+
+    .story-pull-author {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.8;
+    }
+
+    /* ── MENU ── */
+    .menu { background: var(--cream); }
+
+    .menu-header {
+      text-align: center;
+      max-width: 560px;
+      margin: 0 auto 3.5rem;
+    }
+
+    .menu-header .section-heading { margin-bottom: 0.75rem; }
+
+    .menu-subtitle {
+      font-size: 1rem;
+      color: var(--text-light);
+      line-height: 1.65;
+    }
+
+    .menu-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .menu-tab {
+      background: none;
+      border: 2px solid rgba(164, 121, 79, 0.25);
+      color: var(--text-light);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.55rem 1.25rem;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all 0.25s var(--spring);
+    }
+
+    .menu-tab.active,
+    .menu-tab:hover {
+      background: var(--peach);
+      border-color: var(--peach);
+      color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .menu-card {
+      background: var(--white);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: transform 0.4s var(--spring), box-shadow 0.4s ease;
+      opacity: 0;
+      transform: translateY(40px) scale(0.95);
+    }
+
+    .menu-card.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      transition:
+        opacity 0.6s var(--ease-out),
+        transform 0.7s var(--spring),
+        box-shadow 0.4s ease;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 48px rgba(61, 43, 31, 0.12);
+    }
+
+    .menu-card-img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+    }
+
+    .menu-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s var(--ease-out);
+    }
+
+    .menu-card:hover .menu-card-img img { transform: scale(1.06); }
+
+    .menu-card-body {
+      padding: 1.25rem 1.5rem 1.5rem;
+    }
+
+    .menu-card-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--peach);
+      margin-bottom: 0.4rem;
+    }
+
+    .menu-card-name {
+      font-family: 'Fraunces', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      font-style: italic;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .menu-card-desc {
+      font-size: 0.875rem;
+      color: var(--text-light);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .menu-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .menu-card-price {
+      font-family: 'Fraunces', serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      font-style: italic;
+      color: var(--text);
+    }
+
+    .menu-card-btn {
+      background: var(--cream);
+      border: 2px solid rgba(164, 121, 79, 0.2);
+      color: var(--brown);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.45rem 1rem;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all 0.25s var(--spring);
+    }
+
+    .menu-card-btn:hover {
+      background: var(--peach);
+      border-color: var(--peach);
+      color: var(--white);
+      transform: scale(1.05);
+    }
+
+    /* ── DAILY SPECIALS ── */
+    .specials {
+      background: var(--peach);
+      padding: 5rem 5vw;
+    }
+
+    .specials-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .specials-text .section-eyebrow { color: rgba(255,255,255,0.75); }
+
+    .specials-text .section-heading { color: var(--white); margin-bottom: 1rem; }
+
+    .specials-intro {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    .specials-list { list-style: none; }
+
+    .specials-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      color: var(--white);
+    }
+
+    .specials-list li:last-child { border-bottom: none; }
+
+    .special-day {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.2);
+      color: var(--white);
+      padding: 0.3rem 0.7rem;
+      border-radius: 100px;
+      white-space: nowrap;
+      margin-top: 2px;
+    }
+
+    .special-info strong {
+      font-family: 'Fraunces', serif;
+      font-size: 1.05rem;
+      font-style: italic;
+      display: block;
+      margin-bottom: 0.15rem;
+    }
+
+    .special-info span {
+      font-size: 0.85rem;
+      opacity: 0.8;
+    }
+
+    .specials-img {
+      border-radius: 20px;
+      overflow: hidden;
+      aspect-ratio: 1;
+    }
+
+    .specials-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ── GALLERY ── */
+    .gallery { background: var(--white); }
+
+    .gallery-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: auto auto;
+      gap: 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .gallery-item {
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      opacity: 0;
+      transform: scale(0.92);
+      transition: opacity 0.5s ease, transform 0.6s var(--spring);
+    }
+
+    .gallery-item.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s var(--ease-out);
+      display: block;
+      min-height: 200px;
+    }
+
+    .gallery-item:hover img { transform: scale(1.07); }
+
+    /* ── VISIT ── */
+    .visit { background: var(--cream); }
+
+    .visit-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .visit-text .section-heading { margin-bottom: 1.5rem; }
+
+    .visit-info-block {
+      margin-bottom: 2rem;
+    }
+
+    .visit-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--peach);
+      margin-bottom: 0.4rem;
+    }
+
+    .visit-detail {
+      font-size: 1rem;
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    .visit-detail a {
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(164, 121, 79, 0.3);
+    }
+
+    .visit-detail a:hover { color: var(--peach); }
+
+    .hours-grid {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.3rem 1.5rem;
+    }
+
+    .hours-day { font-weight: 600; }
+    .hours-time { color: var(--text-light); }
+
+    .visit-map {
+      border-radius: 20px;
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      background: #e8ddd0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .visit-map-placeholder {
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .map-icon {
+      width: 64px;
+      height: 64px;
+      background: var(--peach);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+    }
+
+    .map-icon svg { width: 28px; height: 28px; fill: white; }
+
+    .map-label {
+      font-family: 'Fraunces', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .map-sublabel {
+      font-size: 0.85rem;
+      color: var(--text-light);
+    }
+
+    .map-btn {
+      display: inline-block;
+      margin-top: 1.25rem;
+      background: var(--peach);
+      color: var(--white);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.7rem 1.5rem;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.25s var(--spring);
+    }
+
+    .map-btn:hover { background: var(--brown); transform: translateY(-2px); }
+
+    /* ── LOYALTY ── */
+    .loyalty {
+      background: var(--text);
+      padding: 5rem 5vw;
+    }
+
+    .loyalty-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .loyalty-icon {
+      font-size: 3rem;
+      margin-bottom: 1.25rem;
+      display: block;
+    }
+
+    .loyalty-heading {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 3vw, 2.75rem);
+      font-weight: 800;
+      font-style: italic;
+      color: var(--cream);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+      line-height: 1.1;
+    }
+
+    .loyalty-sub {
+      font-size: 1rem;
+      color: rgba(251, 243, 228, 0.65);
+      line-height: 1.65;
+      margin-bottom: 2rem;
+    }
+
+    .loyalty-form {
+      display: flex;
+      gap: 0.75rem;
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    .loyalty-input {
+      flex: 1;
+      background: rgba(255,255,255,0.08);
+      border: 1.5px solid rgba(251, 243, 228, 0.2);
+      color: var(--cream);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.95rem;
+      padding: 0.85rem 1.25rem;
+      border-radius: 100px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .loyalty-input::placeholder { color: rgba(251, 243, 228, 0.4); }
+    .loyalty-input:focus { border-color: var(--peach); }
+
+    .loyalty-submit {
+      background: var(--peach);
+      border: none;
+      color: var(--white);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 0.85rem 1.5rem;
+      border-radius: 100px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s, transform 0.25s var(--spring);
+    }
+
+    .loyalty-submit:hover { background: var(--brown); transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--brown);
+      padding: 3.5rem 5vw;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .footer-brand-name {
+      font-family: 'Fraunces', serif;
+      font-size: 1.75rem;
+      font-weight: 800;
+      font-style: italic;
+      color: var(--cream);
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-tagline {
+      font-size: 0.9rem;
+      color: rgba(251, 243, 228, 0.7);
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+      max-width: 30ch;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .footer-social a {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(251, 243, 228, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(251, 243, 228, 0.7);
+      text-decoration: none;
+      font-size: 0.8rem;
+      transition: all 0.25s var(--spring);
+    }
+
+    .footer-social a:hover {
+      background: var(--peach);
+      border-color: var(--peach);
+      color: var(--white);
+      transform: translateY(-3px);
+    }
+
+    .footer-col-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--peach);
+      margin-bottom: 1rem;
+    }
+
+    .footer-links { list-style: none; }
+
+    .footer-links li { margin-bottom: 0.5rem; }
+
+    .footer-links a {
+      font-size: 0.9rem;
+      color: rgba(251, 243, 228, 0.7);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--cream); }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 2.5rem auto 0;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(251, 243, 228, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: rgba(251, 243, 228, 0.5);
+    }
+
+    .footer-credit {
+      font-size: 0.8rem;
+      color: rgba(251, 243, 228, 0.5);
+    }
+
+    .footer-credit a {
+      color: var(--peach);
+      text-decoration: none;
+    }
+
+    /* ── REDUCED MOTION ── */
+    @media (prefers-reduced-motion: reduce) {
+      .badge, .hero-crumb { animation: none; }
+      .menu-card, .gallery-item { transition: none; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; padding: 6rem 5vw 3rem; gap: 3rem; }
+      .hero-image-wrap { order: -1; }
+      .hero-img-frame { width: min(340px, 100%); aspect-ratio: 1; border-radius: 50%; }
+      .badge { width: 90px; height: 90px; }
+      .story-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .story-pull { right: 0; }
+      .menu-grid { grid-template-columns: repeat(2, 1fr); }
+      .specials-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-item:nth-child(1) { grid-column: span 2; }
+      .visit-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .nav-links { display: none; }
+    }
+
+    @media (max-width: 600px) {
+      .menu-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .loyalty-form { flex-direction: column; }
+      .loyalty-submit { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#" class="nav-logo">Solano <span>Bakery</span></a>
+    <ul class="nav-links">
+      <li><a href="#story">Our Story</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#specials">Specials</a></li>
+      <li><a href="#visit">Visit Us</a></li>
+      <li><a href="#loyalty" class="nav-cta">Join the Club</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="hero-text">
+      <p class="hero-eyebrow">Knoxville, Tennessee</p>
+      <h1 class="hero-headline">Baked with<br><em>love &amp;</em><br>flour.</h1>
+      <p class="hero-sub">Handcrafted sourdough, flaky pastries, and great coffee on North Central Street. We've been your neighborhood bakery since 2012.</p>
+      <div class="hero-actions">
+        <a href="#menu" class="btn-primary">Explore the Menu &darr;</a>
+        <a href="#visit" class="btn-secondary">Find us</a>
+      </div>
+    </div>
+    <div class="hero-image-wrap">
+      <div class="hero-img-frame">
+        <img
+          src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=900&q=85"
+          alt="Golden sourdough loaf fresh from the oven"
+          loading="eager"
+        >
+      </div>
+      <div class="badge" aria-hidden="true">
+        <span class="badge-est">Est.</span>
+        <span class="badge-year">2012</span>
+      </div>
+      <div class="hero-crumb" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="story" id="story">
+    <div class="story-inner">
+      <div class="story-text">
+        <p class="section-eyebrow">Our Story</p>
+        <h2 class="section-heading">Started small.<br>Stayed honest.</h2>
+        <p class="story-body">Marisol Solano opened the original Solano Bakery with a single deck oven and a recipe her grandmother brought from Oaxaca. What started as a weekend farmers market stand became a full storefront in 2014, and a neighborhood institution not long after.</p>
+        <p class="story-body">Every loaf is naturally leavened and cold-proofed overnight. Every pastry is made from scratch each morning. We don't cut corners, because we believe you can taste the difference.</p>
+        <div class="story-values">
+          <div class="value-item">
+            <span class="value-num">100%</span>
+            <span class="value-label">Scratch Made</span>
+          </div>
+          <div class="value-item">
+            <span class="value-num">12+</span>
+            <span class="value-label">Years Open</span>
+          </div>
+          <div class="value-item">
+            <span class="value-num">3</span>
+            <span class="value-label">Farmers Markets</span>
+          </div>
+        </div>
+      </div>
+      <div class="story-img-col">
+        <div class="story-img">
+          <img
+            src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=700&q=80"
+            alt="Baker shaping dough by hand"
+            loading="lazy"
+          >
+        </div>
+        <div class="story-pull">
+          <p class="story-pull-quote">"This bread is the reason I moved to this side of town."</p>
+          <p class="story-pull-author">Regular customer since 2015</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section class="menu" id="menu">
+    <div class="menu-header">
+      <p class="section-eyebrow">Fresh Daily</p>
+      <h2 class="section-heading">The Bakery Menu</h2>
+      <p class="menu-subtitle">Everything is baked in small batches. Arrive early for the best selection.</p>
+    </div>
+    <div class="menu-tabs">
+      <button class="menu-tab active">All</button>
+      <button class="menu-tab">Breads</button>
+      <button class="menu-tab">Pastries</button>
+      <button class="menu-tab">Coffee</button>
+    </div>
+    <div class="menu-grid" id="menuGrid">
+
+      <div class="menu-card">
+        <div class="menu-card-img">
+          <img src="https://images.unsplash.com/photo-1608198093002-ad4e005484ec?auto=format&fit=crop&w=600&q=80" alt="Country sourdough loaf" loading="lazy">
+        </div>
+        <div class="menu-card-body">
+          <p class="menu-card-tag">Bread</p>
+          <h3 class="menu-card-name">Country Sourdough</h3>
+          <p class="menu-card-desc">Our flagship. 48-hour cold proof, thick crackling crust, open crumb. Available whole or half.</p>
+          <div class="menu-card-footer">
+            <span class="menu-card-price">$12</span>
+            <button class="menu-card-btn">Add to Order</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <div class="menu-card-img">
+          <img src="https://images.unsplash.com/photo-1520201163981-8cc95007dd2a?auto=format&fit=crop&w=600&q=80" alt="Butter croissant" loading="lazy">
+        </div>
+        <div class="menu-card-body">
+          <p class="menu-card-tag">Pastry</p>
+          <h3 class="menu-card-name">Butter Croissant</h3>
+          <p class="menu-card-desc">Laminated with European-style cultured butter. 72 layers, impossibly flaky. Best warm.</p>
+          <div class="menu-card-footer">
+            <span class="menu-card-price">$4.50</span>
+            <button class="menu-card-btn">Add to Order</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <div class="menu-card-img">
+          <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=600&q=80" alt="Seeded rye loaf" loading="lazy">
+        </div>
+        <div class="menu-card-body">
+          <p class="menu-card-tag">Bread</p>
+          <h3 class="menu-card-name">Dark Rye</h3>
+          <p class="menu-card-desc">50% rye flour, caraway seeds, molasses. Dense, deeply flavored, exceptional with butter.</p>
+          <div class="menu-card-footer">
+            <span class="menu-card-price">$11</span>
+            <button class="menu-card-btn">Add to Order</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <div class="menu-card-img">
+          <img src="https://images.unsplash.com/photo-1528207776546-365bb710ee93?auto=format&fit=crop&w=600&q=80" alt="Morning coffee and pastry" loading="lazy">
+        </div>
+        <div class="menu-card-body">
+          <p class="menu-card-tag">Coffee</p>
+          <h3 class="menu-card-name">Morning Set</h3>
+          <p class="menu-card-desc">Drip coffee or espresso drink plus your choice of pastry. Available until 11 am.</p>
+          <div class="menu-card-footer">
+            <span class="menu-card-price">$9</span>
+            <button class="menu-card-btn">Add to Order</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <div class="menu-card-img">
+          <img src="https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?auto=format&fit=crop&w=600&q=80" alt="Seasonal fruit tart" loading="lazy">
+        </div>
+        <div class="menu-card-body">
+          <p class="menu-card-tag">Pastry</p>
+          <h3 class="menu-card-name">Seasonal Tart</h3>
+          <p class="menu-card-desc">Buttery shortcrust, vanilla pastry cream, whatever is at its best at the farmers market this week.</p>
+          <div class="menu-card-footer">
+            <span class="menu-card-price">$6</span>
+            <button class="menu-card-btn">Add to Order</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <div class="menu-card-img">
+          <img src="https://images.unsplash.com/photo-1534432182912-63863115e106?auto=format&fit=crop&w=600&q=80" alt="Cinnamon morning bun" loading="lazy">
+        </div>
+        <div class="menu-card-body">
+          <p class="menu-card-tag">Pastry</p>
+          <h3 class="menu-card-name">Morning Bun</h3>
+          <p class="menu-card-desc">Laminated dough rolled in cinnamon sugar and orange zest. Caramelized on the outside, pull-apart inside.</p>
+          <div class="menu-card-footer">
+            <span class="menu-card-price">$5</span>
+            <button class="menu-card-btn">Add to Order</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DAILY SPECIALS -->
+  <section class="specials" id="specials">
+    <div class="specials-inner">
+      <div class="specials-text">
+        <p class="section-eyebrow">Every Week</p>
+        <h2 class="section-heading">Daily Specials</h2>
+        <p class="specials-intro">Something different every day of the week. Follow us on Instagram for the first look.</p>
+        <ul class="specials-list">
+          <li>
+            <span class="special-day">Tue</span>
+            <div class="special-info">
+              <strong>Focaccia with Market Toppings</strong>
+              <span>Rosemary, sea salt, whatever looks good at the farm stand</span>
+            </div>
+          </li>
+          <li>
+            <span class="special-day">Wed</span>
+            <div class="special-info">
+              <strong>Kouign-Amann</strong>
+              <span>Buttery, caramelized, utterly not good for you</span>
+            </div>
+          </li>
+          <li>
+            <span class="special-day">Thu</span>
+            <div class="special-info">
+              <strong>Whole Wheat Sandwich Loaf</strong>
+              <span>Soft crumb, perfect for toast. Sells out by 9 am</span>
+            </div>
+          </li>
+          <li>
+            <span class="special-day">Sat</span>
+            <div class="special-info">
+              <strong>Cinnamon Rolls</strong>
+              <span>Brown butter cream cheese frosting. Saturday only, no exceptions</span>
+            </div>
+          </li>
+          <li>
+            <span class="special-day">Sun</span>
+            <div class="special-info">
+              <strong>Brunch Box</strong>
+              <span>Two pastries + quiche slice + coffee, $18</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="specials-img">
+        <img
+          src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=700&q=80"
+          alt="Selection of fresh baked goods"
+          loading="lazy"
+        >
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery" id="gallery">
+    <div class="gallery-header">
+      <p class="section-eyebrow">Inside the Bakery</p>
+      <h2 class="section-heading">From the Kitchen</h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1556217477-d325251ece38?auto=format&fit=crop&w=900&q=80" alt="Baker scoring sourdough" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1521483451569-e33803c0330c?auto=format&fit=crop&w=500&q=80" alt="Pastry display case" loading="lazy" style="min-height:180px;">
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1603532648955-039310d9ed75?auto=format&fit=crop&w=500&q=80" alt="Morning coffee and croissant" loading="lazy" style="min-height:180px;">
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1574085733277-851d9d856a3a?auto=format&fit=crop&w=500&q=80" alt="Stacked loaves on cooling rack" loading="lazy" style="min-height:180px;">
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=500&q=80" alt="Glazed morning bun" loading="lazy" style="min-height:180px;">
+      </div>
+    </div>
+  </section>
+
+  <!-- VISIT -->
+  <section class="visit" id="visit">
+    <div class="visit-inner">
+      <div class="visit-text">
+        <p class="section-eyebrow">Come See Us</p>
+        <h2 class="section-heading">Find the Bakery</h2>
+        <div class="visit-info-block">
+          <p class="visit-label">Address</p>
+          <p class="visit-detail">2145 N. Central Street<br>Knoxville, TN 37917</p>
+        </div>
+        <div class="visit-info-block">
+          <p class="visit-label">Hours</p>
+          <div class="hours-grid visit-detail">
+            <span class="hours-day">Tue &ndash; Sat</span><span class="hours-time">7:00 am &ndash; 4:00 pm</span>
+            <span class="hours-day">Sunday</span><span class="hours-time">8:00 am &ndash; 2:00 pm</span>
+            <span class="hours-day">Monday</span><span class="hours-time">Closed</span>
+          </div>
+        </div>
+        <div class="visit-info-block">
+          <p class="visit-label">Contact</p>
+          <p class="visit-detail">
+            <a href="tel:+18654871200">(865) 487-1200</a><br>
+            <a href="mailto:hello@solanobakery.com">hello@solanobakery.com</a>
+          </p>
+        </div>
+      </div>
+      <div class="visit-map" aria-label="Bakery location map">
+        <div class="visit-map-placeholder">
+          <div class="map-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          </div>
+          <p class="map-label">2145 N. Central Street</p>
+          <p class="map-sublabel">Knoxville, TN 37917</p>
+          <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="map-btn">Get Directions</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOYALTY -->
+  <section class="loyalty" id="loyalty">
+    <div class="loyalty-inner">
+      <span class="loyalty-icon" aria-hidden="true">&#9749;</span>
+      <h2 class="loyalty-heading">The Bread Club</h2>
+      <p class="loyalty-sub">Join 1,800+ regulars who get early access to specials, seasonal menus, and a free pastry on their birthday. No spam, ever.</p>
+      <form class="loyalty-form" onsubmit="handleSignup(event)">
+        <input
+          type="email"
+          class="loyalty-input"
+          placeholder="your@email.com"
+          aria-label="Email address"
+          required
+        >
+        <button type="submit" class="loyalty-submit">Sign Up</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <p class="footer-brand-name">Solano Bakery</p>
+        <p class="footer-tagline">Handcrafted bread and pastries in the heart of Knoxville's North Central neighborhood.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram">In</a>
+          <a href="#" aria-label="Facebook">Fb</a>
+          <a href="#" aria-label="TikTok">Tk</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer-col-title">Navigate</p>
+        <ul class="footer-links">
+          <li><a href="#story">Our Story</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#specials">Daily Specials</a></li>
+          <li><a href="#visit">Visit Us</a></li>
+          <li><a href="#loyalty">Bread Club</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Hours</p>
+        <ul class="footer-links">
+          <li><a href="#visit">Tue &ndash; Sat: 7am &ndash; 4pm</a></li>
+          <li><a href="#visit">Sunday: 8am &ndash; 2pm</a></li>
+          <li><a href="#visit">Monday: Closed</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2026 Solano Bakery. All rights reserved.</p>
+      <p class="footer-credit">Website concept by <a href="https://www.raffinatodesigns.com" target="_blank" rel="noopener">Raffinato Designs</a></p>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll shadow
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // Staggered spring card reveals via IntersectionObserver
+    const cards = document.querySelectorAll('.menu-card');
+    const cardObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const card = entry.target;
+          const idx = Array.from(cards).indexOf(card);
+          setTimeout(() => card.classList.add('visible'), idx * 90);
+          cardObs.unobserve(card);
+        }
+      });
+    }, { threshold: 0.12 });
+    cards.forEach(c => cardObs.observe(c));
+
+    // Gallery reveal
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const galleryObs = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          const item = entry.target;
+          const idx = Array.from(galleryItems).indexOf(item);
+          setTimeout(() => item.classList.add('visible'), idx * 70);
+          galleryObs.unobserve(item);
+        }
+      });
+    }, { threshold: 0.1 });
+    galleryItems.forEach(g => galleryObs.observe(g));
+
+    // Menu tabs (visual filter only)
+    const tabs = document.querySelectorAll('.menu-tab');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+      });
+    });
+
+    // Loyalty signup
+    function handleSignup(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('.loyalty-submit');
+      btn.textContent = 'You\'re in!';
+      btn.style.background = '#A4794F';
+      e.target.querySelector('.loyalty-input').value = '';
+      setTimeout(() => {
+        btn.textContent = 'Sign Up';
+        btn.style.background = '';
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
