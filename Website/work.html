@@ -281,6 +281,16 @@ a { text-decoration: none; color: inherit; }
 .card:nth-child(9) .card-preview::before { inset:0; background:rgba(5,13,31,0.28); border:none; }
 .card:nth-child(9) .card-preview::after  { display:none; }
 
+.card:nth-child(10) .card-preview {
+  background-image: url('https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=800&q=80');
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+.card:nth-child(10):hover .card-preview { transform: scale(1.04); }
+.card:nth-child(10) .card-preview::before { inset:0; background:rgba(5,13,31,0.35); border:none; }
+.card:nth-child(10) .card-preview::after  { display:none; }
+
 
 /* Card overlay (slide up on hover) */
 .card-overlay {
@@ -607,6 +617,15 @@ a { text-decoration: none; color: inherit; }
       <div class="card-overlay">
         <span class="card-tag">Beauty &amp; Wellness</span>
         <p class="card-name">Lumiere Aesthetics</p>
+        <span class="card-view">View Live Demo →</span>
+      </div>
+    </div>
+    <div class="card" data-category="professional" data-name="Verdant Landscapes" data-desc="A premium website concept for a Tennessee landscaping company. Full-screen hero video, service breakdowns, project gallery, and a clear quote CTA built to convert homeowners." data-url="/work/verdant-landscapes/" tabindex="0" role="article" aria-label="Verdant Landscapes - view live demo">
+      <div class="card-preview" aria-hidden="true"></div>
+      <div class="card-info"><p class="card-info-name">Verdant Landscapes</p><p class="card-info-tag">Professional Services</p></div>
+      <div class="card-overlay">
+        <span class="card-tag">Professional Services</span>
+        <p class="card-name">Verdant Landscapes</p>
         <span class="card-view">View Live Demo →</span>
       </div>
     </div>

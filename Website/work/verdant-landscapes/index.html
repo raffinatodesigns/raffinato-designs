@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verdant Landscapes — Outdoor Living, Expertly Crafted</title>
+  <meta name="description" content="Verdant Landscapes designs and installs premium outdoor spaces across Tennessee. Lawn care, hardscaping, planting, and seasonal maintenance." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --forest:   #1C3A2A;
+      --forest-mid: #274D38;
+      --sage:     #5C8C6A;
+      --gold:     #C9A84C;
+      --cream:    #F5F0E8;
+      --earth:    #3D2B1F;
+      --white:    #FFFFFF;
+      --gray:     #6B7280;
+      --light:    #FAF8F4;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Jost', sans-serif; color: var(--earth); background: var(--white); overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ── SCROLL REVEAL ── */
+    .rv { opacity: 0; transform: translateY(36px); transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1); }
+    .rv.visible { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.1s; }
+    .d2 { transition-delay: 0.2s; }
+    .d3 { transition-delay: 0.3s; }
+    .d4 { transition-delay: 0.4s; }
+    .d5 { transition-delay: 0.5s; }
+    @media (prefers-reduced-motion: reduce) {
+      .rv { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      height: 76px;
+      transition: background 0.4s, backdrop-filter 0.4s, box-shadow 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(28, 58, 42, 0.94);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 1px 0 rgba(201,168,76,0.15);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-weight: 800;
+      font-size: 1.45rem;
+      color: var(--white);
+      letter-spacing: -0.3px;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links {
+      display: flex;
+      gap: 2.2rem;
+      list-style: none;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .nav-links a {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--forest);
+      background: var(--gold);
+      padding: 0.6rem 1.5rem;
+      border-radius: 2px;
+      transition: background 0.25s, transform 0.2s;
+      white-space: nowrap;
+    }
+    .nav-cta:hover { background: #b8963e; transform: translateY(-1px); }
+
+    /* hamburger */
+    .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; z-index: 101; }
+    .hamburger span { display: block; width: 26px; height: 2px; background: var(--white); transition: transform 0.3s, opacity 0.3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    #mobile-menu {
+      position: fixed; inset: 0;
+      background: rgba(28,58,42,0.97);
+      backdrop-filter: blur(20px);
+      z-index: 99;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.35s cubic-bezier(0.16,1,0.3,1);
+    }
+    #mobile-menu.open { opacity: 1; pointer-events: all; }
+    #mobile-menu a { font-family: 'Playfair Display', serif; font-size: 2.8rem; color: var(--white); }
+    #mobile-menu a:hover { color: var(--gold); }
+    #mobile-menu .mobile-cta { font-family: 'Jost', sans-serif; font-size: 0.85rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: var(--forest); background: var(--gold); padding: 0.8rem 2.5rem; border-radius: 2px; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      padding: 0 5% 8%;
+    }
+    .hero-fallback {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--forest) 0%, #2e5c40 50%, #1a3a28 100%);
+      z-index: 0;
+    }
+    .hero-video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(28,58,42,0.85) 0%, rgba(28,58,42,0.2) 50%, rgba(0,0,0,0.15) 100%);
+      z-index: 2;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      max-width: 720px;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.4rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px; height: 1px;
+      background: var(--gold);
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.05;
+      margin-bottom: 1.4rem;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .hero p {
+      font-size: clamp(1rem, 1.5vw, 1.15rem);
+      font-weight: 300;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.7;
+      max-width: 520px;
+      margin-bottom: 2.4rem;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--forest);
+      background: var(--gold);
+      padding: 0.9rem 2.2rem;
+      border-radius: 2px;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .btn-primary:hover { background: #b8963e; transform: translateY(-2px); }
+    .btn-outline {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.5);
+      padding: 0.9rem 2.2rem;
+      border-radius: 2px;
+      transition: border-color 0.25s, background 0.25s;
+    }
+    .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.08); }
+
+    /* scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem; left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0.6;
+    }
+    .scroll-hint span { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white); }
+    .scroll-line { width: 1px; height: 40px; background: var(--white); animation: scrollDrop 1.6s ease-in-out infinite; }
+    @keyframes scrollDrop { 0%,100%{opacity:0.3;transform:scaleY(0.4) translateY(-10px)} 50%{opacity:1;transform:scaleY(1) translateY(0)} }
+
+    /* ── TRUST BAR ── */
+    .trust-bar {
+      background: var(--forest);
+      padding: 1.4rem 5%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.75);
+    }
+    .trust-item svg { color: var(--gold); flex-shrink: 0; }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 6rem 5%; }
+    .section-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 1rem;
+    }
+    .section-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      color: var(--forest);
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+    }
+    .section-heading em { font-style: italic; color: var(--sage); }
+    .section-sub {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--gray);
+      line-height: 1.7;
+      max-width: 560px;
+    }
+
+    /* ── SERVICES ── */
+    #services { background: var(--light); }
+    .services-header { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 2rem; margin-bottom: 3.5rem; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+      background: rgba(92,140,106,0.15);
+      border: 1.5px solid rgba(92,140,106,0.15);
+    }
+    .service-card {
+      background: var(--white);
+      padding: 2.5rem 2rem;
+      transition: background 0.3s;
+    }
+    .service-card:hover { background: var(--forest); }
+    .service-card:hover .service-icon { background: rgba(201,168,76,0.15); color: var(--gold); }
+    .service-card:hover .service-name { color: var(--white); }
+    .service-card:hover .service-desc { color: rgba(255,255,255,0.65); }
+    .service-icon {
+      width: 52px; height: 52px;
+      background: rgba(92,140,106,0.1);
+      border-radius: 2px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--sage);
+      margin-bottom: 1.4rem;
+      transition: background 0.3s, color 0.3s;
+    }
+    .service-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--forest);
+      margin-bottom: 0.7rem;
+      transition: color 0.3s;
+    }
+    .service-desc {
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: var(--gray);
+      line-height: 1.65;
+      transition: color 0.3s;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--white); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .about-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 200px 200px;
+      gap: 12px;
+    }
+    .about-img {
+      border-radius: 2px;
+      overflow: hidden;
+      background: var(--forest-mid);
+    }
+    .about-img img { width: 100%; height: 100%; object-fit: cover; }
+    .about-img:first-child { grid-row: span 2; }
+    .about-stat {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 1.2rem;
+      background: var(--forest);
+    }
+    .about-stat .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .about-stat .stat-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      margin-top: 0.3rem;
+    }
+    .about-text .section-sub { margin-bottom: 2rem; }
+    .about-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 2.2rem;
+    }
+    .badge {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--sage);
+      border: 1px solid rgba(92,140,106,0.4);
+      padding: 0.35rem 0.85rem;
+      border-radius: 2px;
+    }
+
+    /* ── GALLERY ── */
+    #gallery { background: var(--forest); padding: 6rem 5%; }
+    #gallery .section-label { color: var(--gold); opacity: 0.7; }
+    #gallery .section-heading { color: var(--white); }
+    #gallery .section-heading em { color: var(--gold); }
+    .gallery-intro { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 2rem; margin-bottom: 3rem; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 240px 240px;
+      gap: 10px;
+    }
+    .gallery-item {
+      overflow: hidden;
+      border-radius: 2px;
+      position: relative;
+    }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .gallery-item:hover img { transform: scale(1.06); }
+    .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+    .gallery-item:nth-child(4) { grid-row: span 2; }
+    .gallery-tag {
+      position: absolute;
+      bottom: 0.8rem; left: 0.8rem;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--white);
+      background: rgba(28,58,42,0.75);
+      backdrop-filter: blur(6px);
+      padding: 0.3rem 0.7rem;
+      border-radius: 1px;
+    }
+
+    /* ── PROCESS ── */
+    #process { background: var(--cream); }
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-top: 3.5rem;
+      position: relative;
+    }
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 28px; left: 5%; right: 5%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--sage), transparent);
+    }
+    .process-step { text-align: center; }
+    .step-num {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: var(--forest);
+      color: var(--gold);
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.4rem;
+      position: relative; z-index: 1;
+    }
+    .step-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--forest);
+      margin-bottom: 0.6rem;
+    }
+    .step-desc {
+      font-size: 0.875rem;
+      font-weight: 300;
+      color: var(--gray);
+      line-height: 1.65;
+    }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials { background: var(--white); }
+    .testimonials-header { text-align: center; margin-bottom: 3.5rem; }
+    .testimonials-header .section-sub { margin: 0 auto; }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .testimonial {
+      background: var(--light);
+      padding: 2rem;
+      border-radius: 2px;
+      border-top: 3px solid var(--sage);
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .testimonial-stars { color: var(--gold); font-size: 0.85rem; letter-spacing: 2px; }
+    .testimonial-text {
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--earth);
+      line-height: 1.7;
+      flex: 1;
+    }
+    .testimonial-author {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    .author-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--forest);
+    }
+    .author-location {
+      font-size: 0.78rem;
+      color: var(--gray);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── CTA BAND ── */
+    #cta {
+      background: var(--forest);
+      padding: 5rem 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+    .cta-text .section-heading { color: var(--white); margin-bottom: 0.6rem; }
+    .cta-text .section-heading em { color: var(--gold); }
+    .cta-text p { font-size: 1rem; font-weight: 300; color: rgba(255,255,255,0.7); }
+    .btn-gold {
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--forest);
+      background: var(--gold);
+      padding: 1rem 2.6rem;
+      border-radius: 2px;
+      white-space: nowrap;
+      transition: background 0.25s, transform 0.2s;
+      flex-shrink: 0;
+    }
+    .btn-gold:hover { background: #b8963e; transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--earth); padding: 4rem 5% 2rem; }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 2rem;
+    }
+    .footer-brand-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 0.8rem;
+    }
+    .footer-brand-name span { color: var(--gold); }
+    .footer-tagline { font-size: 0.875rem; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.6; margin-bottom: 1.2rem; }
+    .footer-col h4 {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+    .footer-col ul a { font-size: 0.875rem; font-weight: 300; color: rgba(255,255,255,0.55); transition: color 0.2s; }
+    .footer-col ul a:hover { color: var(--white); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.35);
+    }
+    .footer-bottom a { color: rgba(255,255,255,0.45); transition: color 0.2s; }
+    .footer-bottom a:hover { color: var(--white); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-grid { grid-template-columns: repeat(3, 1fr); grid-template-rows: 200px 200px 200px; }
+      .gallery-item:nth-child(1) { grid-column: span 1; grid-row: span 2; }
+      .gallery-item:nth-child(4) { grid-row: span 1; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      section { padding: 4rem 5%; }
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .hero { padding: 0 5% 10%; align-items: flex-end; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-images { display: none; }
+      .services-grid { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: repeat(2, 1fr); }
+      .process-steps::before { display: none; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 180px 180px 180px; }
+      .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 1; }
+      .trust-bar { gap: 1.5rem; }
+      #cta { flex-direction: column; text-align: center; }
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- MOBILE MENU -->
+  <div id="mobile-menu">
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#testimonials">Reviews</a>
+    <a href="#cta" class="mobile-cta">Get a Free Quote</a>
+  </div>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#" class="nav-logo">Verdant<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+    </ul>
+    <a href="#cta" class="nav-cta">Free Quote</a>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-fallback"></div>
+    <video
+      class="hero-video"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+    >
+      <source src="hero-video.mp4" type="video/mp4" />
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Tennessee's Premier Landscape Studio</div>
+      <h1>Your Outdoor Space,<br /><em>Transformed.</em></h1>
+      <p>We design, install, and maintain outdoor spaces that look stunning from day one and hold up for years. No cookie-cutter work. No shortcuts.</p>
+      <div class="hero-actions">
+        <a href="#cta" class="btn-primary">Get a Free Quote</a>
+        <a href="#gallery" class="btn-outline">View Our Work</a>
+      </div>
+    </div>
+    <div class="scroll-hint" aria-hidden="true">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <div class="trust-bar">
+    <div class="trust-item">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      Licensed &amp; Insured
+    </div>
+    <div class="trust-item">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      Free Consultations
+    </div>
+    <div class="trust-item">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      Satisfaction Guaranteed
+    </div>
+    <div class="trust-item">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      10+ Years Experience
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="services-header">
+      <div>
+        <div class="section-label rv">What We Do</div>
+        <h2 class="section-heading rv d1">Full-Service Landscaping,<br /><em>Start to Finish</em></h2>
+      </div>
+      <p class="section-sub rv d2">From a first-time lawn install to a full backyard overhaul, we handle every phase in-house so nothing falls through the cracks.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card rv">
+        <div class="service-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2a10 10 0 0 1 10 10c0 5.52-4.48 10-10 10S2 17.52 2 12A10 10 0 0 1 12 2z"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <div class="service-name">Lawn Care &amp; Maintenance</div>
+        <p class="service-desc">Weekly mowing, edging, fertilization, and seasonal cleanups that keep your lawn looking sharp year-round without you lifting a finger.</p>
+      </div>
+      <div class="service-card rv d1">
+        <div class="service-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <div class="service-name">Hardscaping</div>
+        <p class="service-desc">Patios, walkways, retaining walls, and fire pit areas built with premium materials and proper drainage so they last decades, not years.</p>
+      </div>
+      <div class="service-card rv d2">
+        <div class="service-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22V12M12 12C12 7 7 3 2 3c0 5 4 9 10 9zM12 12c0-5 5-9 10-9-1 5-5 9-10 9z"/></svg>
+        </div>
+        <div class="service-name">Planting &amp; Gardens</div>
+        <p class="service-desc">Native plantings, ornamental beds, and custom garden designs chosen for your Tennessee climate so they thrive with minimal upkeep.</p>
+      </div>
+      <div class="service-card rv d1">
+        <div class="service-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="4"/></svg>
+        </div>
+        <div class="service-name">Irrigation Systems</div>
+        <p class="service-desc">Smart irrigation design, installation, and seasonal startup/shutdown. Your lawn gets exactly what it needs, and your water bill stays reasonable.</p>
+      </div>
+      <div class="service-card rv d2">
+        <div class="service-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
+        </div>
+        <div class="service-name">Outdoor Lighting</div>
+        <p class="service-desc">Low-voltage landscape lighting that showcases your property at night and adds real curb appeal. Warm, professional, and fully automated.</p>
+      </div>
+      <div class="service-card rv d3">
+        <div class="service-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="service-name">Landscape Design</div>
+        <p class="service-desc">Full design consultations, 3D renderings, and phased installation plans so you know exactly what you're getting before a single shovel hits the ground.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-grid">
+      <div class="about-images">
+        <div class="about-img">
+          <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=600&q=80" alt="Landscaped garden" loading="lazy" />
+        </div>
+        <div class="about-img">
+          <img src="https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=400&q=80" alt="Patio installation" loading="lazy" />
+        </div>
+        <div class="about-stat">
+          <span class="stat-num">500+</span>
+          <span class="stat-label">Projects Completed</span>
+        </div>
+      </div>
+      <div class="about-text">
+        <div class="section-label rv">Our Story</div>
+        <h2 class="section-heading rv d1">We Take Your Yard<br /><em>Personally</em></h2>
+        <p class="section-sub rv d2">Founded in Tennessee by a crew that grew up doing this work, Verdant is built on one idea: if it's not something we'd be proud to pull up in front of, it doesn't leave our hands. Every project gets the same attention whether it's a quarterly mow or a full backyard rebuild.</p>
+        <div class="about-badges rv d3">
+          <span class="badge">Licensed &amp; Insured</span>
+          <span class="badge">Tennessee Native</span>
+          <span class="badge">No Subcontractors</span>
+          <span class="badge">Workmanship Warranty</span>
+        </div>
+        <a href="#cta" class="btn-primary rv d4">Schedule a Consultation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery">
+    <div class="gallery-intro">
+      <div>
+        <div class="section-label rv">Recent Work</div>
+        <h2 class="section-heading rv d1">Built Across<br /><em>Tennessee</em></h2>
+      </div>
+      <p class="section-sub rv d2" style="color:rgba(255,255,255,0.55); max-width:380px;">Every project is different. Here's a look at what we've built for homeowners across the state.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item rv">
+        <img src="https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=800&q=80" alt="Full landscape design and installation" loading="lazy" />
+        <span class="gallery-tag">Landscape Design</span>
+      </div>
+      <div class="gallery-item rv d1">
+        <img src="https://images.unsplash.com/photo-1780838446281-9394772d07a8?auto=format&fit=crop&w=500&q=80" alt="Stone patio and hardscape installation" loading="lazy" />
+        <span class="gallery-tag">Hardscaping</span>
+      </div>
+      <div class="gallery-item rv d2">
+        <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=500&q=80" alt="Custom planting and garden beds" loading="lazy" />
+        <span class="gallery-tag">Planting &amp; Gardens</span>
+      </div>
+      <div class="gallery-item rv d1">
+        <img src="https://images.unsplash.com/photo-1458245201577-fc8a130b8829?auto=format&fit=crop&w=500&q=80" alt="Lawn care and maintenance" loading="lazy" />
+        <span class="gallery-tag">Lawn Care &amp; Maintenance</span>
+      </div>
+      <div class="gallery-item rv d2">
+        <img src="https://images.unsplash.com/photo-1658692051708-519fbdac7e8f?auto=format&fit=crop&w=500&q=80" alt="Outdoor landscape lighting" loading="lazy" />
+        <span class="gallery-tag">Outdoor Lighting</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process">
+    <div style="text-align:center; margin-bottom:0;">
+      <div class="section-label rv">How It Works</div>
+      <h2 class="section-heading rv d1" style="margin:0 auto 0.6rem;">Simple Process,<br /><em>Exceptional Results</em></h2>
+      <p class="section-sub rv d2" style="margin: 0 auto;">No surprises, no runaround. Here's what working with us looks like from first call to finished project.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step rv">
+        <div class="step-num">1</div>
+        <div class="step-name">Free Consultation</div>
+        <p class="step-desc">We come to your property, walk the space, and listen to what you actually want. No pitch, no pressure.</p>
+      </div>
+      <div class="process-step rv d1">
+        <div class="step-num">2</div>
+        <div class="step-name">Custom Proposal</div>
+        <p class="step-desc">You get a detailed scope, timeline, and flat-rate price within 48 hours. Everything in writing before we start.</p>
+      </div>
+      <div class="process-step rv d2">
+        <div class="step-num">3</div>
+        <div class="step-name">Professional Install</div>
+        <p class="step-desc">Our crew handles every phase of the project. No subcontractors, no handoffs, no excuses.</p>
+      </div>
+      <div class="process-step rv d3">
+        <div class="step-num">4</div>
+        <div class="step-name">Ongoing Care</div>
+        <p class="step-desc">Sign up for a maintenance plan and we handle the upkeep so it always looks the day it was installed.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials">
+    <div class="testimonials-header">
+      <div class="section-label rv">Reviews</div>
+      <h2 class="section-heading rv d1">What Homeowners<br /><em>Are Saying</em></h2>
+      <p class="section-sub rv d2">Don't take our word for it.</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial rv">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-text">"They completely transformed our backyard. The patio design was exactly what we had in mind and the crew was professional from day one. It's been two years and it still looks brand new."</p>
+        <div class="testimonial-author">
+          <span class="author-name">Mark &amp; Sarah T.</span>
+          <span class="author-location">Franklin, TN</span>
+        </div>
+      </div>
+      <div class="testimonial rv d1">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-text">"Best landscaping company I've worked with in 20 years of homeownership. They actually show up when they say they will and the work is top quality. The lawn maintenance plan alone is worth it."</p>
+        <div class="testimonial-author">
+          <span class="author-name">David R.</span>
+          <span class="author-location">Brentwood, TN</span>
+        </div>
+      </div>
+      <div class="testimonial rv d2">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-text">"We hired Verdant for a full front yard redesign. They brought ideas we hadn't thought of, kept us updated throughout, and the finished result was better than what we imagined. Highly recommend."</p>
+        <div class="testimonial-author">
+          <span class="author-name">Jennifer H.</span>
+          <span class="author-location">Nashville, TN</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="cta">
+    <div class="cta-text">
+      <h2 class="section-heading">Ready for a Yard You're<br /><em>Proud Of?</em></h2>
+      <p>Free consultations. Flat-rate pricing. Work that holds up.</p>
+    </div>
+    <a href="tel:+16155550100" class="btn-gold">Call for a Free Quote</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">Verdant<span>.</span></div>
+        <p class="footer-tagline">Premium landscape design, installation, and maintenance across Tennessee. Outdoor spaces built to last.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Lawn Care</a></li>
+          <li><a href="#services">Hardscaping</a></li>
+          <li><a href="#services">Planting &amp; Gardens</a></li>
+          <li><a href="#services">Irrigation</a></li>
+          <li><a href="#services">Outdoor Lighting</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#gallery">Our Work</a></li>
+          <li><a href="#testimonials">Reviews</a></li>
+          <li><a href="#cta">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+16155550100">(615) 555-0100</a></li>
+          <li><a href="mailto:hello@verdantlandscapes.com">hello@verdantlandscapes.com</a></li>
+          <li><a href="#">Tennessee, USA</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Verdant Landscapes. All rights reserved.</span>
+      <span>Website concept by <a href="https://www.raffinatodesigns.com">Raffinato Designs</a></span>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+      });
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.rv').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
