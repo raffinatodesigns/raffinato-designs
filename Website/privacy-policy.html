@@ -237,7 +237,7 @@ a { text-decoration:none; color:inherit; }
   <div class="policy-inner rv">
     <p style="font-size:0.8rem;letter-spacing:0.08em;color:rgba(200,212,224,0.4);margin-bottom:2rem;">Last updated: June 1, 2026</p>
 
-    <p>Raffinato Designs ("we," "us," or "our") respects your privacy. This Privacy Policy explains what information we collect when you visit raffinatodesigns.com, how we use it, and your rights regarding that information.</p>
+    <p>Raffinato Designs LLC ("we," "us," or "our") respects your privacy. This Privacy Policy explains what information we collect when you visit raffinatodesigns.com, how we use it, and your rights regarding that information.</p>
 
     <hr>
 
@@ -304,7 +304,7 @@ a { text-decoration:none; color:inherit; }
 
     <h2>12. Contact Us</h2>
     <p>If you have questions about this Privacy Policy or how we handle your information, please contact us:</p>
-    <p>Raffinato Designs<br>Email: <a href="mailto:designs@raffinatodesigns.com">designs@raffinatodesigns.com</a><br>Website: <a href="https://www.raffinatodesigns.com">raffinatodesigns.com</a></p>
+    <p>Raffinato Designs LLC<br>Email: <a href="mailto:designs@raffinatodesigns.com">designs@raffinatodesigns.com</a><br>Website: <a href="https://www.raffinatodesigns.com">raffinatodesigns.com</a></p>
   </div>
 </section>
 
@@ -338,7 +338,7 @@ a { text-decoration:none; color:inherit; }
     </div>
   </div>
   <div class="footer-bottom">
-    <p class="footer-copy">© 2025 Raffinato Designs</p>
+    <p class="footer-copy">© <span id="copyright-year"></span> Raffinato Designs LLC. All rights reserved.</p>
     <p class="footer-copy" style="opacity:0.2;">Crafted with precision in the United States</p>
   </div>
 </footer>
@@ -385,6 +385,8 @@ document.querySelectorAll('a[href]').forEach(a=>{
     setTimeout(()=>window.location.href=href,310);
   });
 });
+const _cyrEl = document.getElementById('copyright-year');
+if (_cyrEl) _cyrEl.textContent = new Date().getFullYear();
 </script>
 
 <!-- ═══════════════════════════ AI CHAT WIDGET ═══════════════════════════ -->

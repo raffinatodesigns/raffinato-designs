@@ -109,7 +109,7 @@ function confirmationHtml({ fullName }) {
         <a href="https://www.instagram.com/raffinato_designs" style="color:#0EA5FF;text-decoration:none;font-size:13px;">@raffinato_designs on Instagram</a>
       </p>
       <p style="margin:0;font-family:Georgia,'Cormorant Garamond',serif;font-size:13px;color:#666;">
-        Raffinato Designs &middot; Tennessee, USA &middot;
+        Raffinato Designs LLC &middot; Tennessee, USA &middot;
         <a href="mailto:designs@raffinatodesigns.com" style="color:#0EA5FF;text-decoration:none;">designs@raffinatodesigns.com</a>
       </p>
     </div>
