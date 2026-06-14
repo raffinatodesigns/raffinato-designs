@@ -1348,18 +1348,17 @@ document.querySelectorAll('a[href]').forEach(a=>{
     var inner    = wrap.querySelector('.flip-inner');
     var front    = wrap.querySelector('.flip-front');
     var back     = wrap.querySelector('.flip-back');
-    var learnBtn = wrap.querySelector('.price-learn-more');
     var closeBtn = wrap.querySelector('.flip-back-close');
 
-    // Flip this card to its back. Each card is independent; flipping one
+    // Flip this card to its back. Clicking anywhere on the front flips it
+    // (including the Learn More button), EXCEPT the Get Started CTA link on
+    // the front, which navigates. Each card is independent; flipping one
     // never affects any other card.
-    if (learnBtn) {
-      learnBtn.addEventListener('click', function (e) {
-        e.stopPropagation();
-        wrap.classList.add('flipped');
-        foldTo(inner, front, back, true);
-      });
-    }
+    front.addEventListener('click', function (e) {
+      if (e.target.closest('a')) return;
+      wrap.classList.add('flipped');
+      foldTo(inner, front, back, true);
+    });
 
     // Flip this card back to its front.
     function flipToFront() {
