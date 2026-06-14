@@ -797,6 +797,7 @@ a { text-decoration: none; color: inherit; }
   padding: 2.5rem 2rem;
   flex-direction: column;
   overflow-y: auto;
+  cursor: pointer;
 }
 .flip-trigger { background: none; border: none; padding: 0; cursor: pointer; }
 .flip-back-close {
@@ -2299,49 +2300,44 @@ document.querySelectorAll('a[href]').forEach(a => {
     }, HALF);
   }
 
-  function closeAll(except) {
-    document.querySelectorAll('.flip-wrap.flipped').forEach(function (w) {
-      if (w === except) return;
-      var i = w.querySelector('.flip-inner');
-      var f = w.querySelector('.flip-front');
-      var b = w.querySelector('.flip-back');
-      b.style.display = 'none';
-      f.style.display = '';
-      i.style.height  = '';
-      i.style.transform = '';
-      w.classList.remove('flipped');
-    });
-  }
-
   document.querySelectorAll('.flip-wrap').forEach(function (wrap) {
     var inner    = wrap.querySelector('.flip-inner');
     var front    = wrap.querySelector('.flip-front');
     var back     = wrap.querySelector('.flip-back');
     var closeBtn = wrap.querySelector('.flip-back-close');
 
-    // clicking anywhere on the front card flips it
+    // Flip this card to its back. Each card is independent; flipping one
+    // never affects any other card.
     front.addEventListener('click', function () {
-      closeAll(wrap);
       wrap.classList.add('flipped');
       foldTo(inner, front, back, true);
     });
 
-    // back: close button and clicking the card itself (but not the CTA link)
+    // Flip this card back to its front.
+    function flipToFront() {
+      wrap.classList.remove('flipped');
+      foldTo(inner, front, back, false);
+    }
+
+    // Clicking anywhere on the back face flips it back, EXCEPT when the click
+    // lands on an interactive element (the CTA link or the Back button), which
+    // must keep their own behavior.
+    back.addEventListener('click', function (e) {
+      if (e.target.closest('a, button')) return;
+      flipToFront();
+    });
+
+    // Dedicated Back button still flips to front.
     if (closeBtn) {
       closeBtn.addEventListener('click', function (e) {
         e.stopPropagation();
-        wrap.classList.remove('flipped');
-        foldTo(inner, front, back, false);
+        flipToFront();
       });
     }
 
-    // prevent CTA link clicks from bubbling to any card handler
+    // The CTA link navigates normally and must not trigger a flip.
     var cta = back.querySelector('.flip-back-cta');
     if (cta) cta.addEventListener('click', function (e) { e.stopPropagation(); });
-  });
-
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') closeAll(null);
   });
 })();
 </script>
